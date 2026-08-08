@@ -58,3 +58,60 @@ To be completed after the timing values are generated.
 - The dataset contains 500 records per source.
 - Tests run locally on one machine.
 - Results do not represent distributed execution.
+
+
+## Storage-Overhead Experiment
+
+### Objective
+
+Measure the storage introduced by data zones and cross-cutting
+metadata in the proposed architecture.
+
+### Measurement scope
+
+The preliminary storage evaluator groups MinIO objects into:
+
+- Bronze data.
+- Accepted Silver data.
+- Quarantine data.
+- Integrated Silver data.
+- Gold analytical outputs.
+- Gold data products.
+- Manifests.
+- Lineage records.
+- Quality reports.
+- Traceability reports.
+
+### Preliminary results
+
+| Category | Object count | Size (bytes) | Size (MB) |
+|---|---:|---:|---:|
+| Bronze data | TBD | TBD | TBD |
+| Accepted Silver | TBD | TBD | TBD |
+| Silver quarantine | TBD | TBD | TBD |
+| Integrated Silver | TBD | TBD | TBD |
+| Gold analytical | TBD | TBD | TBD |
+| Gold data products | TBD | TBD | TBD |
+| Manifests | TBD | TBD | TBD |
+| Lineage | TBD | TBD | TBD |
+| Quality reports | TBD | TBD | TBD |
+| Traceability | TBD | TBD | TBD |
+
+### Aggregate measurements
+
+- Total data storage: TBD.
+- Total metadata storage: TBD.
+- Metadata-to-data storage ratio: TBD.
+- Metadata storage percentage: TBD.
+- Data object count: TBD.
+- Metadata object count: TBD.
+
+### Interpretation
+
+To be completed after measuring a clean experimental run.
+
+### Limitation
+
+The first evaluator execution may include accumulated development
+runs. Final publication measurements must use an isolated bucket or
+run-specific object selection.

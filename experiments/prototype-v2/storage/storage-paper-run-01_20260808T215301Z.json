@@ -1,0 +1,1931 @@
+{
+  "experiment_name": "storage-paper-run-01",
+  "experiment_type": "architectural_storage_overhead",
+  "architecture": "proposed dual-dimensional V2",
+  "bucket": "smart-farming-v2",
+  "generated_at": "2026-08-08T21:53:01.669385+00:00",
+  "summary": {
+    "total_storage_bytes": 6369676,
+    "total_storage_kilobytes": 6220.3867,
+    "total_storage_megabytes": 6.074596,
+    "total_object_count": 222,
+    "data_storage_bytes": 6220887,
+    "data_storage_megabytes": 5.9327,
+    "data_object_count": 76,
+    "metadata_storage_bytes": 148789,
+    "metadata_storage_megabytes": 0.141896,
+    "metadata_object_count": 146,
+    "metadata_to_data_storage_ratio": 0.023918,
+    "metadata_storage_percentage": 2.3359,
+    "metadata_object_percentage": 65.7658
+  },
+  "categories": {
+    "bronze_data": {
+      "category": "bronze_data",
+      "prefixes": [
+        "bronze/"
+      ],
+      "object_count": 12,
+      "total_bytes": 990150,
+      "total_kilobytes": 966.9434,
+      "total_megabytes": 0.944281,
+      "objects": [
+        {
+          "object_name": "bronze/source=farm_weather_station/year=2026/month=08/day=02/run_id=20260802T211553Z_5402ed92/partition=0/events_0_4.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 4689,
+          "size_kilobytes": 4.5791,
+          "size_megabytes": 0.004472,
+          "last_modified": "2026-08-02T21:16:14.713000+00:00"
+        },
+        {
+          "object_name": "bronze/source=farm_weather_station/year=2026/month=08/day=06/run_id=20260806T203839Z_8f848c8c/partition=0/events_0_99.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 93028,
+          "size_kilobytes": 90.8477,
+          "size_megabytes": 0.088718,
+          "last_modified": "2026-08-06T20:39:07.769000+00:00"
+        },
+        {
+          "object_name": "bronze/source=farm_weather_station/year=2026/month=08/day=06/run_id=20260806T203839Z_8f848c8c/partition=0/events_100_199.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 93141,
+          "size_kilobytes": 90.958,
+          "size_megabytes": 0.088826,
+          "last_modified": "2026-08-06T20:39:07.926000+00:00"
+        },
+        {
+          "object_name": "bronze/source=farm_weather_station/year=2026/month=08/day=06/run_id=20260806T203839Z_8f848c8c/partition=0/events_200_299.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 93130,
+          "size_kilobytes": 90.9473,
+          "size_megabytes": 0.088816,
+          "last_modified": "2026-08-06T20:39:07.980000+00:00"
+        },
+        {
+          "object_name": "bronze/source=farm_weather_station/year=2026/month=08/day=06/run_id=20260806T203839Z_8f848c8c/partition=0/events_300_399.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 93145,
+          "size_kilobytes": 90.9619,
+          "size_megabytes": 0.08883,
+          "last_modified": "2026-08-06T20:39:08.072000+00:00"
+        },
+        {
+          "object_name": "bronze/source=farm_weather_station/year=2026/month=08/day=06/run_id=20260806T203839Z_8f848c8c/partition=0/events_400_499.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 93110,
+          "size_kilobytes": 90.9277,
+          "size_megabytes": 0.088797,
+          "last_modified": "2026-08-06T20:39:08.172000+00:00"
+        },
+        {
+          "object_name": "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=01/run_id=20260801T000837Z_fff15ee6/partition=0/events_0_99.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 103081,
+          "size_kilobytes": 100.665,
+          "size_megabytes": 0.098306,
+          "last_modified": "2026-08-01T00:09:15.285000+00:00"
+        },
+        {
+          "object_name": "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=01/run_id=20260801T000837Z_fff15ee6/partition=0/events_100_199.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 103136,
+          "size_kilobytes": 100.7188,
+          "size_megabytes": 0.098358,
+          "last_modified": "2026-08-01T00:09:15.385000+00:00"
+        },
+        {
+          "object_name": "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=01/run_id=20260801T000837Z_fff15ee6/partition=0/events_200_299.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 103200,
+          "size_kilobytes": 100.7812,
+          "size_megabytes": 0.098419,
+          "last_modified": "2026-08-01T00:09:15.474000+00:00"
+        },
+        {
+          "object_name": "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=01/run_id=20260801T000837Z_fff15ee6/partition=0/events_300_399.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 103169,
+          "size_kilobytes": 100.751,
+          "size_megabytes": 0.09839,
+          "last_modified": "2026-08-01T00:09:15.582000+00:00"
+        },
+        {
+          "object_name": "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=01/run_id=20260801T000837Z_fff15ee6/partition=0/events_400_499.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 103109,
+          "size_kilobytes": 100.6924,
+          "size_megabytes": 0.098332,
+          "last_modified": "2026-08-01T00:09:15.645000+00:00"
+        },
+        {
+          "object_name": "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=01/run_id=20260801T214316Z_f2f414eb/partition=0/events_500_504.jsonl",
+          "prefix": "bronze/",
+          "size_bytes": 4212,
+          "size_kilobytes": 4.1133,
+          "size_megabytes": 0.004017,
+          "last_modified": "2026-08-01T21:44:09.426000+00:00"
+        }
+      ]
+    },
+    "silver_accepted": {
+      "category": "silver_accepted",
+      "prefixes": [
+        "silver/accepted/"
+      ],
+      "object_count": 10,
+      "total_bytes": 567110,
+      "total_kilobytes": 553.8184,
+      "total_megabytes": 0.540838,
+      "objects": [
+        {
+          "object_name": "silver/accepted/field_observations/run_id=20260801T213053Z_c64102a1/field_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 100091,
+          "size_kilobytes": 97.7451,
+          "size_megabytes": 0.095454,
+          "last_modified": "2026-08-01T21:30:54.378000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/field_observations/run_id=20260801T214428Z_ea385c05/field_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 100919,
+          "size_kilobytes": 98.5537,
+          "size_megabytes": 0.096244,
+          "last_modified": "2026-08-01T21:44:29.562000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/field_observations/run_id=20260801T223728Z_056ffeb3/field_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 21018,
+          "size_kilobytes": 20.5254,
+          "size_megabytes": 0.020044,
+          "last_modified": "2026-08-01T22:37:28.606000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/field_observations/run_id=20260802T021425Z_41c4182b/field_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 21018,
+          "size_kilobytes": 20.5254,
+          "size_megabytes": 0.020044,
+          "last_modified": "2026-08-02T02:14:25.931000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/field_observations/run_id=20260802T021538Z_b4e37a7a/field_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 100384,
+          "size_kilobytes": 98.0312,
+          "size_megabytes": 0.095734,
+          "last_modified": "2026-08-02T02:15:39.514000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/field_observations/run_id=20260802T024004Z_57929b17/field_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 21018,
+          "size_kilobytes": 20.5254,
+          "size_megabytes": 0.020044,
+          "last_modified": "2026-08-02T02:40:04.748000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/weather_observations/run_id=20260805T182550Z_45c3101d/weather_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 15750,
+          "size_kilobytes": 15.3809,
+          "size_megabytes": 0.01502,
+          "last_modified": "2026-08-05T18:25:51.747000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/weather_observations/run_id=20260805T182636Z_b4ee37c5/weather_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 15725,
+          "size_kilobytes": 15.3564,
+          "size_megabytes": 0.014997,
+          "last_modified": "2026-08-05T18:26:36.507000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/weather_observations/run_id=20260806T204143Z_93140702/weather_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 86425,
+          "size_kilobytes": 84.3994,
+          "size_megabytes": 0.082421,
+          "last_modified": "2026-08-06T20:41:45.756000+00:00"
+        },
+        {
+          "object_name": "silver/accepted/weather_observations/run_id=20260806T204335Z_35758ca5/weather_observations.parquet",
+          "prefix": "silver/accepted/",
+          "size_bytes": 84762,
+          "size_kilobytes": 82.7754,
+          "size_megabytes": 0.080835,
+          "last_modified": "2026-08-06T20:43:36.618000+00:00"
+        }
+      ]
+    },
+    "silver_quarantine": {
+      "category": "silver_quarantine",
+      "prefixes": [
+        "silver/quarantine/"
+      ],
+      "object_count": 4,
+      "total_bytes": 29932,
+      "total_kilobytes": 29.2305,
+      "total_megabytes": 0.028545,
+      "objects": [
+        {
+          "object_name": "silver/quarantine/field_observations/run_id=20260801T214428Z_ea385c05/rejected_records.jsonl",
+          "prefix": "silver/quarantine/",
+          "size_bytes": 7483,
+          "size_kilobytes": 7.3076,
+          "size_megabytes": 0.007136,
+          "last_modified": "2026-08-01T21:44:29.613000+00:00"
+        },
+        {
+          "object_name": "silver/quarantine/field_observations/run_id=20260801T223728Z_056ffeb3/rejected_records.jsonl",
+          "prefix": "silver/quarantine/",
+          "size_bytes": 7483,
+          "size_kilobytes": 7.3076,
+          "size_megabytes": 0.007136,
+          "last_modified": "2026-08-01T22:37:28.657000+00:00"
+        },
+        {
+          "object_name": "silver/quarantine/field_observations/run_id=20260802T021425Z_41c4182b/rejected_records.jsonl",
+          "prefix": "silver/quarantine/",
+          "size_bytes": 7483,
+          "size_kilobytes": 7.3076,
+          "size_megabytes": 0.007136,
+          "last_modified": "2026-08-02T02:14:25.990000+00:00"
+        },
+        {
+          "object_name": "silver/quarantine/field_observations/run_id=20260802T024004Z_57929b17/rejected_records.jsonl",
+          "prefix": "silver/quarantine/",
+          "size_bytes": 7483,
+          "size_kilobytes": 7.3076,
+          "size_megabytes": 0.007136,
+          "last_modified": "2026-08-02T02:40:04.803000+00:00"
+        }
+      ]
+    },
+    "silver_integrated": {
+      "category": "silver_integrated",
+      "prefixes": [
+        "silver/integrated/"
+      ],
+      "object_count": 14,
+      "total_bytes": 2123890,
+      "total_kilobytes": 2074.1113,
+      "total_megabytes": 2.025499,
+      "objects": [
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260805T210116Z_bdd6bb08/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 36189,
+          "size_kilobytes": 35.3408,
+          "size_megabytes": 0.034513,
+          "last_modified": "2026-08-05T21:01:17.363000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260805T213206Z_8dcf8a3e/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 36189,
+          "size_kilobytes": 35.3408,
+          "size_megabytes": 0.034513,
+          "last_modified": "2026-08-05T21:32:07.276000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260805T213515Z_1e830ef6/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 120625,
+          "size_kilobytes": 117.7979,
+          "size_megabytes": 0.115037,
+          "last_modified": "2026-08-05T21:35:16.478000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260805T213729Z_4545a1a4/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 120625,
+          "size_kilobytes": 117.7979,
+          "size_megabytes": 0.115037,
+          "last_modified": "2026-08-05T21:37:29.929000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260805T213822Z_d67af678/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 120332,
+          "size_kilobytes": 117.5117,
+          "size_megabytes": 0.114758,
+          "last_modified": "2026-08-05T21:38:22.640000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T205547Z_9f17a848/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T20:55:48.388000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T225259Z_a5d58424/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T22:52:59.555000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T225307Z_045939dd/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T22:53:08.067000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T225315Z_741680e9/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T22:53:16.144000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T230703Z_005aa1d5/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T23:07:04.421000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T230711Z_d69c8e24/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T23:07:12.430000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T230719Z_7df43265/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T23:07:20.299000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T230728Z_abfdf93d/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T23:07:28.676000+00:00"
+        },
+        {
+          "object_name": "silver/integrated/field_weather_observations/run_id=20260806T230736Z_5cea7a8c/integrated_observations.parquet",
+          "prefix": "silver/integrated/",
+          "size_bytes": 187770,
+          "size_kilobytes": 183.3691,
+          "size_megabytes": 0.179071,
+          "last_modified": "2026-08-06T23:07:36.825000+00:00"
+        }
+      ]
+    },
+    "gold_analytical": {
+      "category": "gold_analytical",
+      "prefixes": [
+        "gold/analytical/"
+      ],
+      "object_count": 12,
+      "total_bytes": 2138310,
+      "total_kilobytes": 2088.1934,
+      "total_megabytes": 2.039251,
+      "objects": [
+        {
+          "object_name": "gold/analytical/field_observation_scores/run_id=20260802T201356Z_c661495b/scored_field_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 110985,
+          "size_kilobytes": 108.3838,
+          "size_megabytes": 0.105844,
+          "last_modified": "2026-08-02T20:13:58.570000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/field_observation_scores/run_id=20260802T201504Z_f8c617ff/scored_field_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 111013,
+          "size_kilobytes": 108.4111,
+          "size_megabytes": 0.10587,
+          "last_modified": "2026-08-02T20:15:05.773000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260805T214808Z_e7dcea48/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 130937,
+          "size_kilobytes": 127.8682,
+          "size_megabytes": 0.124871,
+          "last_modified": "2026-08-05T21:48:09.868000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T205739Z_b6a30bdd/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T20:57:41.556000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T225303Z_5cacfc2d/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T22:53:05.155000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T225311Z_eefcc08b/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T22:53:13.291000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T225319Z_56f33d29/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T22:53:21.332000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T230707Z_c599a5ee/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T23:07:09.505000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T230715Z_1dab601a/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T23:07:17.361000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T230723Z_2b172491/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T23:07:25.693000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T230732Z_594c8815/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T23:07:33.829000+00:00"
+        },
+        {
+          "object_name": "gold/analytical/integrated_field_weather_scores/run_id=20260806T230740Z_224e03a1/scored_integrated_observations.parquet",
+          "prefix": "gold/analytical/",
+          "size_bytes": 198375,
+          "size_kilobytes": 193.7256,
+          "size_megabytes": 0.189185,
+          "last_modified": "2026-08-06T23:07:42.077000+00:00"
+        }
+      ]
+    },
+    "gold_data_products": {
+      "category": "gold_data_products",
+      "prefixes": [
+        "gold/data-products/"
+      ],
+      "object_count": 24,
+      "total_bytes": 371495,
+      "total_kilobytes": 362.7881,
+      "total_megabytes": 0.354285,
+      "objects": [
+        {
+          "object_name": "gold/data-products/anomaly_detection_summary/run_id=20260802T201356Z_c661495b/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 925,
+          "size_kilobytes": 0.9033,
+          "size_megabytes": 0.000882,
+          "last_modified": "2026-08-02T20:13:58.703000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/anomaly_detection_summary/run_id=20260802T201504Z_f8c617ff/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 922,
+          "size_kilobytes": 0.9004,
+          "size_megabytes": 0.000879,
+          "last_modified": "2026-08-02T20:15:05.908000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/field_anomaly_alerts/run_id=20260802T201356Z_c661495b/field_anomaly_alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 24734,
+          "size_kilobytes": 24.1543,
+          "size_megabytes": 0.023588,
+          "last_modified": "2026-08-02T20:13:58.641000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/field_anomaly_alerts/run_id=20260802T201504Z_f8c617ff/field_anomaly_alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 29531,
+          "size_kilobytes": 28.8389,
+          "size_megabytes": 0.028163,
+          "last_modified": "2026-08-02T20:15:05.851000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260805T214808Z_e7dcea48/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1016,
+          "size_kilobytes": 0.9922,
+          "size_megabytes": 0.000969,
+          "last_modified": "2026-08-05T21:48:09.969000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T205739Z_b6a30bdd/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T20:57:41.685000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T225303Z_5cacfc2d/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T22:53:05.291000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T225311Z_eefcc08b/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T22:53:13.427000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T225319Z_56f33d29/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T22:53:21.416000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T230707Z_c599a5ee/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T23:07:09.659000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T230715Z_1dab601a/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T23:07:17.515000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T230723Z_2b172491/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T23:07:25.781000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T230732Z_594c8815/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T23:07:33.961000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_anomaly_summary/run_id=20260806T230740Z_224e03a1/summary.json",
+          "prefix": "gold/data-products/",
+          "size_bytes": 1017,
+          "size_kilobytes": 0.9932,
+          "size_megabytes": 0.00097,
+          "last_modified": "2026-08-06T23:07:42.205000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260805T214808Z_e7dcea48/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 27185,
+          "size_kilobytes": 26.5479,
+          "size_megabytes": 0.025926,
+          "last_modified": "2026-08-05T21:48:09.906000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T205739Z_b6a30bdd/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30895,
+          "size_kilobytes": 30.1709,
+          "size_megabytes": 0.029464,
+          "last_modified": "2026-08-06T20:57:41.624000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T225303Z_5cacfc2d/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30877,
+          "size_kilobytes": 30.1533,
+          "size_megabytes": 0.029447,
+          "last_modified": "2026-08-06T22:53:05.225000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T225311Z_eefcc08b/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30891,
+          "size_kilobytes": 30.167,
+          "size_megabytes": 0.02946,
+          "last_modified": "2026-08-06T22:53:13.361000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T225319Z_56f33d29/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30876,
+          "size_kilobytes": 30.1523,
+          "size_megabytes": 0.029446,
+          "last_modified": "2026-08-06T22:53:21.358000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T230707Z_c599a5ee/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30898,
+          "size_kilobytes": 30.1738,
+          "size_megabytes": 0.029467,
+          "last_modified": "2026-08-06T23:07:09.574000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T230715Z_1dab601a/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30898,
+          "size_kilobytes": 30.1738,
+          "size_megabytes": 0.029467,
+          "last_modified": "2026-08-06T23:07:17.438000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T230723Z_2b172491/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30898,
+          "size_kilobytes": 30.1738,
+          "size_megabytes": 0.029467,
+          "last_modified": "2026-08-06T23:07:25.719000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T230732Z_594c8815/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30898,
+          "size_kilobytes": 30.1738,
+          "size_megabytes": 0.029467,
+          "last_modified": "2026-08-06T23:07:33.900000+00:00"
+        },
+        {
+          "object_name": "gold/data-products/integrated_field_weather_alerts/run_id=20260806T230740Z_224e03a1/alerts.parquet",
+          "prefix": "gold/data-products/",
+          "size_bytes": 30898,
+          "size_kilobytes": 30.1738,
+          "size_megabytes": 0.029467,
+          "last_modified": "2026-08-06T23:07:42.144000+00:00"
+        }
+      ]
+    },
+    "metadata_manifests": {
+      "category": "metadata_manifests",
+      "prefixes": [
+        "metadata/manifests/"
+      ],
+      "object_count": 87,
+      "total_bytes": 79318,
+      "total_kilobytes": 77.459,
+      "total_megabytes": 0.075644,
+      "objects": [
+        {
+          "object_name": "metadata/manifests/bronze_ingestion/run_id=20260801T000837Z_fff15ee6/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1283,
+          "size_kilobytes": 1.2529,
+          "size_megabytes": 0.001224,
+          "last_modified": "2026-08-01T01:33:12.937000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/bronze_ingestion/run_id=20260801T000837Z_fff15ee6/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 462,
+          "size_kilobytes": 0.4512,
+          "size_megabytes": 0.000441,
+          "last_modified": "2026-08-01T00:08:37.833000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/bronze_ingestion/run_id=20260801T214316Z_f2f414eb/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 714,
+          "size_kilobytes": 0.6973,
+          "size_megabytes": 0.000681,
+          "last_modified": "2026-08-01T21:44:09.491000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/bronze_ingestion/run_id=20260801T214316Z_f2f414eb/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 462,
+          "size_kilobytes": 0.4512,
+          "size_megabytes": 0.000441,
+          "last_modified": "2026-08-01T21:43:16.965000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_field_anomaly_detection/run_id=20260802T201133Z_951b4f0e/manifest_failed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 601,
+          "size_kilobytes": 0.5869,
+          "size_megabytes": 0.000573,
+          "last_modified": "2026-08-02T20:11:33.720000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_field_anomaly_detection/run_id=20260802T201356Z_c661495b/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1313,
+          "size_kilobytes": 1.2822,
+          "size_megabytes": 0.001252,
+          "last_modified": "2026-08-02T20:13:58.791000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_field_anomaly_detection/run_id=20260802T201356Z_c661495b/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 582,
+          "size_kilobytes": 0.5684,
+          "size_megabytes": 0.000555,
+          "last_modified": "2026-08-02T20:13:56.414000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_field_anomaly_detection/run_id=20260802T201504Z_f8c617ff/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1310,
+          "size_kilobytes": 1.2793,
+          "size_megabytes": 0.001249,
+          "last_modified": "2026-08-02T20:15:06+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_field_anomaly_detection/run_id=20260802T201504Z_f8c617ff/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 581,
+          "size_kilobytes": 0.5674,
+          "size_megabytes": 0.000554,
+          "last_modified": "2026-08-02T20:15:04.424000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260805T211138Z_2d6f2782/manifest_failed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 699,
+          "size_kilobytes": 0.6826,
+          "size_megabytes": 0.000667,
+          "last_modified": "2026-08-05T21:11:39.474000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260805T211138Z_2d6f2782/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 600,
+          "size_kilobytes": 0.5859,
+          "size_megabytes": 0.000572,
+          "last_modified": "2026-08-05T21:11:38.718000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260805T214808Z_e7dcea48/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1356,
+          "size_kilobytes": 1.3242,
+          "size_megabytes": 0.001293,
+          "last_modified": "2026-08-05T21:48:10.041000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260805T214808Z_e7dcea48/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 600,
+          "size_kilobytes": 0.5859,
+          "size_megabytes": 0.000572,
+          "last_modified": "2026-08-05T21:48:08.377000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T205739Z_b6a30bdd/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T20:57:41.764000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T205739Z_b6a30bdd/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T20:57:40.064000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T225303Z_5cacfc2d/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T22:53:05.363000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T225303Z_5cacfc2d/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T22:53:03.710000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T225311Z_eefcc08b/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T22:53:13.518000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T225311Z_eefcc08b/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T22:53:11.826000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T225319Z_56f33d29/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T22:53:21.500000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T225319Z_56f33d29/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T22:53:19.904000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230707Z_c599a5ee/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T23:07:09.751000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230707Z_c599a5ee/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T23:07:08.107000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230715Z_1dab601a/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T23:07:17.591000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230715Z_1dab601a/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T23:07:16.003000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230723Z_2b172491/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T23:07:25.857000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230723Z_2b172491/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T23:07:24.193000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230732Z_594c8815/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T23:07:34.033000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230732Z_594c8815/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T23:07:32.485000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230740Z_224e03a1/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1359,
+          "size_kilobytes": 1.3271,
+          "size_megabytes": 0.001296,
+          "last_modified": "2026-08-06T23:07:42.293000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/gold_integrated_field_anomaly_detection/run_id=20260806T230740Z_224e03a1/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 602,
+          "size_kilobytes": 0.5879,
+          "size_megabytes": 0.000574,
+          "last_modified": "2026-08-06T23:07:40.609000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260801T213053Z_c64102a1/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1649,
+          "size_kilobytes": 1.6104,
+          "size_megabytes": 0.001573,
+          "last_modified": "2026-08-01T21:30:54.447000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260801T213053Z_c64102a1/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-01T21:30:53.778000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260801T214428Z_ea385c05/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1899,
+          "size_kilobytes": 1.8545,
+          "size_megabytes": 0.001811,
+          "last_modified": "2026-08-01T21:44:29.749000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260801T214428Z_ea385c05/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-01T21:44:29.013000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260801T223728Z_056ffeb3/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1230,
+          "size_kilobytes": 1.2012,
+          "size_megabytes": 0.001173,
+          "last_modified": "2026-08-01T22:37:28.781000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260801T223728Z_056ffeb3/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-01T22:37:28.405000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T021425Z_41c4182b/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1273,
+          "size_kilobytes": 1.2432,
+          "size_megabytes": 0.001214,
+          "last_modified": "2026-08-02T02:14:26.141000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T021425Z_41c4182b/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-02T02:14:25.558000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T021538Z_b4e37a7a/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1744,
+          "size_kilobytes": 1.7031,
+          "size_megabytes": 0.001663,
+          "last_modified": "2026-08-02T02:15:39.682000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T021538Z_b4e37a7a/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-02T02:15:38.726000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T021648Z_9671c821/manifest_failed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 513,
+          "size_kilobytes": 0.501,
+          "size_megabytes": 0.000489,
+          "last_modified": "2026-08-02T02:16:48.818000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T021648Z_9671c821/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-02T02:16:48.710000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T023759Z_0525dc07/manifest_failed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 742,
+          "size_kilobytes": 0.7246,
+          "size_megabytes": 0.000708,
+          "last_modified": "2026-08-02T02:37:59.577000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T023759Z_0525dc07/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-02T02:37:59.429000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T024004Z_57929b17/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1453,
+          "size_kilobytes": 1.4189,
+          "size_megabytes": 0.001386,
+          "last_modified": "2026-08-02T02:40:04.934000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_observations/run_id=20260802T024004Z_57929b17/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 436,
+          "size_kilobytes": 0.4258,
+          "size_megabytes": 0.000416,
+          "last_modified": "2026-08-02T02:40:04.518000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T210116Z_bdd6bb08/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1150,
+          "size_kilobytes": 1.123,
+          "size_megabytes": 0.001097,
+          "last_modified": "2026-08-05T21:01:17.520000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T210116Z_bdd6bb08/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-05T21:01:16.536000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213206Z_8dcf8a3e/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1150,
+          "size_kilobytes": 1.123,
+          "size_megabytes": 0.001097,
+          "last_modified": "2026-08-05T21:32:07.419000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213206Z_8dcf8a3e/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-05T21:32:07.119000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213515Z_1e830ef6/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-05T21:35:16.589000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213515Z_1e830ef6/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-05T21:35:16.185000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213729Z_4545a1a4/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-05T21:37:30.079000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213729Z_4545a1a4/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-05T21:37:29.722000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213822Z_d67af678/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-05T21:38:22.734000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260805T213822Z_d67af678/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-05T21:38:22.402000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T205547Z_9f17a848/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T20:55:48.535000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T205547Z_9f17a848/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T20:55:47.543000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T225259Z_a5d58424/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T22:52:59.702000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T225259Z_a5d58424/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T22:52:59.314000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T225307Z_045939dd/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T22:53:08.206000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T225307Z_045939dd/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T22:53:07.843000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T225315Z_741680e9/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T22:53:16.283000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T225315Z_741680e9/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T22:53:15.867000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230703Z_005aa1d5/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T23:07:04.523000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230703Z_005aa1d5/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T23:07:04.135000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230711Z_d69c8e24/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T23:07:12.571000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230711Z_d69c8e24/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T23:07:12.207000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230719Z_7df43265/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T23:07:20.449000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230719Z_7df43265/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T23:07:20.053000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230728Z_abfdf93d/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T23:07:28.826000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230728Z_abfdf93d/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T23:07:28.413000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230736Z_5cea7a8c/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1158,
+          "size_kilobytes": 1.1309,
+          "size_megabytes": 0.001104,
+          "last_modified": "2026-08-06T23:07:36.961000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_field_weather_integration/run_id=20260806T230736Z_5cea7a8c/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 686,
+          "size_kilobytes": 0.6699,
+          "size_megabytes": 0.000654,
+          "last_modified": "2026-08-06T23:07:36.586000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260805T182550Z_45c3101d/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1268,
+          "size_kilobytes": 1.2383,
+          "size_megabytes": 0.001209,
+          "last_modified": "2026-08-05T18:25:51.913000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260805T182550Z_45c3101d/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 483,
+          "size_kilobytes": 0.4717,
+          "size_megabytes": 0.000461,
+          "last_modified": "2026-08-05T18:25:50.925000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260805T182636Z_b4ee37c5/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1270,
+          "size_kilobytes": 1.2402,
+          "size_megabytes": 0.001211,
+          "last_modified": "2026-08-05T18:26:36.654000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260805T182636Z_b4ee37c5/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 483,
+          "size_kilobytes": 0.4717,
+          "size_megabytes": 0.000461,
+          "last_modified": "2026-08-05T18:26:36.322000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260806T204143Z_93140702/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1809,
+          "size_kilobytes": 1.7666,
+          "size_megabytes": 0.001725,
+          "last_modified": "2026-08-06T20:41:45.909000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260806T204143Z_93140702/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 483,
+          "size_kilobytes": 0.4717,
+          "size_megabytes": 0.000461,
+          "last_modified": "2026-08-06T20:41:44.025000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260806T204335Z_35758ca5/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1811,
+          "size_kilobytes": 1.7686,
+          "size_megabytes": 0.001727,
+          "last_modified": "2026-08-06T20:43:36.711000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/silver_weather_observations/run_id=20260806T204335Z_35758ca5/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 483,
+          "size_kilobytes": 0.4717,
+          "size_megabytes": 0.000461,
+          "last_modified": "2026-08-06T20:43:35.247000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/weather_bronze_ingestion/run_id=20260802T211553Z_5402ed92/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 825,
+          "size_kilobytes": 0.8057,
+          "size_megabytes": 0.000787,
+          "last_modified": "2026-08-02T21:16:14.885000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/weather_bronze_ingestion/run_id=20260802T211553Z_5402ed92/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 517,
+          "size_kilobytes": 0.5049,
+          "size_megabytes": 0.000493,
+          "last_modified": "2026-08-02T21:15:53.357000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/weather_bronze_ingestion/run_id=20260806T203839Z_8f848c8c/manifest_completed.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 1366,
+          "size_kilobytes": 1.334,
+          "size_megabytes": 0.001303,
+          "last_modified": "2026-08-06T20:40:35.866000+00:00"
+        },
+        {
+          "object_name": "metadata/manifests/weather_bronze_ingestion/run_id=20260806T203839Z_8f848c8c/manifest_started.json",
+          "prefix": "metadata/manifests/",
+          "size_bytes": 517,
+          "size_kilobytes": 0.5049,
+          "size_megabytes": 0.000493,
+          "last_modified": "2026-08-06T20:38:40.001000+00:00"
+        }
+      ]
+    },
+    "metadata_lineage": {
+      "category": "metadata_lineage",
+      "prefixes": [
+        "metadata/lineage/"
+      ],
+      "object_count": 34,
+      "total_bytes": 42076,
+      "total_kilobytes": 41.0898,
+      "total_megabytes": 0.040127,
+      "objects": [
+        {
+          "object_name": "metadata/lineage/gold_field_anomaly_detection/run_id=20260802T201356Z_c661495b/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1242,
+          "size_kilobytes": 1.2129,
+          "size_megabytes": 0.001184,
+          "last_modified": "2026-08-02T20:13:58.879000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_field_anomaly_detection/run_id=20260802T201504Z_f8c617ff/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1239,
+          "size_kilobytes": 1.21,
+          "size_megabytes": 0.001182,
+          "last_modified": "2026-08-02T20:15:06.088000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260805T214808Z_e7dcea48/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1285,
+          "size_kilobytes": 1.2549,
+          "size_megabytes": 0.001225,
+          "last_modified": "2026-08-05T21:48:10.113000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T205739Z_b6a30bdd/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T20:57:41.845000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T225303Z_5cacfc2d/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T22:53:05.446000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T225311Z_eefcc08b/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T22:53:13.595000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T225319Z_56f33d29/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T22:53:21.580000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T230707Z_c599a5ee/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T23:07:09.835000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T230715Z_1dab601a/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T23:07:17.667000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T230723Z_2b172491/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T23:07:25.933000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T230732Z_594c8815/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T23:07:34.114000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260806T230740Z_224e03a1/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1288,
+          "size_kilobytes": 1.2578,
+          "size_megabytes": 0.001228,
+          "last_modified": "2026-08-06T23:07:42.369000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_observations/run_id=20260801T223728Z_056ffeb3/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1109,
+          "size_kilobytes": 1.083,
+          "size_megabytes": 0.001058,
+          "last_modified": "2026-08-01T22:37:28.849000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_observations/run_id=20260802T021425Z_41c4182b/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1152,
+          "size_kilobytes": 1.125,
+          "size_megabytes": 0.001099,
+          "last_modified": "2026-08-02T02:14:26.213000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_observations/run_id=20260802T021538Z_b4e37a7a/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1623,
+          "size_kilobytes": 1.585,
+          "size_megabytes": 0.001548,
+          "last_modified": "2026-08-02T02:15:39.754000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_observations/run_id=20260802T024004Z_57929b17/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1296,
+          "size_kilobytes": 1.2656,
+          "size_megabytes": 0.001236,
+          "last_modified": "2026-08-02T02:40:05.002000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260805T210116Z_bdd6bb08/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1112,
+          "size_kilobytes": 1.0859,
+          "size_megabytes": 0.00106,
+          "last_modified": "2026-08-05T21:01:17.592000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260805T213206Z_8dcf8a3e/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1112,
+          "size_kilobytes": 1.0859,
+          "size_megabytes": 0.00106,
+          "last_modified": "2026-08-05T21:32:07.499000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260805T213515Z_1e830ef6/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-05T21:35:16.673000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260805T213729Z_4545a1a4/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-05T21:37:30.150000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260805T213822Z_d67af678/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-05T21:38:22.822000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T205547Z_9f17a848/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T20:55:48.627000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T225259Z_a5d58424/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T22:52:59.779000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T225307Z_045939dd/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T22:53:08.279000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T225315Z_741680e9/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T22:53:16.363000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T230703Z_005aa1d5/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T23:07:04.615000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T230711Z_d69c8e24/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T23:07:12.643000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T230719Z_7df43265/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T23:07:20.517000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T230728Z_abfdf93d/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T23:07:28.901000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_field_weather_integration/run_id=20260806T230736Z_5cea7a8c/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1120,
+          "size_kilobytes": 1.0938,
+          "size_megabytes": 0.001068,
+          "last_modified": "2026-08-06T23:07:37.042000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_weather_observations/run_id=20260805T182550Z_45c3101d/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1197,
+          "size_kilobytes": 1.1689,
+          "size_megabytes": 0.001142,
+          "last_modified": "2026-08-05T18:25:51.981000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_weather_observations/run_id=20260805T182636Z_b4ee37c5/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1199,
+          "size_kilobytes": 1.1709,
+          "size_megabytes": 0.001143,
+          "last_modified": "2026-08-05T18:26:36.734000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_weather_observations/run_id=20260806T204143Z_93140702/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1738,
+          "size_kilobytes": 1.6973,
+          "size_megabytes": 0.001657,
+          "last_modified": "2026-08-06T20:41:46.057000+00:00"
+        },
+        {
+          "object_name": "metadata/lineage/silver_weather_observations/run_id=20260806T204335Z_35758ca5/lineage.json",
+          "prefix": "metadata/lineage/",
+          "size_bytes": 1740,
+          "size_kilobytes": 1.6992,
+          "size_megabytes": 0.001659,
+          "last_modified": "2026-08-06T20:43:36.831000+00:00"
+        }
+      ]
+    },
+    "metadata_quality_reports": {
+      "category": "metadata_quality_reports",
+      "prefixes": [
+        "metadata/quality-reports/"
+      ],
+      "object_count": 24,
+      "total_bytes": 24155,
+      "total_kilobytes": 23.5889,
+      "total_megabytes": 0.023036,
+      "objects": [
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260805T210116Z_bdd6bb08/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 828,
+          "size_kilobytes": 0.8086,
+          "size_megabytes": 0.00079,
+          "last_modified": "2026-08-05T21:01:17.440000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260805T213206Z_8dcf8a3e/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 828,
+          "size_kilobytes": 0.8086,
+          "size_megabytes": 0.00079,
+          "last_modified": "2026-08-05T21:32:07.339000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260805T213515Z_1e830ef6/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-05T21:35:16.507000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260805T213729Z_4545a1a4/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-05T21:37:29.998000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260805T213822Z_d67af678/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-05T21:38:22.666000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T205547Z_9f17a848/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T20:55:48.448000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T225259Z_a5d58424/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T22:52:59.611000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T225307Z_045939dd/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T22:53:08.126000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T225315Z_741680e9/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T22:53:16.203000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T230703Z_005aa1d5/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T23:07:04.437000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T230711Z_d69c8e24/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T23:07:12.491000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T230719Z_7df43265/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T23:07:20.357000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T230728Z_abfdf93d/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T23:07:28.733000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/field_weather_integration/run_id=20260806T230736Z_5cea7a8c/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 836,
+          "size_kilobytes": 0.8164,
+          "size_megabytes": 0.000797,
+          "last_modified": "2026-08-06T23:07:36.881000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/run_id=20260801T213053Z_c64102a1/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 1453,
+          "size_kilobytes": 1.4189,
+          "size_megabytes": 0.001386,
+          "last_modified": "2026-08-01T21:30:54.389000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/run_id=20260801T214428Z_ea385c05/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 1703,
+          "size_kilobytes": 1.6631,
+          "size_megabytes": 0.001624,
+          "last_modified": "2026-08-01T21:44:29.665000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/run_id=20260801T223728Z_056ffeb3/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 984,
+          "size_kilobytes": 0.9609,
+          "size_megabytes": 0.000938,
+          "last_modified": "2026-08-01T22:37:28.709000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/run_id=20260802T021425Z_41c4182b/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 984,
+          "size_kilobytes": 0.9609,
+          "size_megabytes": 0.000938,
+          "last_modified": "2026-08-02T02:14:26.053000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/run_id=20260802T021538Z_b4e37a7a/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 1453,
+          "size_kilobytes": 1.4189,
+          "size_megabytes": 0.001386,
+          "last_modified": "2026-08-02T02:15:39.582000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/run_id=20260802T024004Z_57929b17/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 984,
+          "size_kilobytes": 0.9609,
+          "size_megabytes": 0.000938,
+          "last_modified": "2026-08-02T02:40:04.858000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/weather_observations/run_id=20260805T182550Z_45c3101d/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 956,
+          "size_kilobytes": 0.9336,
+          "size_megabytes": 0.000912,
+          "last_modified": "2026-08-05T18:25:51.805000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/weather_observations/run_id=20260805T182636Z_b4ee37c5/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 956,
+          "size_kilobytes": 0.9336,
+          "size_megabytes": 0.000912,
+          "last_modified": "2026-08-05T18:26:36.569000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/weather_observations/run_id=20260806T204143Z_93140702/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 1497,
+          "size_kilobytes": 1.4619,
+          "size_megabytes": 0.001428,
+          "last_modified": "2026-08-06T20:41:45.833000+00:00"
+        },
+        {
+          "object_name": "metadata/quality-reports/silver/weather_observations/run_id=20260806T204335Z_35758ca5/quality_report.json",
+          "prefix": "metadata/quality-reports/",
+          "size_bytes": 1497,
+          "size_kilobytes": 1.4619,
+          "size_megabytes": 0.001428,
+          "last_modified": "2026-08-06T20:43:36.640000+00:00"
+        }
+      ]
+    },
+    "metadata_traceability": {
+      "category": "metadata_traceability",
+      "prefixes": [
+        "metadata/traceability/"
+      ],
+      "object_count": 1,
+      "total_bytes": 3240,
+      "total_kilobytes": 3.1641,
+      "total_megabytes": 0.00309,
+      "objects": [
+        {
+          "object_name": "metadata/traceability/gold_run_id=20260802T201356Z_c661495b/traceability_report.json",
+          "prefix": "metadata/traceability/",
+          "size_bytes": 3240,
+          "size_kilobytes": 3.1641,
+          "size_megabytes": 0.00309,
+          "last_modified": "2026-08-02T20:30:44.389000+00:00"
+        }
+      ]
+    },
+    "metadata_schemas": {
+      "category": "metadata_schemas",
+      "prefixes": [
+        "metadata/schemas/"
+      ],
+      "object_count": 0,
+      "total_bytes": 0,
+      "total_kilobytes": 0.0,
+      "total_megabytes": 0.0,
+      "objects": []
+    }
+  }
+}

@@ -1,0 +1,12 @@
+category,object_count,total_bytes,total_kilobytes,total_megabytes
+bronze_data,12,990150,966.9434,0.944281
+silver_accepted,10,567110,553.8184,0.540838
+silver_quarantine,4,29932,29.2305,0.028545
+silver_integrated,14,2123890,2074.1113,2.025499
+gold_analytical,12,2138310,2088.1934,2.039251
+gold_data_products,24,371495,362.7881,0.354285
+metadata_manifests,87,79318,77.459,0.075644
+metadata_lineage,34,42076,41.0898,0.040127
+metadata_quality_reports,24,24155,23.5889,0.023036
+metadata_traceability,1,3240,3.1641,0.00309
+metadata_schemas,0,0,0.0,0.0
