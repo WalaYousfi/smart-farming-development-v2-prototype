@@ -4,9 +4,14 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+
+const KAFKA_BROKER =
+  process.env.KAFKA_SERVER ||
+  "localhost:9092";
+
 const kafka = new Kafka({
   clientId: "agri-producer",
-  brokers: ["localhost:9092"],
+  brokers: [KAFKA_BROKER],
 });
 
 const producer = kafka.producer();
@@ -19,7 +24,13 @@ const csvPath = path.resolve(
   "../../data/source/Smart_Farming_Crop_Yield_2024.csv",
 );
 
+const TOPIC =
+  process.env.KAFKA_TOPIC ||
+  "raw-field-readings";
+
 console.log("Reading CSV from:", csvPath);
+console.log(`Kafka broker: ${KAFKA_BROKER}`);
+console.log(`Kafka topic: ${TOPIC}`);
 
 async function sendCSV() {
   const rows = [];
@@ -40,7 +51,7 @@ async function sendCSV() {
       }));
 
       await producer.send({
-        topic: "raw-field-readings",
+        topic: TOPIC,
         messages,
       });
 
