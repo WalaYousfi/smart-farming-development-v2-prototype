@@ -115,3 +115,30 @@ To be completed after measuring a clean experimental run.
 The first evaluator execution may include accumulated development
 runs. Final publication measurements must use an isolated bucket or
 run-specific object selection.
+
+
+
+## Experimental Environment Isolation
+
+The final evaluation uses a clean, isolated data-lake environment.
+
+Development and experimental resources are separated to prevent
+historical objects or Kafka offsets from affecting measurements.
+
+### Development environment
+
+- MinIO bucket: `smart-farming-v2`
+- Field topic: `raw-field-readings`
+- Weather topic: `raw-weather-readings`
+
+### Evaluation environment
+
+- MinIO bucket: `smart-farming-paper-eval`
+- Field topic: `eval-field-readings`
+- Weather topic: `eval-weather-readings`
+
+Initial evaluation-bucket object count: 0.
+
+This isolation is intended to improve the reproducibility and
+internal validity of storage, record-count, and performance
+measurements.

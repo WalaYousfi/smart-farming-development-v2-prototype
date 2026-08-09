@@ -7,6 +7,22 @@ measurable benefits in heterogeneous integration, data quality,
 traceability, reproducibility, and AI-ready data preparation while
 maintaining acceptable processing and storage overhead.
 
+## Experimental Isolation
+
+Final publication-oriented experiments are executed in a dedicated
+evaluation environment to avoid contamination from development runs.
+
+The evaluation environment uses:
+
+- A dedicated MinIO bucket: `smart-farming-paper-eval`.
+- A dedicated Field Kafka topic: `eval-field-readings`.
+- A dedicated Weather Kafka topic: `eval-weather-readings`.
+- Dedicated Kafka consumer groups.
+- The same processing code as the development environment.
+
+The isolation ensures that object counts, storage measurements,
+record counts, and lineage artifacts reported during evaluation are
+generated only by the controlled experiment.
 ---
 
 # Experiment 1 — End-to-End Functional Validation

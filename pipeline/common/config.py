@@ -12,8 +12,36 @@ from dotenv import load_dotenv
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 # Load variables from the root .env file.
-ENV_FILE = PROJECT_ROOT / ".env"
-load_dotenv(ENV_FILE)
+
+APP_ENV = os.getenv(
+    "APP_ENV",
+    "development",
+).strip().lower()
+
+
+if APP_ENV == "evaluation":
+    ENV_FILE = (
+        PROJECT_ROOT
+        / ".env.evaluation"
+    )
+
+else:
+    ENV_FILE = (
+        PROJECT_ROOT
+        / ".env"
+    )
+
+
+if not ENV_FILE.exists():
+    raise RuntimeError(
+        f"Environment file not found: {ENV_FILE}"
+    )
+
+
+load_dotenv(
+    ENV_FILE,
+    override=True,
+)
 
 
 def get_required_env(name: str) -> str:
