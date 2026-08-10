@@ -1,0 +1,7 @@
+job,run_id,duration_seconds,output_objects,output_bytes,lineage,parent_count
+field_bronze,20260809T122640Z_b09798ef,110.3023,5,516195,False,0
+field_silver,20260809T123145Z_a587e198,1.7347,2,102403,True,1
+weather_bronze,20260809T123248Z_81dff0c0,187.5162,5,466054,False,0
+weather_silver,20260809T123659Z_fe5574f3,0.9074,2,87824,True,1
+integration,20260809T124056Z_2102200d,0.9715,2,190737,True,2
+integrated_gold,20260809T124237Z_b7b4cee8,1.7968,3,232388,True,1

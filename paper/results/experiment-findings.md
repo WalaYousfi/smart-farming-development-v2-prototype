@@ -142,3 +142,69 @@ Initial evaluation-bucket object count: 0.
 This isolation is intended to improve the reproducibility and
 internal validity of storage, record-count, and performance
 measurements.
+
+## Isolated End-to-End Evaluation
+
+### Objective
+
+Evaluate one complete execution of the proposed architecture using
+an isolated MinIO bucket and dedicated Kafka topics.
+
+### Input
+
+- Field observations: 500
+- Weather observations: 500
+- Source systems: 2
+- Source formats: CSV and JSON
+
+### Data-quality results
+
+| Source | Input | Accepted | Quarantined | Acceptance rate |
+|---|---:|---:|---:|---:|
+| Field | 500| 500 | 0 | 1.0 |
+| Weather | 500 | 500 | 0 | 1.0 |
+
+### Integration results
+
+- Field records: 500
+- Weather records: 500
+- Integrated records: 500
+- Matched records: 500
+- Unmatched records: 0
+- Match rate: 1.0
+
+### Gold analytical results
+
+- Records scored: 500*
+- Normal observations: 475
+- Anomalous observations: 25
+- Weather-matched observations: 500
+- Weather-matched anomalies: 25
+
+### Traceability
+
+- Transformation jobs evaluated: 4
+- Jobs with lineage: 4
+- Lineage coverage: 1.0
+- Integration parent runs: 2
+- Gold parent runs: 1
+
+### Performance
+
+- Total bounded processing time: 5.4104 seconds
+- Run-specific output storage: 1.521684 MB
+
+### Interpretation
+
+The controlled experiment evaluates whether two heterogeneous source
+representations can pass independently through Bronze and canonical
+Silver processing before being combined into one integrated Silver
+dataset and consumed by an AI-enabled Gold stage.
+
+### Important limitation
+
+The synthetic weather dataset was deliberately generated with matching
+farm and temporal keys. Therefore, complete match coverage demonstrates
+the architecture's ability to integrate compatible heterogeneous
+datasets; it does not represent naturally occurring real-world weather
+matching rates.
