@@ -1,0 +1,116 @@
+{
+  "experiment": "controlled_field_quality_stress_test",
+  "generated_at": "2026-08-10T21:57:10.892240+00:00",
+  "source_file": "data\\source\\Smart_Farming_Crop_Yield_2024.csv",
+  "total_injected_records": 20,
+  "expected_quarantined_records": 20,
+  "expected_accepted_records": 0,
+  "defects": {
+    "invalid_soil_moisture": 5,
+    "invalid_humidity": 5,
+    "invalid_soil_ph": 5,
+    "invalid_ndvi": 5
+  },
+  "records": [
+    {
+      "test_id": "soil-moisture-01",
+      "defect": "invalid_soil_moisture",
+      "column": "soil_moisture_%"
+    },
+    {
+      "test_id": "soil-moisture-02",
+      "defect": "invalid_soil_moisture",
+      "column": "soil_moisture_%"
+    },
+    {
+      "test_id": "soil-moisture-03",
+      "defect": "invalid_soil_moisture",
+      "column": "soil_moisture_%"
+    },
+    {
+      "test_id": "soil-moisture-04",
+      "defect": "invalid_soil_moisture",
+      "column": "soil_moisture_%"
+    },
+    {
+      "test_id": "soil-moisture-05",
+      "defect": "invalid_soil_moisture",
+      "column": "soil_moisture_%"
+    },
+    {
+      "test_id": "humidity-01",
+      "defect": "invalid_humidity",
+      "column": "humidity_%"
+    },
+    {
+      "test_id": "humidity-02",
+      "defect": "invalid_humidity",
+      "column": "humidity_%"
+    },
+    {
+      "test_id": "humidity-03",
+      "defect": "invalid_humidity",
+      "column": "humidity_%"
+    },
+    {
+      "test_id": "humidity-04",
+      "defect": "invalid_humidity",
+      "column": "humidity_%"
+    },
+    {
+      "test_id": "humidity-05",
+      "defect": "invalid_humidity",
+      "column": "humidity_%"
+    },
+    {
+      "test_id": "soil-ph-01",
+      "defect": "invalid_soil_ph",
+      "column": "soil_pH"
+    },
+    {
+      "test_id": "soil-ph-02",
+      "defect": "invalid_soil_ph",
+      "column": "soil_pH"
+    },
+    {
+      "test_id": "soil-ph-03",
+      "defect": "invalid_soil_ph",
+      "column": "soil_pH"
+    },
+    {
+      "test_id": "soil-ph-04",
+      "defect": "invalid_soil_ph",
+      "column": "soil_pH"
+    },
+    {
+      "test_id": "soil-ph-05",
+      "defect": "invalid_soil_ph",
+      "column": "soil_pH"
+    },
+    {
+      "test_id": "ndvi-01",
+      "defect": "invalid_ndvi",
+      "column": "NDVI_index"
+    },
+    {
+      "test_id": "ndvi-02",
+      "defect": "invalid_ndvi",
+      "column": "NDVI_index"
+    },
+    {
+      "test_id": "ndvi-03",
+      "defect": "invalid_ndvi",
+      "column": "NDVI_index"
+    },
+    {
+      "test_id": "ndvi-04",
+      "defect": "invalid_ndvi",
+      "column": "NDVI_index"
+    },
+    {
+      "test_id": "ndvi-05",
+      "defect": "invalid_ndvi",
+      "column": "NDVI_index"
+    }
+  ]
+}

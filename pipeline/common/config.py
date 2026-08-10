@@ -40,7 +40,7 @@ if not ENV_FILE.exists():
 
 load_dotenv(
     ENV_FILE,
-    override=True,
+    override=False,
 )
 
 

@@ -203,3 +203,55 @@ farm and temporal keys. Therefore, complete match coverage demonstrates
 the architecture's ability to integrate compatible heterogeneous
 datasets; it does not represent naturally occurring real-world weather
 matching rates.
+
+## Controlled Data-Quality Stress Test
+
+### Objective
+
+Evaluate whether the Silver quality-control stage detects and
+quarantines known invalid agricultural observations while Bronze
+preserves the source records unchanged according to the ELT design.
+
+### Experimental design
+
+Twenty Field observations were deliberately corrupted after selection
+from the clean source dataset.
+
+Four defect categories were introduced:
+
+| Defect category | Injected records |
+|---|---:|
+| Invalid soil moisture | 5 |
+| Invalid humidity | 5 |
+| Invalid soil pH | 5 |
+| Invalid NDVI | 5 |
+| **Total** | **20** |
+
+The ground-truth defect labels were recorded before ingestion.
+
+### Expected result
+
+- Input records: 20
+- Expected accepted records: 0
+- Expected quarantined records: 20
+- Expected invalid-record detection rate: 100%
+
+### Actual result
+
+- Input records: TBD
+- Accepted records: TBD
+- Quarantined records: TBD
+- Detection rate: TBD
+
+### Architectural significance
+
+The experiment evaluates the separation of responsibilities between
+Bronze and Silver. Bronze is expected to preserve source observations,
+including invalid values, while Silver applies explicit quality rules
+and separates accepted from quarantined records.
+
+### Limitation
+
+The injected defects are controlled synthetic quality violations and
+therefore evaluate rule enforcement rather than the frequency or
+distribution of naturally occurring agricultural data-quality errors.
