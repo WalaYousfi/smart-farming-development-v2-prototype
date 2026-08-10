@@ -8,8 +8,15 @@ import sys
 import time
 from typing import Any, Dict, List, Optional
 
-from pipeline.common.config import PROJECT_ROOT
-
+from pipeline.common.config import (
+    APP_ENV,
+    MINIO_BUCKET,
+    MANIFEST_PREFIX,
+    PROJECT_ROOT,
+)
+from pipeline.common.minio_client import (
+    create_minio_client,
+)
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -192,11 +199,153 @@ def extract_run_id(
     )
 
 
+def read_completed_manifest(
+    job_name: str,
+    run_id: str,
+) -> Dict[str, Any]:
+    """
+    Read one completed manifest from MinIO.
+    """
+
+    minio_client = create_minio_client()
+
+    object_name = (
+        f"{MANIFEST_PREFIX}/"
+        f"{job_name}/"
+        f"run_id={run_id}/"
+        f"manifest_completed.json"
+    )
+
+    response = minio_client.get_object(
+        bucket_name=MINIO_BUCKET,
+        object_name=object_name,
+    )
+
+    try:
+        return json.loads(
+            response.read().decode("utf-8")
+        )
+
+    finally:
+        response.close()
+        response.release_conn()
+
+
+def validate_repetition_results(
+    integration_run_id: str,
+    gold_run_id: str,
+) -> Dict[str, Any]:
+    """
+    Verify that one repetition produced the expected
+    controlled experimental results.
+    """
+
+    integration_manifest = (
+        read_completed_manifest(
+            job_name=(
+                "silver_field_weather_integration"
+            ),
+            run_id=integration_run_id,
+        )
+    )
+
+    gold_manifest = read_completed_manifest(
+        job_name=(
+            "gold_integrated_field_anomaly_detection"
+        ),
+        run_id=gold_run_id,
+    )
+
+    integration_metrics = (
+        integration_manifest.get(
+            "metrics",
+            {},
+        )
+    )
+
+    gold_metrics = gold_manifest.get(
+        "metrics",
+        {},
+    )
+
+    actual_results = {
+        "field_records": (
+            integration_metrics.get(
+                "field_input_records"
+            )
+        ),
+        "weather_records": (
+            integration_metrics.get(
+                "weather_input_records"
+            )
+        ),
+        "integrated_records": (
+            integration_metrics.get(
+                "integrated_output_records"
+            )
+        ),
+        "matched_records": (
+            integration_metrics.get(
+                "matched_field_records"
+            )
+        ),
+        "match_rate": (
+            integration_metrics.get(
+                "weather_match_rate"
+            )
+        ),
+        "gold_records": (
+            gold_metrics.get(
+                "total_records"
+            )
+        ),
+        "normal_records": (
+            gold_metrics.get(
+                "normal_records"
+            )
+        ),
+        "anomaly_records": (
+            gold_metrics.get(
+                "anomaly_records"
+            )
+        ),
+    }
+
+    expected_results = {
+        "field_records": 500,
+        "weather_records": 500,
+        "integrated_records": 500,
+        "matched_records": 500,
+        "match_rate": 1.0,
+        "gold_records": 500,
+        "normal_records": 475,
+        "anomaly_records": 25,
+    }
+
+    validation_passed = (
+        actual_results
+        == expected_results
+    )
+
+    if not validation_passed:
+        raise RuntimeError(
+            "Experimental result validation failed.\n"
+            f"Expected: {expected_results}\n"
+            f"Actual: {actual_results}"
+        )
+
+    return {
+        "passed": True,
+        "expected": expected_results,
+        "actual": actual_results,
+    }
+
+
 def calculate_statistics(
     values: List[float],
 ) -> Dict[str, Optional[float]]:
     """
-    Calculate descriptive statistics.
+    Calculate descriptive statistics for experiment timing.
     """
 
     if not values:
@@ -207,7 +356,12 @@ def calculate_statistics(
             "minimum": None,
             "maximum": None,
             "standard_deviation": None,
+            "coefficient_of_variation": None,
         }
+
+    mean_value = statistics.mean(
+        values
+    )
 
     standard_deviation = (
         statistics.stdev(values)
@@ -215,10 +369,16 @@ def calculate_statistics(
         else 0.0
     )
 
+    coefficient_of_variation = (
+        standard_deviation / mean_value
+        if mean_value != 0
+        else 0.0
+    )
+
     return {
         "count": len(values),
         "mean": round(
-            statistics.mean(values),
+            mean_value,
             4,
         ),
         "median": round(
@@ -237,9 +397,11 @@ def calculate_statistics(
             standard_deviation,
             4,
         ),
+        "coefficient_of_variation": round(
+            coefficient_of_variation,
+            4,
+        ),
     }
-
-
 def run_one_repetition(
     repetition_number: int,
     arguments: argparse.Namespace,
@@ -301,6 +463,15 @@ def run_one_repetition(
         4,
     )
 
+    validation = validate_repetition_results(
+        integration_run_id=integration_run_id,
+        gold_run_id=gold_run_id,
+    )
+
+    print(
+        "Result validation: PASSED"
+    )
+
     return {
         "repetition": repetition_number,
         "started_at": (
@@ -342,6 +513,7 @@ def run_one_repetition(
             "integration": integration_result,
             "integrated_gold": gold_result,
         },
+        "validation": validation,
         "status": "completed",
     }
 
@@ -469,6 +641,11 @@ def print_summary(
         "  Standard deviation: "
         f"{integration['standard_deviation']} s"
     )
+    
+    print(
+        "  Coefficient of variation: "
+        f"{integration['coefficient_of_variation']}"
+    )
 
     gold = summary["gold_duration_seconds"]
 
@@ -482,6 +659,11 @@ def print_summary(
         f"{gold['standard_deviation']} s"
     )
 
+    print(
+        "  Coefficient of variation: "
+        f"{gold['coefficient_of_variation']}"
+    )
+
     total = summary["total_duration_seconds"]
 
     print("\nCombined duration:")
@@ -492,6 +674,11 @@ def print_summary(
     print(
         "  Standard deviation: "
         f"{total['standard_deviation']} s"
+    )
+
+    print(
+        "  Coefficient of variation: "
+        f"{total['coefficient_of_variation']}"
     )
 
 
@@ -527,6 +714,9 @@ def main() -> None:
         "architecture": (
             "proposed dual-dimensional V2"
         ),
+
+        "environment": APP_ENV,
+        "minio_bucket": MINIO_BUCKET,
         "started_at": experiment_started_at,
         "completed_at": utc_now(),
         "configuration": {

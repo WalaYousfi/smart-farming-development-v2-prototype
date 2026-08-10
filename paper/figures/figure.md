@@ -1,0 +1,16 @@
+18. One very useful future figure
+
+These five repetitions will later become a figure like:
+
+Execution time (seconds)
+
+Run       Integration     Gold
+1             ...
+2             ...
+3             ...
+4             ...
+5             ...
+
+This can show visually whether the runtime is stable.
+
+Do not generate the chart yet. First we want all the experiments collected consistently.

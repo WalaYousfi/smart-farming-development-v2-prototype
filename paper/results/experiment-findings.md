@@ -2,62 +2,57 @@
 
 ### Objective
 
-Measure the execution-time stability of heterogeneous Silver
-integration and integrated Gold anomaly detection.
+Evaluate the execution-time stability of the heterogeneous
+integration stage and integrated Gold anomaly-detection stage.
 
-### Configuration
+### Experimental configuration
 
-- Field observations: 500
-- Weather observations: 500
-- Integration coverage: 100%
-- Repetitions: 3 for preliminary testing
-- Isolation Forest contamination: 0.05
-- Isolation Forest estimators: 200
-- Random seed: 42
-- Execution environment: local Docker-based prototype
+- Environment: isolated paper-evaluation environment.
+- Field Silver observations: 500.
+- Weather Silver observations: 500.
+- Integration coverage: 100%.
+- Repetitions: 5.
+- Isolation Forest estimators: 200.
+- Contamination: 0.05.
+- Random state: 42.
+- Processing engine: pandas and scikit-learn.
+- Storage: MinIO.
+- Execution environment: local Docker-based prototype.
+
+### Workload validation
+
+Each repetition was required to produce:
+
+- 500 Field observations.
+- 500 Weather observations.
+- 500 integrated observations.
+- 500 matched observations.
+- 500 Gold-scored observations.
+- 475 normal observations.
+- 25 anomaly-labelled observations.
+
+Runs failing these checks were excluded as invalid experimental
+executions rather than treated as timing measurements.
 
 ### Results
 
-| Stage | Mean (s) | Median (s) | Minimum (s) | Maximum (s) | Standard deviation (s) |
-|---|---:|---:|---:|---:|---:|
-| Field–Weather integration | 2.8349 | 2.7388 | 2.6726 | 3.0933 | 0.2262 |
-| Integrated Gold processing | 5.4846 | 5.4174 | 5.2804 | 5.7560 | 0.2448 |
-| Combined | 8.3195 | 8.1562 | 7.9530 | 8.8493 | 0.4699 |
+| Stage | Mean (s) | Median (s) | Min (s) | Max (s) | SD (s) | CV |
+|---|---:|---:|---:|---:|---:|---:|
+| Field–Weather integration | 3.957 | 2.8296 | 2.5489 | 8.7265 | 2.6702 | 0.6748|
+| Integrated Gold processing |  7.6086 | 5.4612 | 5.0713 | 16.6278 | 5.0457 | 0.6632 |
+| Combined | 11.5656 | 8.1461 | 8.0173 |25.3543 | 7.7084 | 0.6665 |
 
-The preliminary three-run experiment shows that the Field–Weather
-integration stage required an average of 2.8349 seconds, while the
-Integrated Gold anomaly-detection stage required an average of
-5.4846 seconds. The complete integration and Gold-processing
-workflow required an average of 8.3195 seconds.
+### Interpretation
 
-The standard deviations were 0.2262 seconds for integration,
-0.2448 seconds for Gold processing, and 0.4699 seconds for the
-combined workflow. These relatively small variations indicate
-reasonably stable execution times across the three preliminary runs
-under the same local experimental conditions.
-
-The Integrated Gold stage was the most time-consuming part of the
-measured workflow. Its mean execution time was approximately 1.93
-times the integration-stage mean, which is consistent with the
-additional work required for feature preparation, Isolation Forest
-training, anomaly scoring, and the generation of analytical and
-consumer-oriented Gold outputs.
-
-### Experiment artifact
-
-The complete machine-generated experiment report is stored at:
-
-`experiments/prototype-v2/repeated-runs/timing-test-3-runs_20260806T225321Z.json`
-### Preliminary interpretation
-
-To be completed after the timing values are generated.
+TBD after experimental execution.
 
 ### Limitations
 
-- Preliminary results use only three repetitions.
-- The dataset contains 500 records per source.
-- Tests run locally on one machine.
-- Results do not represent distributed execution.
+The measurements were performed using a 500-record-per-source
+controlled workload on a single local machine. They therefore
+characterize prototype execution stability rather than
+large-scale distributed performance.
+
 
 
 ## Storage-Overhead Experiment

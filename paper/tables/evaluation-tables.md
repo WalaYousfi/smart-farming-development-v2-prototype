@@ -39,3 +39,16 @@ data.
 
 **Configuration:** 500 Field observations, 500 synthetic Weather
 observations, Isolation Forest contamination = 0.05, random state = 42.
+
+## Table — Repeated Processing-Time Evaluation
+
+| Stage | Mean (s) | Median (s) | Min (s) | Max (s) | SD (s) | CV |
+|---|---:|---:|---:|---:|---:|---:|
+| Field–Weather integration | 3.957 | 2.8296 | 2.5489 | 8.7265 | 2.6702 | 0.6748|
+| Integrated Gold processing |  7.6086 | 5.4612 | 5.0713 | 16.6278 | 5.0457 | 0.6632 |
+| Combined | 11.5656 | 8.1461 | 8.0173 |25.3543 | 7.7084 | 0.6665 |
+
+
+**Experimental conditions:** Five repetitions using the same
+500-record Field Silver dataset and 500-record Weather Silver
+dataset in the isolated evaluation environment.
