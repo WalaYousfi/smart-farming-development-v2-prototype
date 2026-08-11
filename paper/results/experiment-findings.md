@@ -238,10 +238,16 @@ The ground-truth defect labels were recorded before ingestion.
 
 ### Actual result
 
-- Input records: TBD
-- Accepted records: TBD
-- Quarantined records: TBD
-- Detection rate: TBD
+- Input records: 20
+- Accepted records: 0
+- Quarantined records: 20
+- Correctly detected invalid records: 20
+- Invalid-record detection rate: 100%
+- Defect categories detected: 4/4
+
+All injected violations were rejected during canonical schema
+validation. The quarantine records retained the corresponding
+validation reason and source provenance.
 
 ### Architectural significance
 

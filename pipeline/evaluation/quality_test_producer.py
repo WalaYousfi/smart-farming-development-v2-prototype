@@ -7,7 +7,13 @@ from kafka import KafkaProducer
 
 
 KAFKA_SERVER = "localhost:9092"
-QUALITY_TOPIC = "eval-quality-field-readings"
+import os
+
+
+QUALITY_TOPIC = os.getenv(
+    "QUALITY_KAFKA_TOPIC",
+    "eval-quality-field-readings",
+)
 
 
 def parse_arguments() -> argparse.Namespace:

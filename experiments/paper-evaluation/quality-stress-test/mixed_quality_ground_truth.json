@@ -1,0 +1,211 @@
+{
+  "experiment": "mixed_field_quality_classification",
+  "total_records": 40,
+  "valid_records": 20,
+  "invalid_records": 20,
+  "expected_accepted": 20,
+  "expected_quarantined": 20,
+  "shuffle_random_state": 42,
+  "records": [
+    {
+      "test_id": "valid-20",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-17",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-16",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "humidity-02",
+      "defect": "invalid_humidity",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-05",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-13",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "ndvi-03",
+      "defect": "invalid_ndvi",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "humidity-03",
+      "defect": "invalid_humidity",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "ndvi-05",
+      "defect": "invalid_ndvi",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-07",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "humidity-01",
+      "defect": "invalid_humidity",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-10",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-14",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "soil-ph-02",
+      "defect": "invalid_soil_ph",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "soil-ph-05",
+      "defect": "invalid_soil_ph",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-09",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-18",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "soil-moisture-05",
+      "defect": "invalid_soil_moisture",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-01",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "soil-ph-04",
+      "defect": "invalid_soil_ph",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-06",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-12",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-02",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "humidity-05",
+      "defect": "invalid_humidity",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "soil-moisture-02",
+      "defect": "invalid_soil_moisture",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-03",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "soil-ph-01",
+      "defect": "invalid_soil_ph",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "ndvi-02",
+      "defect": "invalid_ndvi",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-04",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "ndvi-01",
+      "defect": "invalid_ndvi",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "soil-moisture-04",
+      "defect": "invalid_soil_moisture",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "soil-ph-03",
+      "defect": "invalid_soil_ph",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-11",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "soil-moisture-03",
+      "defect": "invalid_soil_moisture",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-19",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "soil-moisture-01",
+      "defect": "invalid_soil_moisture",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "valid-08",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "valid-15",
+      "defect": "none",
+      "expected_result": "accepted"
+    },
+    {
+      "test_id": "humidity-04",
+      "defect": "invalid_humidity",
+      "expected_result": "quarantined"
+    },
+    {
+      "test_id": "ndvi-04",
+      "defect": "invalid_ndvi",
+      "expected_result": "quarantined"
+    }
+  ]
+}
