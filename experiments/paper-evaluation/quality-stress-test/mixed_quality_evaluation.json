@@ -1,0 +1,267 @@
+{
+  "experiment": "mixed_quality_classification",
+  "bucket": "smart-farming-paper-eval",
+  "silver_run_id": "20260811T212148Z_5754ed4c",
+  "bronze_run_id": "20260811T194526Z_6e6b7acf",
+  "ground_truth_records": 40,
+  "bronze_test_ids_found": 40,
+  "accepted_event_ids_found": 20,
+  "quarantined_event_ids_found": 20,
+  "confusion_matrix": {
+    "true_positive": 20,
+    "true_negative": 20,
+    "false_positive": 0,
+    "false_negative": 0
+  },
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "specificity": 1.0,
+    "false_positive_rate": 0.0,
+    "f1_score": 1.0
+  },
+  "missing_records": [],
+  "record_results": [
+    {
+      "test_id": "valid-20",
+      "event_id": "a7edb754-e21b-4d42-9ca1-81c219efc29d",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-17",
+      "event_id": "92a02efa-b2a3-4f10-813b-abec045eccb3",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-16",
+      "event_id": "d5324152-1222-426b-a72f-a8422139b151",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "humidity-02",
+      "event_id": "f337b11a-a00f-450d-a58b-920f6e04b2ef",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-05",
+      "event_id": "48f77774-b239-47f6-aa7c-910baf4600aa",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-13",
+      "event_id": "3c326bf0-02b7-463e-b234-b2991c02be4a",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "ndvi-03",
+      "event_id": "9fa92d4f-7329-44ea-9be2-5b0c645d9631",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "humidity-03",
+      "event_id": "7af0c234-e427-43c4-82c6-5984ccd236f1",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "ndvi-05",
+      "event_id": "be9a8861-33ac-41e1-aaa5-d25944a6cf4c",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-07",
+      "event_id": "6802319b-7936-4201-92ad-657f2b6093b9",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "humidity-01",
+      "event_id": "37b133db-8984-4b5d-afac-7273535063c6",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-10",
+      "event_id": "62243b56-abba-4038-831b-b4ec0ee85f17",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-14",
+      "event_id": "93683160-9165-4b81-acd1-2ea5ca6db3d7",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "soil-ph-02",
+      "event_id": "ddae13d4-d157-48a2-b12d-39d83118dbfd",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "soil-ph-05",
+      "event_id": "a711ea84-d526-4ef5-a476-73ec12499d24",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-09",
+      "event_id": "23117011-78c1-4894-a316-edebd06bef16",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-18",
+      "event_id": "d8335746-b3a8-4f7d-b36d-b9805b8e68e6",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "soil-moisture-05",
+      "event_id": "0428b888-301c-4280-9fec-22be3b9bcc4c",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-01",
+      "event_id": "4b43a21e-7fb1-43a0-b12c-2f40f669f99b",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "soil-ph-04",
+      "event_id": "9e660c8f-852f-47be-a580-7eac19601876",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-06",
+      "event_id": "ae6d23af-2335-4ba8-82af-f2f8cb974892",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-12",
+      "event_id": "16adfdd3-de7c-429e-be5a-303c15661094",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-02",
+      "event_id": "27540592-50c9-4dd9-b784-97a8acc8e929",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "humidity-05",
+      "event_id": "2ee0f07c-d9bc-4daa-94ff-3da427dc43df",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "soil-moisture-02",
+      "event_id": "5329ed14-a4b4-460e-8c95-dcfc9332e6cc",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-03",
+      "event_id": "62ed4b53-2278-4079-b439-2495f3e9fa0a",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "soil-ph-01",
+      "event_id": "b3961af2-4be1-4c1e-95e5-0bb27edc1029",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "ndvi-02",
+      "event_id": "194ec26b-db57-4809-b8ef-eae438048658",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-04",
+      "event_id": "dc253e3f-bd69-4250-ad07-9e76de409578",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "ndvi-01",
+      "event_id": "63d074dc-d6bd-4f91-b4b6-a465793da6be",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "soil-moisture-04",
+      "event_id": "634b5b89-20d2-4d68-b9ce-1db8dd69e918",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "soil-ph-03",
+      "event_id": "d7da0f0c-2e08-4f6d-b8a7-b16f7b7f360c",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-11",
+      "event_id": "f43865df-7452-4a8c-bac7-7a1745a302a5",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "soil-moisture-03",
+      "event_id": "42627235-c635-44a1-87f1-935ad0f7c6e1",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-19",
+      "event_id": "6c4c556e-a48b-4532-b539-ba48c31bf424",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "soil-moisture-01",
+      "event_id": "cdec1fdc-6cbf-4c06-b79c-c378d89fc295",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "valid-08",
+      "event_id": "b814e4d5-0595-4339-b036-98319df5a1f5",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "valid-15",
+      "event_id": "d46eed4d-9ff0-4882-9f9f-b9dfb9c743c2",
+      "expected": "accepted",
+      "actual": "accepted"
+    },
+    {
+      "test_id": "humidity-04",
+      "event_id": "2a02bd51-a9bd-4605-b723-a55419786b38",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    },
+    {
+      "test_id": "ndvi-04",
+      "event_id": "94cde86e-b3f9-4257-94f8-1add079db4f2",
+      "expected": "quarantined",
+      "actual": "quarantined"
+    }
+  ]
+}
