@@ -170,11 +170,20 @@ an isolated MinIO bucket and dedicated Kafka topics.
 
 ### Gold analytical results
 
-- Records scored: 500*
+- Records scored: 500
 - Normal observations: 475
 - Anomalous observations: 25
 - Weather-matched observations: 500
 - Weather-matched anomalies: 25
+
+#### interpretation: Gold anomalies
+
+The anomaly count should be interpreted in relation to the configured
+Isolation Forest contamination parameter of 0.05. Therefore, the
+25 anomaly-labelled observations are model outputs under the defined
+experimental configuration and should not be interpreted as an
+estimated 5% prevalence of true agricultural anomalies.
+
 
 ### Traceability
 
@@ -261,3 +270,98 @@ and separates accepted from quarantined records.
 The injected defects are controlled synthetic quality violations and
 therefore evaluate rule enforcement rather than the frequency or
 distribution of naturally occurring agricultural data-quality errors.
+
+## Mixed Valid-Invalid Quality Classification Experiment
+
+### Objective
+
+Evaluate whether the Silver quality-control stage can correctly
+distinguish known-valid observations from deliberately corrupted
+observations rather than simply rejecting all records in a stress-test
+dataset.
+
+### Experimental design
+
+A balanced controlled dataset containing 40 Field observations was
+constructed:
+
+- 20 known-valid observations.
+- 20 deliberately invalid observations.
+- Four invalid-data categories were represented:
+  - Invalid soil moisture.
+  - Invalid humidity.
+  - Invalid soil pH.
+  - Invalid NDVI.
+
+The dataset was shuffled using a fixed random state of 42 before
+ingestion. Ground-truth labels were stored independently before
+processing.
+
+### Silver processing result
+
+- Input records: 40
+- Accepted records: 20
+- Quarantined records: 20
+- Acceptance rate: 0.50
+- Uniqueness score: 1.00
+- Composite Silver quality score: 0.75
+
+The current prototype defines the composite Silver quality score as the
+mean of the acceptance rate and uniqueness score:
+
+`Composite quality score = (acceptance rate + uniqueness score) / 2`
+
+This metric is used as an architectural monitoring indicator and is
+evaluated separately from ground-truth classification metrics such as
+accuracy, precision, recall, and F1 score.
+
+
+### Record-level classification results
+
+| Metric | Result |
+|---|---:|
+| True positives | 20 |
+| True negatives | 20 |
+| False positives | 0 |
+| False negatives | 0 |
+| Accuracy | 1.0000 |
+| Precision | 1.0000 |
+| Recall | 1.0000 |
+| Specificity | 1.0000 |
+| F1 score | 1.0000 |
+| False-positive rate | 0.0000 |
+| Missing records | 0 |
+
+### Traceability validation
+
+The evaluator reconstructed each quality-test observation through the
+Bronze-to-Silver provenance chain.
+
+- MIXED_QUALITY_BRONZE_RUN_ID =  `20260811T194526Z_6e6b7acf` 
+- MIXED_QUALITY_SILVER_RUN_ID =  `20260811T212148Z_5754ed4c `
+- Controlled test IDs recovered from Bronze: 40
+- Accepted Silver event IDs recovered: 20
+- Quarantined event IDs recovered: 20
+- Missing records: 0
+
+The experimental identifier was retained only in the Bronze payload,
+while accepted canonical Silver records used `source_event_id` to
+preserve provenance without polluting the canonical schema with
+experiment-specific attributes.
+
+### Interpretation
+
+Under the controlled rule-based experiment, the Silver stage correctly
+classified all 40 observations. All known-valid observations were
+accepted and all deliberately invalid observations were quarantined.
+
+The result demonstrates correct enforcement of the four evaluated
+quality-rule categories and confirms that quality decisions remain
+traceable to the original Bronze events.
+
+### Limitation
+
+The result should not be interpreted as evidence of perfect quality
+classification for arbitrary real-world agricultural data. The
+experiment evaluates a defined set of synthetic violations against
+explicit validation rules.
