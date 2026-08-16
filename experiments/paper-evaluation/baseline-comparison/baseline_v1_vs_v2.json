@@ -1,0 +1,120 @@
+{
+  "experiment": "baseline_v1_vs_proposed_v2",
+  "baseline_repository": "docker-learning",
+  "proposed_repository": "smart-farming-development",
+  "summary": {
+    "capabilities_compared": 17,
+    "capabilities_added": 13,
+    "added_capabilities": [
+      "separate_source_ingestion_paths",
+      "source_aware_bronze_envelope",
+      "canonical_silver_models",
+      "quarantine_zone",
+      "quality_reports",
+      "heterogeneous_integration",
+      "multi_parent_lineage",
+      "run_manifests",
+      "explicit_lineage_records",
+      "historical_run_selection",
+      "isolated_experiment_environment",
+      "purpose_specific_gold_products",
+      "automated_evaluation_framework"
+    ],
+    "unchanged_capabilities": [
+      "bronze_raw_preservation",
+      "gold_anomaly_detection"
+    ]
+  },
+  "comparison": {
+    "source_count": {
+      "baseline_v1": 1,
+      "proposed_v2": 2,
+      "changed": true
+    },
+    "source_formats": {
+      "baseline_v1": [
+        "CSV"
+      ],
+      "proposed_v2": [
+        "CSV",
+        "JSON"
+      ],
+      "changed": true
+    },
+    "separate_source_ingestion_paths": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "source_aware_bronze_envelope": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "bronze_raw_preservation": {
+      "baseline_v1": true,
+      "proposed_v2": true,
+      "changed": false
+    },
+    "canonical_silver_models": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "quarantine_zone": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "quality_reports": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "heterogeneous_integration": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "multi_parent_lineage": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "run_manifests": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "explicit_lineage_records": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "historical_run_selection": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "isolated_experiment_environment": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "gold_anomaly_detection": {
+      "baseline_v1": true,
+      "proposed_v2": true,
+      "changed": false
+    },
+    "purpose_specific_gold_products": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    },
+    "automated_evaluation_framework": {
+      "baseline_v1": false,
+      "proposed_v2": true,
+      "changed": true
+    }
+  }
+}

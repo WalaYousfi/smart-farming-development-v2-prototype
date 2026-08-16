@@ -137,3 +137,27 @@ validation while retaining failure reasons and Bronze provenance.
 | Overall traceability status | Complete |
 
 **Scope:** One controlled two-source end-to-end execution from Bronze ingestion through integrated Gold analytics.
+
+
+## Table — Baseline V1 versus Proposed V2
+
+| Capability | Baseline V1 | Proposed V2 |
+|---|---|---|
+| Agricultural source count | 1 | 2 |
+| Source formats | CSV | CSV + JSON |
+| Source-specific ingestion paths | No | Yes |
+| Source-aware Bronze envelope | No | Yes |
+| Raw Bronze preservation | Yes | Yes |
+| Canonical Silver models | No | Yes |
+| Quarantine support | No | Yes |
+| Quality reports | No | Yes |
+| Heterogeneous integration | No | Yes |
+| Multi-parent lineage | No | Yes |
+| Run manifests | No | Yes |
+| Explicit lineage records | No | Yes |
+| Historical run selection | No | Yes |
+| Isolated evaluation environment | No | Yes |
+| Gold anomaly detection | Yes | Yes |
+| Purpose-specific Gold products | No | Yes |
+| Automated evaluation framework | No | Yes |
+
