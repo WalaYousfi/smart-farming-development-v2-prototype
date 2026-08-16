@@ -75,62 +75,86 @@ characterize prototype execution stability rather than
 large-scale distributed performance.
 
 
-
-## Storage-Overhead Experiment
+## Isolated Storage-Overhead Evaluation
 
 ### Objective
 
-Measure the storage introduced by data zones and cross-cutting
-metadata in the proposed architecture.
+Measure the storage overhead associated with the data-maturity zones and cross-cutting governance mechanisms for one isolated end-to-end execution of the proposed architecture.
 
 ### Measurement scope
 
-The preliminary storage evaluator groups MinIO objects into:
+Only objects associated with the selected clean publication run were included. Historical development runs and unrelated evaluation objects were excluded.
 
-- Bronze data.
-- Accepted Silver data.
-- Quarantine data.
-- Integrated Silver data.
-- Gold analytical outputs.
-- Gold data products.
-- Manifests.
-- Lineage records.
-- Quality reports.
-- Traceability reports.
+The measurement distinguishes between data objects and governance metadata.
 
-### Preliminary results
+Data objects include:
 
-| Category | Object count | Size (bytes) | Size (MB) |
+Bronze source-preserving data.
+Accepted canonical Silver datasets.
+Quarantine data.
+Integrated Silver data.
+Gold analytical outputs.
+Gold data products.
+
+Governance metadata includes:
+
+Execution manifests.
+Lineage records.
+Quality reports.
+
+### Results
+
+The isolated end-to-end execution generated 35 MinIO objects occupying
+a total of 1.538713 MB. Of these, 16 were data objects occupying
+1.518073 MB, whereas 19 were governance metadata objects occupying
+0.020639 MB.
+
+The resulting metadata-to-data storage ratio was 0.013596. Governance
+metadata therefore represented 1.3413% of the total measured storage
+volume.
+
+| Category | Objects | Storage (KB) | Share |
 |---|---:|---:|---:|
-| Bronze data | TBD | TBD | TBD |
-| Accepted Silver | TBD | TBD | TBD |
-| Silver quarantine | TBD | TBD | TBD |
-| Integrated Silver | TBD | TBD | TBD |
-| Gold analytical | TBD | TBD | TBD |
-| Gold data products | TBD | TBD | TBD |
-| Manifests | TBD | TBD | TBD |
-| Lineage | TBD | TBD | TBD |
-| Quality reports | TBD | TBD | TBD |
-| Traceability | TBD | TBD | TBD |
-
-### Aggregate measurements
-
-- Total data storage: TBD.
-- Total metadata storage: TBD.
-- Metadata-to-data storage ratio: TBD.
-- Metadata storage percentage: TBD.
-- Data object count: TBD.
-- Metadata object count: TBD.
+| Bronze | 10 | 959.2275 | 60.8785% |
+| Accepted Silver | 2 | 182.8877 | 11.6072% |
+| Quarantine | 0 | 0.0000 | 0.0000% |
+| Integrated Silver | 1 | 185.4502 | 11.7698% |
+| Gold analytical | 1 | 195.8066 | 12.4271% |
+| Gold products | 2 | 31.1348 | 1.9760% |
+| Manifests | 12 | 11.7344 | 0.7447% |
+| Lineage | 4 | 5.7031 | 0.3620% |
+| Quality reports | 3 | 3.6973 | 0.2347% |
 
 ### Interpretation
 
-To be completed after measuring a clean experimental run.
+Bronze accounted for the largest proportion of storage at 60.8785%,
+which is consistent with the architecture's objective of preserving
+source observations before downstream standardization.
+
+A notable distinction was observed between object-count overhead and
+byte-level storage overhead. Governance metadata consisted of 19
+objects compared with 16 data objects. Nevertheless, manifests,
+lineage records, and quality reports together accounted for only
+1.3413% of total storage volume.
+
+Within governance metadata, manifests constituted the largest
+component at 11.7344 KB, followed by lineage records at 5.7031 KB and
+quality reports at 3.6973 KB.
+
+These results indicate that the explicit governance mechanisms used by
+the prototype introduced limited byte-level storage overhead for the
+evaluated workload while providing execution metadata, provenance and
+quality information used by the traceability and reproducibility
+mechanisms.
 
 ### Limitation
 
-The first evaluator execution may include accumulated development
-runs. Final publication measurements must use an isolated bucket or
-run-specific object selection.
+The measured overhead applies to one controlled two-source execution
+with 500 observations per source. Metadata-to-data ratios may differ
+substantially at larger scales because data-file sizes and metadata
+objects do not necessarily grow at the same rate. The experiment
+therefore characterizes the implemented prototype rather than
+establishing a general storage-overhead bound.
 
 
 

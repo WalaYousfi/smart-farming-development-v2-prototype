@@ -1,0 +1,10 @@
+category,object_count,total_bytes,total_kilobytes,total_megabytes,share_of_total_storage_percent
+bronze,10,982249,959.2275,0.936746,60.8785
+accepted_silver,2,187277,182.8877,0.178601,11.6072
+quarantine,0,0,0.0,0.0,0.0
+integrated_silver,1,189901,185.4502,0.181104,11.7698
+gold_analytical,1,200506,195.8066,0.191217,12.4271
+gold_products,2,31882,31.1348,0.030405,1.976
+manifests,12,12016,11.7344,0.011459,0.7447
+lineage,4,5840,5.7031,0.005569,0.362
+quality_reports,3,3786,3.6973,0.003611,0.2347

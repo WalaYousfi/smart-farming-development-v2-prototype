@@ -2,22 +2,42 @@
 
 | Architectural category | Objects | Storage (KB) | Share of total storage |
 |---|---:|---:|---:|
-| Bronze | TBD | TBD | TBD |
-| Accepted Silver | TBD | TBD | TBD |
-| Quarantine | TBD | TBD | TBD |
-| Integrated Silver | TBD | TBD | TBD |
-| Gold analytical | TBD | TBD | TBD |
-| Gold products | TBD | TBD | TBD |
-| Manifests | TBD | TBD | TBD |
-| Lineage | TBD | TBD | TBD |
-| Quality reports | TBD | TBD | TBD |
+| Bronze | 10 | 959.2275 | 60.8785% |
+| Accepted Silver | 2 | 182.8877 | 11.6072% |
+| Quarantine | 0 | 0.0000 | 0.0000% |
+| Integrated Silver | 1 | 185.4502 | 11.7698% |
+| Gold analytical | 1 | 195.8066 | 12.4271% |
+| Gold products | 2 | 31.1348 | 1.9760% |
+| Manifests | 12 | 11.7344 | 0.7447% |
+| Lineage | 4 | 5.7031 | 0.3620% |
+| Quality reports | 3 | 3.6973 | 0.2347% |
 
-**Source:** Automatically generated from MinIO object metadata.
+### Aggregate Storage
 
-**Interpretation:** The table evaluates whether the storage cost of
-governance metadata remains small relative to stored agricultural
-data.
+| Metric | Result |
+|---|---:|
+| Total storage | 1.538713 MB |
+| Data storage | 1.518073 MB |
+| Governance metadata storage | 0.020639 MB |
+| Metadata-to-data ratio | 0.013596 |
+| Metadata share of total storage | 1.3413% |
+| Data objects | 16 |
+| Metadata objects | 19 |
+| Total objects | 35 |
 
+**Source:** Automatically measured from MinIO object metadata for one
+isolated clean end-to-end evaluation run.
+
+**Interpretation:** Governance metadata represented 19 of the 35 stored
+objects but accounted for only 1.3413% of total storage volume. This
+indicates that, for the evaluated prototype run, explicit manifests,
+lineage records, and quality reports introduced limited byte-level
+storage overhead despite increasing the number of stored objects.
+
+**Scope:** Results correspond to one controlled execution containing
+500 Field observations and 500 Weather observations. Storage ratios
+should not be assumed to remain constant as data volume, source count,
+run count, or metadata complexity increases.
 
 ## Table — End-to-End Controlled Evaluation
 
