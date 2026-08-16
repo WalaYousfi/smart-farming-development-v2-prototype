@@ -53,31 +53,6 @@ observations, Isolation Forest contamination = 0.05, random state = 42.
 500-record Field Silver dataset and 500-record Weather Silver
 dataset in the isolated evaluation environment.
 
-### Interpretation
-
-The repeated experiment showed substantial execution-time variability
-under the local Docker-based environment. Field–Weather integration
-required a mean of 3.9570 s, while integrated Gold processing required
-a mean of 7.6086 s. The corresponding coefficients of variation were
-0.6748 and 0.6632, indicating that execution times were not highly
-stable across the five repetitions.
-
-The median durations were considerably lower than the respective
-means, particularly for integrated Gold processing, because one or
-more slower executions increased the average. Consequently, median
-values provide a useful complement to mean execution time for this
-small experimental sample.
-
-Integrated Gold processing was consistently the more computationally
-expensive of the two evaluated stages, which is consistent with its
-additional responsibilities including feature preparation, Isolation
-Forest training and scoring, Gold-product generation, object-storage
-writes, manifest generation, and lineage recording.
-
-These measurements characterize prototype behavior under the tested
-local environment and are not intended as claims of production-scale
-or distributed-system performance.
-
 
 ## Table — Controlled Silver Quality Classification
 
@@ -123,3 +98,22 @@ quality failures.
 
 All controlled violations were quarantined during canonical-schema
 validation while retaining failure reasons and Bronze provenance.
+
+
+## Table — End-to-End Lineage Traceability
+
+| Metric | Result |
+|---|---:|
+| Lineage graph nodes | 6 / 6 |
+| Transformation edges | 5 / 5 |
+| Transformation lineage records | 4 / 4 |
+| Bronze source roots | 2 / 2 |
+| Source systems recovered | 2 |
+| Maximum lineage depth | 3 |
+| Node completeness | 1.0000 |
+| Edge completeness | 1.0000 |
+| Multi-parent integration preserved | True |
+| End-to-end ancestry preserved | True |
+| Overall traceability status | Complete |
+
+**Scope:** One controlled two-source end-to-end execution from Bronze ingestion through integrated Gold analytics.

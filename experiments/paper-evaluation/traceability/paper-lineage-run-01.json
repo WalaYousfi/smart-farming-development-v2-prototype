@@ -1,0 +1,119 @@
+{
+  "experiment": "end_to_end_lineage_traceability",
+  "generated_at": "2026-08-16T21:00:19.036362+00:00",
+  "bucket": "smart-farming-paper-eval",
+  "starting_gold_run_id": "20260809T124237Z_b7b4cee8",
+  "metrics": {
+    "run_nodes_discovered": 6,
+    "expected_run_nodes": 6,
+    "transformation_edges_discovered": 5,
+    "expected_transformation_edges": 5,
+    "transformation_lineage_records": 4,
+    "expected_transformation_lineages": 4,
+    "bronze_roots_discovered": 2,
+    "expected_bronze_roots": 2,
+    "source_systems_recovered": 2,
+    "source_systems": [
+      "farm_weather_station",
+      "smart_farming_crop_yield_csv"
+    ],
+    "maximum_lineage_depth": 3,
+    "node_completeness": 1.0,
+    "edge_completeness": 1.0,
+    "lineage_record_completeness": 1.0,
+    "bronze_root_completeness": 1.0,
+    "multi_parent_integration_preserved": true,
+    "end_to_end_source_ancestry_preserved": true,
+    "overall_traceability_status": "complete"
+  },
+  "nodes": [
+    {
+      "run_id": "20260809T124237Z_b7b4cee8",
+      "node_type": "transformation",
+      "job_name": "gold_integrated_field_anomaly_detection",
+      "input_zone": "silver",
+      "output_zone": "gold",
+      "lineage_object": "metadata/lineage/gold_integrated_field_anomaly_detection/run_id=20260809T124237Z_b7b4cee8/lineage.json"
+    },
+    {
+      "run_id": "20260809T124056Z_2102200d",
+      "node_type": "transformation",
+      "job_name": "silver_field_weather_integration",
+      "input_zone": "silver",
+      "output_zone": "silver",
+      "lineage_object": "metadata/lineage/silver_field_weather_integration/run_id=20260809T124056Z_2102200d/lineage.json"
+    },
+    {
+      "run_id": "20260809T123145Z_a587e198",
+      "node_type": "transformation",
+      "job_name": "silver_field_observations",
+      "input_zone": "bronze",
+      "output_zone": "silver",
+      "lineage_object": "metadata/lineage/silver_field_observations/run_id=20260809T123145Z_a587e198/lineage.json"
+    },
+    {
+      "run_id": "20260809T122640Z_b09798ef",
+      "node_type": "bronze_root",
+      "job_name": null,
+      "source_system": "smart_farming_crop_yield_csv",
+      "input_objects_from_child": [
+        "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=09/run_id=20260809T122640Z_b09798ef/partition=0/events_0_99.jsonl",
+        "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=09/run_id=20260809T122640Z_b09798ef/partition=0/events_100_199.jsonl",
+        "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=09/run_id=20260809T122640Z_b09798ef/partition=0/events_200_299.jsonl",
+        "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=09/run_id=20260809T122640Z_b09798ef/partition=0/events_300_399.jsonl",
+        "bronze/source=smart_farming_crop_yield_csv/year=2026/month=08/day=09/run_id=20260809T122640Z_b09798ef/partition=0/events_400_499.jsonl"
+      ]
+    },
+    {
+      "run_id": "20260809T123659Z_fe5574f3",
+      "node_type": "transformation",
+      "job_name": "silver_weather_observations",
+      "input_zone": "bronze",
+      "output_zone": "silver",
+      "lineage_object": "metadata/lineage/silver_weather_observations/run_id=20260809T123659Z_fe5574f3/lineage.json"
+    },
+    {
+      "run_id": "20260809T123248Z_81dff0c0",
+      "node_type": "bronze_root",
+      "job_name": null,
+      "source_system": "farm_weather_station",
+      "input_objects_from_child": [
+        "bronze/source=farm_weather_station/year=2026/month=08/day=09/run_id=20260809T123248Z_81dff0c0/partition=0/events_0_99.jsonl",
+        "bronze/source=farm_weather_station/year=2026/month=08/day=09/run_id=20260809T123248Z_81dff0c0/partition=0/events_100_199.jsonl",
+        "bronze/source=farm_weather_station/year=2026/month=08/day=09/run_id=20260809T123248Z_81dff0c0/partition=0/events_200_299.jsonl",
+        "bronze/source=farm_weather_station/year=2026/month=08/day=09/run_id=20260809T123248Z_81dff0c0/partition=0/events_300_399.jsonl",
+        "bronze/source=farm_weather_station/year=2026/month=08/day=09/run_id=20260809T123248Z_81dff0c0/partition=0/events_400_499.jsonl"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "parent_run_id": "20260809T124056Z_2102200d",
+      "child_run_id": "20260809T124237Z_b7b4cee8"
+    },
+    {
+      "parent_run_id": "20260809T123145Z_a587e198",
+      "child_run_id": "20260809T124056Z_2102200d"
+    },
+    {
+      "parent_run_id": "20260809T122640Z_b09798ef",
+      "child_run_id": "20260809T123145Z_a587e198"
+    },
+    {
+      "parent_run_id": "20260809T123659Z_fe5574f3",
+      "child_run_id": "20260809T124056Z_2102200d"
+    },
+    {
+      "parent_run_id": "20260809T123248Z_81dff0c0",
+      "child_run_id": "20260809T123659Z_fe5574f3"
+    }
+  ],
+  "tree": [
+    "Gold: 20260809T124237Z_b7b4cee8",
+    "└── Integrated Silver: 20260809T124056Z_2102200d",
+    "    ├── Field Silver: 20260809T123145Z_a587e198",
+    "    │   └── Field Bronze: 20260809T122640Z_b09798ef",
+    "    └── Weather Silver: 20260809T123659Z_fe5574f3",
+    "        └── Weather Bronze: 20260809T123248Z_81dff0c0"
+  ]
+}

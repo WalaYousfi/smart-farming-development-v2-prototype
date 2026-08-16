@@ -44,7 +44,28 @@ executions rather than treated as timing measurements.
 
 ### Interpretation
 
-TBD after experimental execution.
+The repeated experiment showed substantial execution-time variability
+under the local Docker-based environment. Field–Weather integration
+required a mean of 3.9570 s, while integrated Gold processing required
+a mean of 7.6086 s. The corresponding coefficients of variation were
+0.6748 and 0.6632, indicating that execution times were not highly
+stable across the five repetitions.
+
+The median durations were considerably lower than the respective
+means, particularly for integrated Gold processing, because one or
+more slower executions increased the average. Consequently, median
+values provide a useful complement to mean execution time for this
+small experimental sample.
+
+Integrated Gold processing was consistently the more computationally
+expensive of the two evaluated stages, which is consistent with its
+additional responsibilities including feature preparation, Isolation
+Forest training and scoring, Gold-product generation, object-storage
+writes, manifest generation, and lineage recording.
+
+These measurements characterize prototype behavior under the tested
+local environment and are not intended as claims of production-scale
+or distributed-system performance.
 
 ### Limitations
 
@@ -365,3 +386,55 @@ The result should not be interpreted as evidence of perfect quality
 classification for arbitrary real-world agricultural data. The
 experiment evaluates a defined set of synthetic violations against
 explicit validation rules.
+
+
+
+## End-to-End Traceability Evaluation
+
+### Objective
+
+Evaluate whether the provenance of an integrated Gold analytical product can be reconstructed automatically through both heterogeneous Silver branches to their original Bronze ingestion runs.
+
+### Experimental procedure
+
+The evaluator started from the completed integrated Gold run and recursively followed the `parent_run_ids` stored in transformation lineage records. Bronze ingestion runs were treated as lineage roots rather than transformation jobs. Source-system information was recovered from the Bronze object paths referenced by the corresponding Silver lineage records.
+
+### Results
+
+| Metric                                   |   Result |
+| ---------------------------------------- | -------: |
+| Lineage graph nodes discovered           |    6 / 6 |
+| Transformation edges discovered          |    5 / 5 |
+| Transformation lineage records recovered |    4 / 4 |
+| Bronze source roots recovered            |    2 / 2 |
+| Source systems recovered                 |        2 |
+| Maximum lineage depth                    |        3 |
+| Node completeness                        |   1.0000 |
+| Edge completeness                        |   1.0000 |
+| Transformation-lineage completeness      |   1.0000 |
+| Bronze-root completeness                 |   1.0000 |
+| Multi-parent integration preserved       |     True |
+| End-to-end source ancestry preserved     |     True |
+| Overall traceability status              | Complete |
+
+The recovered lineage graph contained two independent Bronze roots, one for the crop-field source and one for the weather source. These roots were linked to their corresponding canonical Silver processing runs. Both Silver runs were then recovered as parents of the heterogeneous integration run, which in turn was identified as the direct parent of the integrated Gold anomaly-detection run.
+
+The reconstructed ancestry therefore followed the complete path:
+
+`Field Bronze → Field Silver → Integrated Silver → Gold`
+
+and:
+
+`Weather Bronze → Weather Silver → Integrated Silver → Gold`
+
+The integration stage preserved both Silver parents explicitly, demonstrating that heterogeneous multi-parent provenance was maintained rather than collapsed into a single upstream reference.
+
+### Interpretation
+
+The experiment demonstrates complete run-level traceability for the controlled end-to-end prototype execution. Starting only from the Gold run identifier, the evaluator reconstructed all expected transformation dependencies and both source-specific Bronze roots.
+
+This result supports the use of run-level lineage as a cross-cutting architectural mechanism linking data maturity and functional processing stages. It also demonstrates that provenance can be reconstructed without embedding source-specific experimental attributes into downstream canonical datasets.
+
+### Limitation
+
+The evaluation verifies lineage completeness within the implemented prototype and controlled two-source workflow. It does not evaluate large-scale lineage-graph traversal, lineage across external systems, schema-evolution provenance, or distributed metadata-catalog performance.
