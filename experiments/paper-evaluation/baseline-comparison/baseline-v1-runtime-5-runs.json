@@ -1,0 +1,234 @@
+{
+  "experiment": "baseline_v1_runtime_benchmark",
+  "experiment_name": "baseline-v1-runtime-5-runs",
+  "started_at": "2026-08-17T18:45:46.615855+00:00",
+  "completed_at": "2026-08-17T18:46:27.260652+00:00",
+  "baseline_repository": "C:\\docker-learning",
+  "configuration": {
+    "repetitions": 5,
+    "field_records": 500,
+    "expected_silver_records": 500,
+    "expected_gold_records": 500,
+    "expected_anomalies": 25,
+    "isolation_forest_estimators": 200,
+    "isolation_forest_contamination": 0.05,
+    "isolation_forest_random_state": 42
+  },
+  "summary": {
+    "completed_repetitions": 5,
+    "silver_duration_seconds": {
+      "count": 5,
+      "mean": 2.684,
+      "median": 2.6408,
+      "minimum": 2.595,
+      "maximum": 2.8541,
+      "standard_deviation": 0.1024,
+      "coefficient_of_variation": 0.0381
+    },
+    "gold_duration_seconds": {
+      "count": 5,
+      "mean": 5.4445,
+      "median": 5.6068,
+      "minimum": 5.0253,
+      "maximum": 5.6096,
+      "standard_deviation": 0.2553,
+      "coefficient_of_variation": 0.0469
+    },
+    "combined_duration_seconds": {
+      "count": 5,
+      "mean": 8.1285,
+      "median": 8.2367,
+      "minimum": 7.6203,
+      "maximum": 8.4609,
+      "standard_deviation": 0.3156,
+      "coefficient_of_variation": 0.0388
+    }
+  },
+  "repetitions": [
+    {
+      "repetition": 1,
+      "validation": {
+        "bronze_records": 500,
+        "silver_records": 500,
+        "valid_records": 500,
+        "gold_records": 500,
+        "normal_records": 475,
+        "anomaly_records": 25,
+        "passed": true
+      },
+      "durations": {
+        "silver_seconds": 2.8541,
+        "gold_seconds": 5.6068,
+        "combined_seconds": 8.4609
+      },
+      "steps": {
+        "silver": {
+          "step": "v1_silver",
+          "started_at": "2026-08-17T18:45:46.615855+00:00",
+          "completed_at": "2026-08-17T18:45:49.473444+00:00",
+          "duration_seconds": 2.8541,
+          "return_code": 0,
+          "stdout": "Reading: bronze/smart-farming/year=2026/month=07/day=28/events_0_99_20260728T215557702918Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_100_199_20260728T215557790273Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_200_299_20260728T215557852413Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_300_399_20260728T215557874514Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_400_499_20260728T215557935700Z.jsonl\nBronze rows loaded: 500\nSilver rows after deduplication: 500\n\nSilver preview:\n farm_id      region crop_type  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours irrigation_type fertilizer_type  pesticide_usage_ml               sowing_date              harvest_date  total_days  yield_kg_per_hectare sensor_id                 timestamp  latitude  longitude  NDVI_index crop_disease_status       bronze_ingestion_timestamp  kafka_partition  kafka_offset  quality_soil_moisture  quality_humidity  quality_soil_ph  quality_ndvi data_quality_status      silver_processing_timestamp\nFARM0001 North India     Wheat            35.95     5.99          17.79        75.62       77.03            7.27            None         Organic                6.34 2024-01-08 00:00:00+00:00 2024-05-09 00:00:00+00:00         122               4408.07  SENS0001 2024-03-19 00:00:00+00:00 14.970941  82.997689        0.63                Mild 2026-07-28 21:55:57.698872+00:00                0             0                   True              True             True          True               valid 2026-08-17 18:45:49.172530+00:00\nFARM0002   South USA   Soybean            19.74     7.24          30.18        89.91       61.13            5.67       Sprinkler       Inorganic                9.60 2024-02-04 00:00:00+00:00 2024-05-26 00:00:00+00:00         112               5389.98  SENS0002 2024-04-21 00:00:00+00:00 16.613022  70.869009        0.58                None 2026-07-28 21:55:57.698872+00:00                0             1                   True              True             True          True               valid 2026-08-17 18:45:49.172530+00:00\nFARM0003   South USA     Wheat            29.32     7.16          27.37       265.43       68.87            8.23            Drip           Mixed               15.26 2024-02-03 00:00:00+00:00 2024-06-26 00:00:00+00:00         144               2931.16  SENS0003 2024-02-28 00:00:00+00:00 19.503156  79.068206        0.80                Mild 2026-07-28 21:55:57.698872+00:00                0             2                   True              True             True          True               valid 2026-08-17 18:45:49.172530+00:00\n\nData-quality results:\nvalid    500\nName: data_quality_status, dtype: int64\nSilver file uploaded successfully\nObject: smart-farming/silver/smart-farming/cleaned_field_readings.parquet\n",
+          "stderr": ""
+        },
+        "gold": {
+          "step": "v1_gold",
+          "started_at": "2026-08-17T18:45:49.473444+00:00",
+          "completed_at": "2026-08-17T18:45:55.079283+00:00",
+          "duration_seconds": 5.6068,
+          "return_code": 0,
+          "stdout": "normal     475\nanomaly     25\nName: anomaly_label, dtype: int64\n farm_id  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours  pesticide_usage_ml  NDVI_index  anomaly_score\nFARM0175            16.05     7.47          34.44       252.12       46.31            6.54               49.88        0.34      -0.036941\nFARM0094            14.93     5.60          33.91       266.04       60.91            9.78               47.02        0.83      -0.030798\nFARM0427            44.93     7.50          30.05       234.96       85.62            4.05               42.00        0.76      -0.030278\nFARM0323            25.20     5.94          33.55       286.56       85.69            9.39                6.80        0.78      -0.024233\nFARM0429            30.21     5.76          33.87        52.42       80.52            9.01               23.86        0.31      -0.019257\nFARM0495            12.52     5.99          33.18       292.60       45.01            7.16                9.49        0.38      -0.018927\nFARM0151            28.82     5.81          16.67        69.76       86.05            9.85               19.70        0.87      -0.016228\nFARM0473            37.23     5.79          30.96       118.41       44.90            9.88               47.83        0.36      -0.014955\nFARM0307            33.72     7.49          21.27        52.64       40.42            4.41               28.64        0.67      -0.013730\nFARM0403            43.33     6.86          16.18       290.28       49.07            8.28                9.44        0.33      -0.013701\nFARM0444            43.38     5.60          34.84       284.57       46.28            5.04               27.83        0.66      -0.012144\nFARM0095            43.08     6.51          34.33       103.79       57.64            4.30               44.71        0.83      -0.011968\nFARM0486            21.19     5.60          15.82        63.03       77.24            5.27               45.88        0.36      -0.009798\nFARM0030            18.83     5.66          15.39       184.85       90.00            6.10                6.81        0.70      -0.009642\nFARM0252            15.86     6.05          17.39       247.29       40.45            4.25               31.83        0.86      -0.008991\nFARM0353            24.99     7.48          23.24        64.11       52.21            5.41                8.82        0.32      -0.008511\nFARM0010            10.25     6.92          16.18        66.85       41.57            5.98               35.10        0.58      -0.007164\nFARM0048            41.87     5.53          17.88       267.73       88.50            4.45               33.05        0.49      -0.006835\nFARM0256            16.25     5.56          17.14        97.90       41.59            7.85               27.05        0.31      -0.005592\nFARM0146            25.02     5.68          16.90       103.36       43.90            7.56                5.36        0.44      -0.005164\nFARM0479            26.91     6.03          15.04       207.79       59.68            9.54               45.16        0.30      -0.004230\nFARM0367            42.31     6.79          27.53       276.71       88.71            5.19               23.05        0.31      -0.003805\nFARM0019            40.94     6.31          27.41        88.64       86.49            9.19                6.12        0.36      -0.001093\nFARM0105            40.69     5.52          26.36        76.83       89.15            5.71               43.30        0.45      -0.000068\nFARM0492            32.14     7.44          21.49       286.61       84.20            5.58               45.43        0.88      -0.000055\nGold uploaded\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "repetition": 2,
+      "validation": {
+        "bronze_records": 500,
+        "silver_records": 500,
+        "valid_records": 500,
+        "gold_records": 500,
+        "normal_records": 475,
+        "anomaly_records": 25,
+        "passed": true
+      },
+      "durations": {
+        "silver_seconds": 2.595,
+        "gold_seconds": 5.0253,
+        "combined_seconds": 7.6203
+      },
+      "steps": {
+        "silver": {
+          "step": "v1_silver",
+          "started_at": "2026-08-17T18:45:55.081291+00:00",
+          "completed_at": "2026-08-17T18:45:57.676323+00:00",
+          "duration_seconds": 2.595,
+          "return_code": 0,
+          "stdout": "Reading: bronze/smart-farming/year=2026/month=07/day=28/events_0_99_20260728T215557702918Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_100_199_20260728T215557790273Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_200_299_20260728T215557852413Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_300_399_20260728T215557874514Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_400_499_20260728T215557935700Z.jsonl\nBronze rows loaded: 500\nSilver rows after deduplication: 500\n\nSilver preview:\n farm_id      region crop_type  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours irrigation_type fertilizer_type  pesticide_usage_ml               sowing_date              harvest_date  total_days  yield_kg_per_hectare sensor_id                 timestamp  latitude  longitude  NDVI_index crop_disease_status       bronze_ingestion_timestamp  kafka_partition  kafka_offset  quality_soil_moisture  quality_humidity  quality_soil_ph  quality_ndvi data_quality_status      silver_processing_timestamp\nFARM0001 North India     Wheat            35.95     5.99          17.79        75.62       77.03            7.27            None         Organic                6.34 2024-01-08 00:00:00+00:00 2024-05-09 00:00:00+00:00         122               4408.07  SENS0001 2024-03-19 00:00:00+00:00 14.970941  82.997689        0.63                Mild 2026-07-28 21:55:57.698872+00:00                0             0                   True              True             True          True               valid 2026-08-17 18:45:57.332833+00:00\nFARM0002   South USA   Soybean            19.74     7.24          30.18        89.91       61.13            5.67       Sprinkler       Inorganic                9.60 2024-02-04 00:00:00+00:00 2024-05-26 00:00:00+00:00         112               5389.98  SENS0002 2024-04-21 00:00:00+00:00 16.613022  70.869009        0.58                None 2026-07-28 21:55:57.698872+00:00                0             1                   True              True             True          True               valid 2026-08-17 18:45:57.332833+00:00\nFARM0003   South USA     Wheat            29.32     7.16          27.37       265.43       68.87            8.23            Drip           Mixed               15.26 2024-02-03 00:00:00+00:00 2024-06-26 00:00:00+00:00         144               2931.16  SENS0003 2024-02-28 00:00:00+00:00 19.503156  79.068206        0.80                Mild 2026-07-28 21:55:57.698872+00:00                0             2                   True              True             True          True               valid 2026-08-17 18:45:57.332833+00:00\n\nData-quality results:\nvalid    500\nName: data_quality_status, dtype: int64\nSilver file uploaded successfully\nObject: smart-farming/silver/smart-farming/cleaned_field_readings.parquet\n",
+          "stderr": ""
+        },
+        "gold": {
+          "step": "v1_gold",
+          "started_at": "2026-08-17T18:45:57.677001+00:00",
+          "completed_at": "2026-08-17T18:46:02.699107+00:00",
+          "duration_seconds": 5.0253,
+          "return_code": 0,
+          "stdout": "normal     475\nanomaly     25\nName: anomaly_label, dtype: int64\n farm_id  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours  pesticide_usage_ml  NDVI_index  anomaly_score\nFARM0175            16.05     7.47          34.44       252.12       46.31            6.54               49.88        0.34      -0.036941\nFARM0094            14.93     5.60          33.91       266.04       60.91            9.78               47.02        0.83      -0.030798\nFARM0427            44.93     7.50          30.05       234.96       85.62            4.05               42.00        0.76      -0.030278\nFARM0323            25.20     5.94          33.55       286.56       85.69            9.39                6.80        0.78      -0.024233\nFARM0429            30.21     5.76          33.87        52.42       80.52            9.01               23.86        0.31      -0.019257\nFARM0495            12.52     5.99          33.18       292.60       45.01            7.16                9.49        0.38      -0.018927\nFARM0151            28.82     5.81          16.67        69.76       86.05            9.85               19.70        0.87      -0.016228\nFARM0473            37.23     5.79          30.96       118.41       44.90            9.88               47.83        0.36      -0.014955\nFARM0307            33.72     7.49          21.27        52.64       40.42            4.41               28.64        0.67      -0.013730\nFARM0403            43.33     6.86          16.18       290.28       49.07            8.28                9.44        0.33      -0.013701\nFARM0444            43.38     5.60          34.84       284.57       46.28            5.04               27.83        0.66      -0.012144\nFARM0095            43.08     6.51          34.33       103.79       57.64            4.30               44.71        0.83      -0.011968\nFARM0486            21.19     5.60          15.82        63.03       77.24            5.27               45.88        0.36      -0.009798\nFARM0030            18.83     5.66          15.39       184.85       90.00            6.10                6.81        0.70      -0.009642\nFARM0252            15.86     6.05          17.39       247.29       40.45            4.25               31.83        0.86      -0.008991\nFARM0353            24.99     7.48          23.24        64.11       52.21            5.41                8.82        0.32      -0.008511\nFARM0010            10.25     6.92          16.18        66.85       41.57            5.98               35.10        0.58      -0.007164\nFARM0048            41.87     5.53          17.88       267.73       88.50            4.45               33.05        0.49      -0.006835\nFARM0256            16.25     5.56          17.14        97.90       41.59            7.85               27.05        0.31      -0.005592\nFARM0146            25.02     5.68          16.90       103.36       43.90            7.56                5.36        0.44      -0.005164\nFARM0479            26.91     6.03          15.04       207.79       59.68            9.54               45.16        0.30      -0.004230\nFARM0367            42.31     6.79          27.53       276.71       88.71            5.19               23.05        0.31      -0.003805\nFARM0019            40.94     6.31          27.41        88.64       86.49            9.19                6.12        0.36      -0.001093\nFARM0105            40.69     5.52          26.36        76.83       89.15            5.71               43.30        0.45      -0.000068\nFARM0492            32.14     7.44          21.49       286.61       84.20            5.58               45.43        0.88      -0.000055\nGold uploaded\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "repetition": 3,
+      "validation": {
+        "bronze_records": 500,
+        "silver_records": 500,
+        "valid_records": 500,
+        "gold_records": 500,
+        "normal_records": 475,
+        "anomaly_records": 25,
+        "passed": true
+      },
+      "durations": {
+        "silver_seconds": 2.6408,
+        "gold_seconds": 5.6096,
+        "combined_seconds": 8.2504
+      },
+      "steps": {
+        "silver": {
+          "step": "v1_silver",
+          "started_at": "2026-08-17T18:46:02.699107+00:00",
+          "completed_at": "2026-08-17T18:46:05.333479+00:00",
+          "duration_seconds": 2.6408,
+          "return_code": 0,
+          "stdout": "Reading: bronze/smart-farming/year=2026/month=07/day=28/events_0_99_20260728T215557702918Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_100_199_20260728T215557790273Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_200_299_20260728T215557852413Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_300_399_20260728T215557874514Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_400_499_20260728T215557935700Z.jsonl\nBronze rows loaded: 500\nSilver rows after deduplication: 500\n\nSilver preview:\n farm_id      region crop_type  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours irrigation_type fertilizer_type  pesticide_usage_ml               sowing_date              harvest_date  total_days  yield_kg_per_hectare sensor_id                 timestamp  latitude  longitude  NDVI_index crop_disease_status       bronze_ingestion_timestamp  kafka_partition  kafka_offset  quality_soil_moisture  quality_humidity  quality_soil_ph  quality_ndvi data_quality_status      silver_processing_timestamp\nFARM0001 North India     Wheat            35.95     5.99          17.79        75.62       77.03            7.27            None         Organic                6.34 2024-01-08 00:00:00+00:00 2024-05-09 00:00:00+00:00         122               4408.07  SENS0001 2024-03-19 00:00:00+00:00 14.970941  82.997689        0.63                Mild 2026-07-28 21:55:57.698872+00:00                0             0                   True              True             True          True               valid 2026-08-17 18:46:05.003645+00:00\nFARM0002   South USA   Soybean            19.74     7.24          30.18        89.91       61.13            5.67       Sprinkler       Inorganic                9.60 2024-02-04 00:00:00+00:00 2024-05-26 00:00:00+00:00         112               5389.98  SENS0002 2024-04-21 00:00:00+00:00 16.613022  70.869009        0.58                None 2026-07-28 21:55:57.698872+00:00                0             1                   True              True             True          True               valid 2026-08-17 18:46:05.003645+00:00\nFARM0003   South USA     Wheat            29.32     7.16          27.37       265.43       68.87            8.23            Drip           Mixed               15.26 2024-02-03 00:00:00+00:00 2024-06-26 00:00:00+00:00         144               2931.16  SENS0003 2024-02-28 00:00:00+00:00 19.503156  79.068206        0.80                Mild 2026-07-28 21:55:57.698872+00:00                0             2                   True              True             True          True               valid 2026-08-17 18:46:05.003645+00:00\n\nData-quality results:\nvalid    500\nName: data_quality_status, dtype: int64\nSilver file uploaded successfully\nObject: smart-farming/silver/smart-farming/cleaned_field_readings.parquet\n",
+          "stderr": ""
+        },
+        "gold": {
+          "step": "v1_gold",
+          "started_at": "2026-08-17T18:46:05.333479+00:00",
+          "completed_at": "2026-08-17T18:46:10.949578+00:00",
+          "duration_seconds": 5.6096,
+          "return_code": 0,
+          "stdout": "normal     475\nanomaly     25\nName: anomaly_label, dtype: int64\n farm_id  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours  pesticide_usage_ml  NDVI_index  anomaly_score\nFARM0175            16.05     7.47          34.44       252.12       46.31            6.54               49.88        0.34      -0.036941\nFARM0094            14.93     5.60          33.91       266.04       60.91            9.78               47.02        0.83      -0.030798\nFARM0427            44.93     7.50          30.05       234.96       85.62            4.05               42.00        0.76      -0.030278\nFARM0323            25.20     5.94          33.55       286.56       85.69            9.39                6.80        0.78      -0.024233\nFARM0429            30.21     5.76          33.87        52.42       80.52            9.01               23.86        0.31      -0.019257\nFARM0495            12.52     5.99          33.18       292.60       45.01            7.16                9.49        0.38      -0.018927\nFARM0151            28.82     5.81          16.67        69.76       86.05            9.85               19.70        0.87      -0.016228\nFARM0473            37.23     5.79          30.96       118.41       44.90            9.88               47.83        0.36      -0.014955\nFARM0307            33.72     7.49          21.27        52.64       40.42            4.41               28.64        0.67      -0.013730\nFARM0403            43.33     6.86          16.18       290.28       49.07            8.28                9.44        0.33      -0.013701\nFARM0444            43.38     5.60          34.84       284.57       46.28            5.04               27.83        0.66      -0.012144\nFARM0095            43.08     6.51          34.33       103.79       57.64            4.30               44.71        0.83      -0.011968\nFARM0486            21.19     5.60          15.82        63.03       77.24            5.27               45.88        0.36      -0.009798\nFARM0030            18.83     5.66          15.39       184.85       90.00            6.10                6.81        0.70      -0.009642\nFARM0252            15.86     6.05          17.39       247.29       40.45            4.25               31.83        0.86      -0.008991\nFARM0353            24.99     7.48          23.24        64.11       52.21            5.41                8.82        0.32      -0.008511\nFARM0010            10.25     6.92          16.18        66.85       41.57            5.98               35.10        0.58      -0.007164\nFARM0048            41.87     5.53          17.88       267.73       88.50            4.45               33.05        0.49      -0.006835\nFARM0256            16.25     5.56          17.14        97.90       41.59            7.85               27.05        0.31      -0.005592\nFARM0146            25.02     5.68          16.90       103.36       43.90            7.56                5.36        0.44      -0.005164\nFARM0479            26.91     6.03          15.04       207.79       59.68            9.54               45.16        0.30      -0.004230\nFARM0367            42.31     6.79          27.53       276.71       88.71            5.19               23.05        0.31      -0.003805\nFARM0019            40.94     6.31          27.41        88.64       86.49            9.19                6.12        0.36      -0.001093\nFARM0105            40.69     5.52          26.36        76.83       89.15            5.71               43.30        0.45      -0.000068\nFARM0492            32.14     7.44          21.49       286.61       84.20            5.58               45.43        0.88      -0.000055\nGold uploaded\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "repetition": 4,
+      "validation": {
+        "bronze_records": 500,
+        "silver_records": 500,
+        "valid_records": 500,
+        "gold_records": 500,
+        "normal_records": 475,
+        "anomaly_records": 25,
+        "passed": true
+      },
+      "durations": {
+        "silver_seconds": 2.7,
+        "gold_seconds": 5.374,
+        "combined_seconds": 8.074
+      },
+      "steps": {
+        "silver": {
+          "step": "v1_silver",
+          "started_at": "2026-08-17T18:46:10.949578+00:00",
+          "completed_at": "2026-08-17T18:46:13.647322+00:00",
+          "duration_seconds": 2.7,
+          "return_code": 0,
+          "stdout": "Reading: bronze/smart-farming/year=2026/month=07/day=28/events_0_99_20260728T215557702918Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_100_199_20260728T215557790273Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_200_299_20260728T215557852413Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_300_399_20260728T215557874514Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_400_499_20260728T215557935700Z.jsonl\nBronze rows loaded: 500\nSilver rows after deduplication: 500\n\nSilver preview:\n farm_id      region crop_type  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours irrigation_type fertilizer_type  pesticide_usage_ml               sowing_date              harvest_date  total_days  yield_kg_per_hectare sensor_id                 timestamp  latitude  longitude  NDVI_index crop_disease_status       bronze_ingestion_timestamp  kafka_partition  kafka_offset  quality_soil_moisture  quality_humidity  quality_soil_ph  quality_ndvi data_quality_status      silver_processing_timestamp\nFARM0001 North India     Wheat            35.95     5.99          17.79        75.62       77.03            7.27            None         Organic                6.34 2024-01-08 00:00:00+00:00 2024-05-09 00:00:00+00:00         122               4408.07  SENS0001 2024-03-19 00:00:00+00:00 14.970941  82.997689        0.63                Mild 2026-07-28 21:55:57.698872+00:00                0             0                   True              True             True          True               valid 2026-08-17 18:46:13.360690+00:00\nFARM0002   South USA   Soybean            19.74     7.24          30.18        89.91       61.13            5.67       Sprinkler       Inorganic                9.60 2024-02-04 00:00:00+00:00 2024-05-26 00:00:00+00:00         112               5389.98  SENS0002 2024-04-21 00:00:00+00:00 16.613022  70.869009        0.58                None 2026-07-28 21:55:57.698872+00:00                0             1                   True              True             True          True               valid 2026-08-17 18:46:13.360690+00:00\nFARM0003   South USA     Wheat            29.32     7.16          27.37       265.43       68.87            8.23            Drip           Mixed               15.26 2024-02-03 00:00:00+00:00 2024-06-26 00:00:00+00:00         144               2931.16  SENS0003 2024-02-28 00:00:00+00:00 19.503156  79.068206        0.80                Mild 2026-07-28 21:55:57.698872+00:00                0             2                   True              True             True          True               valid 2026-08-17 18:46:13.360690+00:00\n\nData-quality results:\nvalid    500\nName: data_quality_status, dtype: int64\nSilver file uploaded successfully\nObject: smart-farming/silver/smart-farming/cleaned_field_readings.parquet\n",
+          "stderr": ""
+        },
+        "gold": {
+          "step": "v1_gold",
+          "started_at": "2026-08-17T18:46:13.647322+00:00",
+          "completed_at": "2026-08-17T18:46:19.029823+00:00",
+          "duration_seconds": 5.374,
+          "return_code": 0,
+          "stdout": "normal     475\nanomaly     25\nName: anomaly_label, dtype: int64\n farm_id  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours  pesticide_usage_ml  NDVI_index  anomaly_score\nFARM0175            16.05     7.47          34.44       252.12       46.31            6.54               49.88        0.34      -0.036941\nFARM0094            14.93     5.60          33.91       266.04       60.91            9.78               47.02        0.83      -0.030798\nFARM0427            44.93     7.50          30.05       234.96       85.62            4.05               42.00        0.76      -0.030278\nFARM0323            25.20     5.94          33.55       286.56       85.69            9.39                6.80        0.78      -0.024233\nFARM0429            30.21     5.76          33.87        52.42       80.52            9.01               23.86        0.31      -0.019257\nFARM0495            12.52     5.99          33.18       292.60       45.01            7.16                9.49        0.38      -0.018927\nFARM0151            28.82     5.81          16.67        69.76       86.05            9.85               19.70        0.87      -0.016228\nFARM0473            37.23     5.79          30.96       118.41       44.90            9.88               47.83        0.36      -0.014955\nFARM0307            33.72     7.49          21.27        52.64       40.42            4.41               28.64        0.67      -0.013730\nFARM0403            43.33     6.86          16.18       290.28       49.07            8.28                9.44        0.33      -0.013701\nFARM0444            43.38     5.60          34.84       284.57       46.28            5.04               27.83        0.66      -0.012144\nFARM0095            43.08     6.51          34.33       103.79       57.64            4.30               44.71        0.83      -0.011968\nFARM0486            21.19     5.60          15.82        63.03       77.24            5.27               45.88        0.36      -0.009798\nFARM0030            18.83     5.66          15.39       184.85       90.00            6.10                6.81        0.70      -0.009642\nFARM0252            15.86     6.05          17.39       247.29       40.45            4.25               31.83        0.86      -0.008991\nFARM0353            24.99     7.48          23.24        64.11       52.21            5.41                8.82        0.32      -0.008511\nFARM0010            10.25     6.92          16.18        66.85       41.57            5.98               35.10        0.58      -0.007164\nFARM0048            41.87     5.53          17.88       267.73       88.50            4.45               33.05        0.49      -0.006835\nFARM0256            16.25     5.56          17.14        97.90       41.59            7.85               27.05        0.31      -0.005592\nFARM0146            25.02     5.68          16.90       103.36       43.90            7.56                5.36        0.44      -0.005164\nFARM0479            26.91     6.03          15.04       207.79       59.68            9.54               45.16        0.30      -0.004230\nFARM0367            42.31     6.79          27.53       276.71       88.71            5.19               23.05        0.31      -0.003805\nFARM0019            40.94     6.31          27.41        88.64       86.49            9.19                6.12        0.36      -0.001093\nFARM0105            40.69     5.52          26.36        76.83       89.15            5.71               43.30        0.45      -0.000068\nFARM0492            32.14     7.44          21.49       286.61       84.20            5.58               45.43        0.88      -0.000055\nGold uploaded\n",
+          "stderr": ""
+        }
+      }
+    },
+    {
+      "repetition": 5,
+      "validation": {
+        "bronze_records": 500,
+        "silver_records": 500,
+        "valid_records": 500,
+        "gold_records": 500,
+        "normal_records": 475,
+        "anomaly_records": 25,
+        "passed": true
+      },
+      "durations": {
+        "silver_seconds": 2.6299,
+        "gold_seconds": 5.6068,
+        "combined_seconds": 8.2367
+      },
+      "steps": {
+        "silver": {
+          "step": "v1_silver",
+          "started_at": "2026-08-17T18:46:19.029823+00:00",
+          "completed_at": "2026-08-17T18:46:21.660739+00:00",
+          "duration_seconds": 2.6299,
+          "return_code": 0,
+          "stdout": "Reading: bronze/smart-farming/year=2026/month=07/day=28/events_0_99_20260728T215557702918Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_100_199_20260728T215557790273Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_200_299_20260728T215557852413Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_300_399_20260728T215557874514Z.jsonl\nReading: bronze/smart-farming/year=2026/month=07/day=28/events_400_499_20260728T215557935700Z.jsonl\nBronze rows loaded: 500\nSilver rows after deduplication: 500\n\nSilver preview:\n farm_id      region crop_type  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours irrigation_type fertilizer_type  pesticide_usage_ml               sowing_date              harvest_date  total_days  yield_kg_per_hectare sensor_id                 timestamp  latitude  longitude  NDVI_index crop_disease_status       bronze_ingestion_timestamp  kafka_partition  kafka_offset  quality_soil_moisture  quality_humidity  quality_soil_ph  quality_ndvi data_quality_status      silver_processing_timestamp\nFARM0001 North India     Wheat            35.95     5.99          17.79        75.62       77.03            7.27            None         Organic                6.34 2024-01-08 00:00:00+00:00 2024-05-09 00:00:00+00:00         122               4408.07  SENS0001 2024-03-19 00:00:00+00:00 14.970941  82.997689        0.63                Mild 2026-07-28 21:55:57.698872+00:00                0             0                   True              True             True          True               valid 2026-08-17 18:46:21.335453+00:00\nFARM0002   South USA   Soybean            19.74     7.24          30.18        89.91       61.13            5.67       Sprinkler       Inorganic                9.60 2024-02-04 00:00:00+00:00 2024-05-26 00:00:00+00:00         112               5389.98  SENS0002 2024-04-21 00:00:00+00:00 16.613022  70.869009        0.58                None 2026-07-28 21:55:57.698872+00:00                0             1                   True              True             True          True               valid 2026-08-17 18:46:21.335453+00:00\nFARM0003   South USA     Wheat            29.32     7.16          27.37       265.43       68.87            8.23            Drip           Mixed               15.26 2024-02-03 00:00:00+00:00 2024-06-26 00:00:00+00:00         144               2931.16  SENS0003 2024-02-28 00:00:00+00:00 19.503156  79.068206        0.80                Mild 2026-07-28 21:55:57.698872+00:00                0             2                   True              True             True          True               valid 2026-08-17 18:46:21.335453+00:00\n\nData-quality results:\nvalid    500\nName: data_quality_status, dtype: int64\nSilver file uploaded successfully\nObject: smart-farming/silver/smart-farming/cleaned_field_readings.parquet\n",
+          "stderr": ""
+        },
+        "gold": {
+          "step": "v1_gold",
+          "started_at": "2026-08-17T18:46:21.660739+00:00",
+          "completed_at": "2026-08-17T18:46:27.260652+00:00",
+          "duration_seconds": 5.6068,
+          "return_code": 0,
+          "stdout": "normal     475\nanomaly     25\nName: anomaly_label, dtype: int64\n farm_id  soil_moisture_%  soil_pH  temperature_C  rainfall_mm  humidity_%  sunlight_hours  pesticide_usage_ml  NDVI_index  anomaly_score\nFARM0175            16.05     7.47          34.44       252.12       46.31            6.54               49.88        0.34      -0.036941\nFARM0094            14.93     5.60          33.91       266.04       60.91            9.78               47.02        0.83      -0.030798\nFARM0427            44.93     7.50          30.05       234.96       85.62            4.05               42.00        0.76      -0.030278\nFARM0323            25.20     5.94          33.55       286.56       85.69            9.39                6.80        0.78      -0.024233\nFARM0429            30.21     5.76          33.87        52.42       80.52            9.01               23.86        0.31      -0.019257\nFARM0495            12.52     5.99          33.18       292.60       45.01            7.16                9.49        0.38      -0.018927\nFARM0151            28.82     5.81          16.67        69.76       86.05            9.85               19.70        0.87      -0.016228\nFARM0473            37.23     5.79          30.96       118.41       44.90            9.88               47.83        0.36      -0.014955\nFARM0307            33.72     7.49          21.27        52.64       40.42            4.41               28.64        0.67      -0.013730\nFARM0403            43.33     6.86          16.18       290.28       49.07            8.28                9.44        0.33      -0.013701\nFARM0444            43.38     5.60          34.84       284.57       46.28            5.04               27.83        0.66      -0.012144\nFARM0095            43.08     6.51          34.33       103.79       57.64            4.30               44.71        0.83      -0.011968\nFARM0486            21.19     5.60          15.82        63.03       77.24            5.27               45.88        0.36      -0.009798\nFARM0030            18.83     5.66          15.39       184.85       90.00            6.10                6.81        0.70      -0.009642\nFARM0252            15.86     6.05          17.39       247.29       40.45            4.25               31.83        0.86      -0.008991\nFARM0353            24.99     7.48          23.24        64.11       52.21            5.41                8.82        0.32      -0.008511\nFARM0010            10.25     6.92          16.18        66.85       41.57            5.98               35.10        0.58      -0.007164\nFARM0048            41.87     5.53          17.88       267.73       88.50            4.45               33.05        0.49      -0.006835\nFARM0256            16.25     5.56          17.14        97.90       41.59            7.85               27.05        0.31      -0.005592\nFARM0146            25.02     5.68          16.90       103.36       43.90            7.56                5.36        0.44      -0.005164\nFARM0479            26.91     6.03          15.04       207.79       59.68            9.54               45.16        0.30      -0.004230\nFARM0367            42.31     6.79          27.53       276.71       88.71            5.19               23.05        0.31      -0.003805\nFARM0019            40.94     6.31          27.41        88.64       86.49            9.19                6.12        0.36      -0.001093\nFARM0105            40.69     5.52          26.36        76.83       89.15            5.71               43.30        0.45      -0.000068\nFARM0492            32.14     7.44          21.49       286.61       84.20            5.58               45.43        0.88      -0.000055\nGold uploaded\n",
+          "stderr": ""
+        }
+      }
+    }
+  ]
+}
