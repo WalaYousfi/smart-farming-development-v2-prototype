@@ -146,7 +146,8 @@ validation while retaining failure reasons and Bronze provenance.
 | Agricultural source count | 1 | 2 |
 | Source formats | CSV | CSV + JSON |
 | Source-specific ingestion paths | No | Yes |
-| Source-aware Bronze envelope | No | Yes |
+| Basic source-aware Bronze envelope       | Yes | Yes |
+| Schema/version/run-aware Bronze metadata | No  | Yes |
 | Raw Bronze preservation | Yes | Yes |
 | Canonical Silver models | No | Yes |
 | Quarantine support | No | Yes |
@@ -161,3 +162,37 @@ validation while retaining failure reasons and Bronze provenance.
 | Purpose-specific Gold products | No | Yes |
 | Automated evaluation framework | No | Yes |
 
+
+
+## Table — Quantitative Baseline V1 versus Proposed V2 Field-Only Benchmark
+
+| Metric | Baseline V1 | Proposed V2 | Relative change |
+|---|---:|---:|---:|
+| Input Field observations | 500 | 500 | — |
+| Silver output records | 500 | 500 | — |
+| Gold scored records | 500 | 500 | — |
+| Normal observations | 475 | 475 | — |
+| Anomalous observations | 25 | 25 | — |
+| Silver mean runtime (s) | 2.6840 | 3.4740 | +29.43% |
+| Silver median runtime (s) | 2.6408 | 3.3668 | +27.49% |
+| Silver CV | 0.0381 | 0.1242 | — |
+| Gold mean runtime (s) | 5.4445 | 5.0980 | -6.36% |
+| Gold median runtime (s) | 5.6068 | 5.1138 | -8.79% |
+| Gold CV | 0.0469 | 0.0080 | — |
+| Combined mean runtime (s) | 8.1285 | 8.5719 | +5.45% |
+| Combined median runtime (s) | 8.2367 | 8.4806 | +2.96% |
+| Combined CV | 0.0388 | 0.0534 | — |
+
+**Experimental conditions:** Five repetitions per implementation using
+the same 500-record Field workload. Both implementations used Isolation
+Forest with 200 estimators, contamination = 0.05, and random state = 42.
+
+**Interpretation:** V2 increased mean Silver-stage execution time because
+the stage performs additional schema validation, canonicalization,
+quality management, run isolation, manifest generation, and lineage
+recording. Despite these added responsibilities, the mean combined
+Silver-to-Gold runtime increased by 0.4434 s, corresponding to 5.45%
+for the tested workload.
+
+**Scope:** These results characterize the local prototype and should not
+be generalized to production-scale or distributed deployments.

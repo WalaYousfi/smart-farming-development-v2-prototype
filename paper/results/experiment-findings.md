@@ -462,3 +462,67 @@ This result supports the use of run-level lineage as a cross-cutting architectur
 ### Limitation
 
 The evaluation verifies lineage completeness within the implemented prototype and controlled two-source workflow. It does not evaluate large-scale lineage-graph traversal, lineage across external systems, schema-evolution provenance, or distributed metadata-catalog performance.
+
+
+## Quantitative Baseline V1 versus Proposed V2
+
+### Objective
+
+Measure the processing-time cost associated with extending the original
+Field-only prototype with the additional architectural mechanisms
+introduced in V2.
+
+### Experimental design
+
+The benchmark used the same 500 Field observations in both versions.
+Both implementations produced 500 Silver observations and subsequently
+applied Isolation Forest using 200 estimators, contamination = 0.05,
+and random state = 42.
+
+Five executions were performed for each implementation.
+
+### Results
+
+| Stage | V1 mean (s) | V2 mean (s) | Relative change |
+|---|---:|---:|---:|
+| Silver | 2.6840 | 3.4740 | +29.43% |
+| Gold | 5.4445 | 5.0980 | -6.36% |
+| Combined | 8.1285 | 8.5719 | +5.45% |
+
+The median combined runtime increased from 8.2367 s in V1 to 8.4806 s
+in V2, corresponding to a 2.96% increase.
+
+Both versions produced the same workload-level analytical outcome:
+500 Gold-scored observations, including 475 normal and 25
+anomaly-labelled observations.
+
+### Interpretation
+
+The largest runtime increase occurred in the Silver stage. V2 Silver
+performs responsibilities not present in the baseline processing path,
+including source-schema validation, canonical mapping, canonical-schema
+validation, quarantine management, quality-report generation, immutable
+run creation, manifest generation, and explicit lineage recording.
+
+Despite these additional responsibilities, the mean combined
+Silver-to-Gold runtime increased by 0.4434 s, equivalent to 5.45% of
+the V1 mean combined runtime for the tested 500-record workload.
+
+V2 Gold displayed a lower measured mean runtime than V1 Gold in this
+experiment. This observation is not interpreted as evidence that V2
+Gold is generally faster; it is reported as a result of the controlled
+local prototype benchmark.
+
+### Runtime variability
+
+V1 combined execution had a coefficient of variation of 0.0388,
+whereas V2 combined execution had a coefficient of variation of
+0.0534. V2 therefore exhibited slightly greater combined runtime
+variability while remaining relatively stable over the five controlled
+executions.
+
+### Limitation
+
+The comparison uses a small Field-only workload on one local machine
+and five repetitions. It evaluates prototype-level overhead rather
+than scalability or distributed performance.
