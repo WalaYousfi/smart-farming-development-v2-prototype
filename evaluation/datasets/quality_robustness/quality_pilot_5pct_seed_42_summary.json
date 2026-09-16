@@ -1,0 +1,21 @@
+{
+  "experiment": "quality_robustness_pilot",
+  "source_dataset": "data\\source\\Smart_Farming_Crop_Yield_2024.csv",
+  "seed": 42,
+  "total_records": 500,
+  "corruption_rate": 0.05,
+  "corrupted_records": 25,
+  "valid_records": 475,
+  "defect_counts": {
+    "invalid_soil_moisture": 4,
+    "invalid_ndvi": 3,
+    "negative_rainfall": 3,
+    "malformed_timestamp": 3,
+    "invalid_humidity": 3,
+    "harvest_before_sowing": 3,
+    "missing_sensor_id": 3,
+    "invalid_soil_ph": 3
+  },
+  "dataset_path": "evaluation\\datasets\\quality_robustness\\quality_pilot_5pct_seed_42.csv",
+  "ground_truth_path": "evaluation\\datasets\\quality_robustness\\quality_pilot_5pct_seed_42_ground_truth.csv"
+}

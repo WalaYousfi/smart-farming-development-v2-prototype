@@ -1,0 +1,12 @@
+{
+  "experiment": "quality_robustness_pilot",
+  "source_dataset": "data\\source\\Smart_Farming_Crop_Yield_2024.csv",
+  "seed": 456,
+  "total_records": 500,
+  "corruption_rate": 0.0,
+  "corrupted_records": 0,
+  "valid_records": 500,
+  "defect_counts": {},
+  "dataset_path": "evaluation\\datasets\\quality_robustness\\quality_pilot_0pct_seed_456.csv",
+  "ground_truth_path": "evaluation\\datasets\\quality_robustness\\quality_pilot_0pct_seed_456_ground_truth.csv"
+}
