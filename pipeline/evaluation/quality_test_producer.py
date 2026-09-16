@@ -6,15 +6,10 @@ import pandas as pd
 from kafka import KafkaProducer
 
 
-KAFKA_SERVER = "localhost:9092"
-import os
-
-
-QUALITY_TOPIC = os.getenv(
-    "QUALITY_KAFKA_TOPIC",
-    "eval-quality-field-readings",
+from pipeline.common.config import (
+    KAFKA_SERVER,
+    KAFKA_TOPIC,
 )
-
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -49,7 +44,7 @@ def main() -> None:
     print("\nQuality-test producer")
     print("---------------------")
     print(f"Kafka server: {KAFKA_SERVER}")
-    print(f"Kafka topic: {QUALITY_TOPIC}")
+    print(f"Kafka topic: {KAFKA_TOPIC}")
     print(f"Records loaded: {len(dataframe)}")
 
     for _, row in dataframe.iterrows():
@@ -57,7 +52,7 @@ def main() -> None:
         record = row.to_dict()
 
         producer.send(
-            QUALITY_TOPIC,
+            KAFKA_TOPIC,
             value=record,
         )
 
