@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime, timezone
 from io import BytesIO
 import json
@@ -37,6 +38,24 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description="Bronze ingestion consumer."
+    )
+
+    parser.add_argument(
+        "--max-records",
+        type=int,
+        default=None,
+        help=(
+            "Stop cleanly after consuming this many records. "
+            "Useful for controlled evaluation runs."
+        ),
+    )
+
+    return parser.parse_args()
+
+
 def create_bronze_event(
     message: Any,
     run_id: str,
@@ -44,7 +63,7 @@ def create_bronze_event(
     """
     Wrap the original Kafka payload with ingestion metadata.
 
-    The payload remains unchanged.
+    The original payload remains unchanged.
     """
 
     payload = message.value
@@ -79,7 +98,9 @@ def upload_batch(
     """
 
     if not events:
-        raise ValueError("Cannot upload an empty Bronze batch.")
+        raise ValueError(
+            "Cannot upload an empty Bronze batch."
+        )
 
     first_metadata = events[0]["metadata"]
     last_metadata = events[-1]["metadata"]
@@ -88,6 +109,7 @@ def upload_batch(
     last_offset = last_metadata["kafka_offset"]
 
     partition = first_metadata["kafka_partition"]
+
     now = datetime.now(timezone.utc)
 
     object_name = (
@@ -111,7 +133,9 @@ def upload_batch(
 
     jsonl_content += "\n"
 
-    encoded_content = jsonl_content.encode("utf-8")
+    encoded_content = jsonl_content.encode(
+        "utf-8"
+    )
 
     minio_client.put_object(
         bucket_name=MINIO_BUCKET,
@@ -129,7 +153,117 @@ def upload_batch(
     return object_name
 
 
+def flush_batch(
+    consumer: KafkaConsumer,
+    minio_client: Any,
+    batch: List[Dict[str, Any]],
+    output_objects: List[str],
+    run_id: str,
+) -> int:
+    """
+    Upload the current batch and commit Kafka offsets.
+
+    Returns the number of uploaded records.
+    """
+
+    if not batch:
+        return 0
+
+    object_name = upload_batch(
+        minio_client=minio_client,
+        events=batch,
+        run_id=run_id,
+    )
+
+    output_objects.append(object_name)
+
+    uploaded_count = len(batch)
+
+    # Commit only after MinIO confirms the upload.
+    consumer.commit()
+
+    batch.clear()
+
+    return uploaded_count
+
+
+def write_completed_manifest(
+    run_context: Any,
+    output_objects: List[str],
+    consumed_records: int,
+    uploaded_records: int,
+    uploaded_batches: int,
+) -> None:
+    """
+    Store the final successful Bronze manifest.
+    """
+
+    completed_manifest = create_manifest(
+        run_context=run_context,
+        status="completed",
+        input_zone="kafka",
+        output_zone="bronze",
+        input_objects=[
+            f"kafka://{KAFKA_TOPIC}",
+        ],
+        output_objects=output_objects,
+        metrics={
+            "consumed_records": consumed_records,
+            "uploaded_records": uploaded_records,
+            "uploaded_batches": uploaded_batches,
+            "batch_size": BRONZE_BATCH_SIZE,
+            "source_system": SOURCE_SYSTEM,
+        },
+    )
+
+    write_manifest(completed_manifest)
+
+
+def write_failed_manifest(
+    run_context: Any,
+    output_objects: List[str],
+    consumed_records: int,
+    uploaded_records: int,
+    uploaded_batches: int,
+    error: Exception,
+) -> None:
+    """
+    Store a failed Bronze manifest.
+    """
+
+    failed_manifest = create_manifest(
+        run_context=run_context,
+        status="failed",
+        input_zone="kafka",
+        output_zone="bronze",
+        input_objects=[
+            f"kafka://{KAFKA_TOPIC}",
+        ],
+        output_objects=output_objects,
+        metrics={
+            "consumed_records": consumed_records,
+            "uploaded_records": uploaded_records,
+            "uploaded_batches": uploaded_batches,
+            "batch_size": BRONZE_BATCH_SIZE,
+            "source_system": SOURCE_SYSTEM,
+        },
+        error_message=str(error),
+    )
+
+    write_manifest(failed_manifest)
+
+
 def main() -> None:
+    args = parse_arguments()
+
+    if (
+        args.max_records is not None
+        and args.max_records <= 0
+    ):
+        raise ValueError(
+            "--max-records must be greater than 0."
+        )
+
     run_context = create_run_context(
         job_name=JOB_NAME,
         job_version=JOB_VERSION,
@@ -177,7 +311,17 @@ def main() -> None:
     print(f"Run ID: {run_context.run_id}")
     print(f"Kafka topic: {KAFKA_TOPIC}")
     print(f"Batch size: {BRONZE_BATCH_SIZE}")
-    print("Press Ctrl+C after all records are processed.")
+
+    if args.max_records is None:
+        print(
+            "Press Ctrl+C after all records "
+            "are processed."
+        )
+    else:
+        print(
+            "Maximum records for this run: "
+            f"{args.max_records}"
+        )
 
     try:
         for message in consumer:
@@ -191,84 +335,143 @@ def main() -> None:
 
             print(
                 f"Buffered offset {message.offset} "
-                f"({len(batch)}/{BRONZE_BATCH_SIZE})"
+                f"({len(batch)}/"
+                f"{BRONZE_BATCH_SIZE})"
             )
 
             if len(batch) >= BRONZE_BATCH_SIZE:
-                object_name = upload_batch(
+                uploaded_count = flush_batch(
+                    consumer=consumer,
                     minio_client=minio_client,
-                    events=batch,
+                    batch=batch,
+                    output_objects=output_objects,
                     run_id=run_context.run_id,
                 )
 
-                output_objects.append(object_name)
-
-                uploaded_records += len(batch)
+                uploaded_records += uploaded_count
                 uploaded_batches += 1
 
-                # Commit only after MinIO confirms the upload.
-                consumer.commit()
+            if (
+                args.max_records is not None
+                and consumed_records
+                >= args.max_records
+            ):
+                print(
+                    "Reached max-records limit: "
+                    f"{args.max_records}"
+                )
+                break
 
-                batch.clear()
-
-    except KeyboardInterrupt:
-        print("\nStopping Bronze consumer...")
-
+        # Handles a final partial batch when
+        # max-records is not divisible by batch size.
         if batch:
-            object_name = upload_batch(
+            uploaded_count = flush_batch(
+                consumer=consumer,
                 minio_client=minio_client,
-                events=batch,
+                batch=batch,
+                output_objects=output_objects,
                 run_id=run_context.run_id,
             )
 
-            output_objects.append(object_name)
-
-            uploaded_records += len(batch)
+            uploaded_records += uploaded_count
             uploaded_batches += 1
 
-            consumer.commit()
-            batch.clear()
-
-        completed_manifest = create_manifest(
+        write_completed_manifest(
             run_context=run_context,
-            status="completed",
-            input_zone="kafka",
-            output_zone="bronze",
-            input_objects=[
-                f"kafka://{KAFKA_TOPIC}",
-            ],
             output_objects=output_objects,
-            metrics={
-                "consumed_records": consumed_records,
-                "uploaded_records": uploaded_records,
-                "uploaded_batches": uploaded_batches,
-                "batch_size": BRONZE_BATCH_SIZE,
-                "source_system": SOURCE_SYSTEM,
-            },
+            consumed_records=consumed_records,
+            uploaded_records=uploaded_records,
+            uploaded_batches=uploaded_batches,
         )
 
-        write_manifest(completed_manifest)
+        print()
+        print("Bronze V2 processing completed.")
+        print(
+            f"Consumed records: "
+            f"{consumed_records}"
+        )
+        print(
+            f"Uploaded records: "
+            f"{uploaded_records}"
+        )
+        print(
+            f"Uploaded batches: "
+            f"{uploaded_batches}"
+        )
 
-    except Exception as error:
-        failed_manifest = create_manifest(
-            run_context=run_context,
-            status="failed",
-            input_zone="kafka",
-            output_zone="bronze",
-            input_objects=[
-                f"kafka://{KAFKA_TOPIC}",
-            ],
-            output_objects=output_objects,
-            metrics={
-                "consumed_records": consumed_records,
-                "uploaded_records": uploaded_records,
-                "uploaded_batches": uploaded_batches,
-            },
-            error_message=str(error),
+    except KeyboardInterrupt:
+        print(
+            "\nStopping Bronze consumer..."
         )
 
         try:
-            write_manifest(failed_manifest)
+            if batch:
+                uploaded_count = flush_batch(
+                    consumer=consumer,
+                    minio_client=minio_client,
+                    batch=batch,
+                    output_objects=output_objects,
+                    run_id=run_context.run_id,
+                )
+
+                uploaded_records += uploaded_count
+                uploaded_batches += 1
+
+            write_completed_manifest(
+                run_context=run_context,
+                output_objects=output_objects,
+                consumed_records=consumed_records,
+                uploaded_records=uploaded_records,
+                uploaded_batches=uploaded_batches,
+            )
+
+            print()
+            print(
+                "Bronze V2 processing completed."
+            )
+            print(
+                f"Consumed records: "
+                f"{consumed_records}"
+            )
+            print(
+                f"Uploaded records: "
+                f"{uploaded_records}"
+            )
+            print(
+                f"Uploaded batches: "
+                f"{uploaded_batches}"
+            )
+
+        except Exception as error:
+            try:
+                write_failed_manifest(
+                    run_context=run_context,
+                    output_objects=output_objects,
+                    consumed_records=consumed_records,
+                    uploaded_records=uploaded_records,
+                    uploaded_batches=uploaded_batches,
+                    error=error,
+                )
+            except Exception as manifest_error:
+                print(
+                    "Could not store the failed "
+                    "manifest:",
+                    manifest_error,
+                )
+
+            raise
+
+    except Exception as error:
+        try:
+            write_failed_manifest(
+                run_context=run_context,
+                output_objects=output_objects,
+                consumed_records=consumed_records,
+                uploaded_records=uploaded_records,
+                uploaded_batches=uploaded_batches,
+                error=error,
+            )
+
         except Exception as manifest_error:
             print(
                 "Could not store the failed manifest:",
