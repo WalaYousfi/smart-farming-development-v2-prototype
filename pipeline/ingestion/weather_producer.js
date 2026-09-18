@@ -3,22 +3,21 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { Kafka } from "kafkajs";
 
-
 const currentFile = fileURLToPath(import.meta.url);
 const currentDirectory = path.dirname(currentFile);
 
-const WEATHER_DATA_PATH = path.resolve(
-  currentDirectory,
-  "../../data/source/weather/weather_observations.json"
-);
+const inputFileArgument = process.argv[2];
 
-const KAFKA_BROKER =
-  process.env.KAFKA_SERVER || "localhost:9092";
+const WEATHER_DATA_PATH = inputFileArgument
+  ? path.resolve(process.cwd(), inputFileArgument)
+  : path.resolve(
+      currentDirectory,
+      "../../data/source/weather/weather_observations.json",
+    );
 
-const WEATHER_TOPIC =
-  process.env.WEATHER_KAFKA_TOPIC ||
-  "raw-weather-readings";
+const KAFKA_BROKER = process.env.KAFKA_SERVER || "localhost:9092";
 
+const WEATHER_TOPIC = process.env.WEATHER_KAFKA_TOPIC || "raw-weather-readings";
 
 const kafka = new Kafka({
   clientId: "farm-weather-station-producer",
@@ -29,59 +28,42 @@ const producer = kafka.producer({
   allowAutoTopicCreation: false,
 });
 
-
 function loadWeatherRecords() {
   if (!fs.existsSync(WEATHER_DATA_PATH)) {
-    throw new Error(
-      `Weather data file not found: ${WEATHER_DATA_PATH}`
-    );
+    throw new Error(`Weather data file not found: ${WEATHER_DATA_PATH}`);
   }
 
-  const fileContent = fs.readFileSync(
-    WEATHER_DATA_PATH,
-    "utf-8"
-  );
+  const fileContent = fs.readFileSync(WEATHER_DATA_PATH, "utf-8");
 
   const records = JSON.parse(fileContent);
 
   if (!Array.isArray(records)) {
-    throw new Error(
-      "Weather data must contain a JSON array."
-    );
+    throw new Error("Weather data must contain a JSON array.");
   }
 
   if (records.length === 0) {
-    throw new Error(
-      "Weather data file contains no records."
-    );
+    throw new Error("Weather data file contains no records.");
   }
 
   return records;
 }
 
-
 function validateMinimumFields(record, index) {
-  const requiredFields = [
-    "weather_station_id",
-    "farm_id",
-    "observed_at",
-  ];
+  const requiredFields = ["weather_station_id", "farm_id", "observed_at"];
 
   const missingFields = requiredFields.filter(
     (field) =>
       record[field] === undefined ||
       record[field] === null ||
-      String(record[field]).trim() === ""
+      String(record[field]).trim() === "",
   );
 
   if (missingFields.length > 0) {
     throw new Error(
-      `Weather record ${index + 1} is missing: ` +
-      missingFields.join(", ")
+      `Weather record ${index + 1} is missing: ` + missingFields.join(", "),
     );
   }
 }
-
 
 async function main() {
   const records = loadWeatherRecords();
@@ -90,9 +72,7 @@ async function main() {
     validateMinimumFields(record, index);
   });
 
-  console.log(
-    `Loaded ${records.length} weather observations`
-  );
+  console.log(`Loaded ${records.length} weather observations`);
 
   console.log(`Kafka broker: ${KAFKA_BROKER}`);
   console.log(`Kafka topic: ${WEATHER_TOPIC}`);
@@ -116,20 +96,14 @@ async function main() {
     messages,
   });
 
-  console.log(
-    `Sent ${messages.length} weather observations`
-  );
+  console.log(`Sent ${messages.length} weather observations`);
 
   console.log("Kafka result:", result);
 }
 
-
 main()
   .catch((error) => {
-    console.error(
-      "Weather producer failed:",
-      error
-    );
+    console.error("Weather producer failed:", error);
 
     process.exitCode = 1;
   })
@@ -137,13 +111,8 @@ main()
     try {
       await producer.disconnect();
 
-      console.log(
-        "Weather producer disconnected"
-      );
+      console.log("Weather producer disconnected");
     } catch (disconnectError) {
-      console.error(
-        "Could not disconnect producer:",
-        disconnectError
-      );
+      console.error("Could not disconnect producer:", disconnectError);
     }
   });
