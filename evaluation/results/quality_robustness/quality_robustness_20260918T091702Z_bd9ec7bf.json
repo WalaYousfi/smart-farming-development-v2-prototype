@@ -1,0 +1,3576 @@
+{
+  "experiment": "quality_robustness_pilot",
+  "bucket": "smart-farming-paper-eval",
+  "silver_run_id": "20260918T091702Z_bd9ec7bf",
+  "bronze_run_id": "20260918T091615Z_b35aaf8f",
+  "ground_truth_records": 500,
+  "bronze_test_ids_found": 500,
+  "accepted_event_ids": 424,
+  "quarantined_event_ids": 76,
+  "confusion_matrix": {
+    "true_positive": 76,
+    "true_negative": 400,
+    "false_positive": 0,
+    "false_negative": 24
+  },
+  "metrics": {
+    "accuracy": 0.952,
+    "precision": 1.0,
+    "recall": 0.76,
+    "specificity": 1.0,
+    "f1_score": 0.8636
+  },
+  "per_defect": {
+    "harvest_before_sowing": {
+      "total": 12,
+      "detected": 0,
+      "missed": 12,
+      "recall": 0.0
+    },
+    "missing_sensor_id": {
+      "total": 12,
+      "detected": 0,
+      "missed": 12,
+      "recall": 0.0
+    },
+    "invalid_humidity": {
+      "total": 13,
+      "detected": 13,
+      "missed": 0,
+      "recall": 1.0
+    },
+    "invalid_ndvi": {
+      "total": 13,
+      "detected": 13,
+      "missed": 0,
+      "recall": 1.0
+    },
+    "malformed_timestamp": {
+      "total": 12,
+      "detected": 12,
+      "missed": 0,
+      "recall": 1.0
+    },
+    "invalid_soil_moisture": {
+      "total": 13,
+      "detected": 13,
+      "missed": 0,
+      "recall": 1.0
+    },
+    "negative_rainfall": {
+      "total": 12,
+      "detected": 12,
+      "missed": 0,
+      "recall": 1.0
+    },
+    "invalid_soil_ph": {
+      "total": 13,
+      "detected": 13,
+      "missed": 0,
+      "recall": 1.0
+    }
+  },
+  "missing_records": [],
+  "record_results": [
+    {
+      "quality_test_id": "quality_eval_0000",
+      "event_id": "a67cdcfc-5b83-4579-957b-eb611681b326",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0001",
+      "event_id": "68d4c1f2-0837-4b87-a829-25004ffdc917",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0002",
+      "event_id": "bfc415cf-0085-4250-adaa-132308c070c0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0003",
+      "event_id": "0fcf21b8-d52e-45af-87d6-dad0aab277a6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0004",
+      "event_id": "bc5bd7e3-10c9-454e-b3a4-19eec1db860e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0005",
+      "event_id": "f69db2b4-b8bf-4aec-9e04-16ab555eefd2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0006",
+      "event_id": "901c4093-21de-4937-bf15-9f05cb645834",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0007",
+      "event_id": "2863045c-c875-454b-bf55-9915d89a8403",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0008",
+      "event_id": "a541783e-598f-405e-8d02-75f13441d704",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0009",
+      "event_id": "b969408d-1245-4db7-9b38-e24d4ec7cd02",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0010",
+      "event_id": "6d7fce71-72de-4fad-a8f8-4243212cc9b1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0011",
+      "event_id": "03946e63-ce71-4dec-8411-5dd71fe69b96",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0012",
+      "event_id": "c83ca67c-e4cc-4702-8c18-0e8f4f69acb3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0013",
+      "event_id": "5015c955-49b5-447b-b720-01353a54fb0f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0014",
+      "event_id": "2dd12e11-6993-4307-9fe3-02a067ddab0c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0015",
+      "event_id": "879fdc67-b6f9-4354-9bc7-40e0a0a99e1f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0016",
+      "event_id": "68599a57-ba5b-4459-bee4-920378feed84",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0017",
+      "event_id": "8d695dc7-256b-4f9f-b2aa-750d3f527ea9",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0018",
+      "event_id": "16084c52-c8cb-4473-a2bd-ca0711ea162b",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0019",
+      "event_id": "dfea476e-a948-42e0-967d-9c58bac053ed",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0020",
+      "event_id": "6ff4d9b7-fb77-46fb-9abc-76d113585f81",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0021",
+      "event_id": "f4f00c80-f3ff-409b-857e-095cf17a4bfc",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0022",
+      "event_id": "941d805f-cf12-41e4-a1e9-ed6997670b86",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0023",
+      "event_id": "92cd809e-0728-4e80-b4e6-1b463ce9f286",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0024",
+      "event_id": "bd693a78-af48-4209-a922-af4e21fc4925",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0025",
+      "event_id": "f0c47297-a41e-4472-84b9-8a59eb5d1097",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0026",
+      "event_id": "88a7ac10-153f-465b-9a6a-e3ecbd9a57bb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0027",
+      "event_id": "7ab9464c-9513-4bf8-87d1-9c399bc79140",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0028",
+      "event_id": "56b26180-a43a-4d13-a2b8-28091867028f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0029",
+      "event_id": "c3e18751-5d21-424e-bd04-7d496ef765d9",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0030",
+      "event_id": "8df5dd38-7817-41ab-b0da-046f26d76bdd",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0031",
+      "event_id": "9274f715-2dfc-44df-a050-5cab5c68438d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0032",
+      "event_id": "a1fa56e1-9353-40dd-b411-3d05f03f5e5e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0033",
+      "event_id": "8925cf62-e3d4-4281-8925-156c98c3a08b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0034",
+      "event_id": "6d4709e4-ff6d-4e30-8d58-bd2c2c38ac8e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0035",
+      "event_id": "39eb6e1b-30a9-48a3-9191-f72e4baf2efd",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0036",
+      "event_id": "721f425a-3a45-4eb6-a188-5df136e2d436",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0037",
+      "event_id": "0d38341c-13fb-4941-bde7-3e7f7346348f",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0038",
+      "event_id": "2a9808a2-1536-40fc-a0d9-44ec1b51144e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0039",
+      "event_id": "89d8a763-a595-4e88-8f7c-325ac4f12159",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0040",
+      "event_id": "cfc271ce-dd21-4195-a6c2-d860c740c8f9",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0041",
+      "event_id": "312de416-884a-41be-a6c9-8d2373def3dc",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0042",
+      "event_id": "d9487a13-3c6b-4300-ba4a-b5fb42761684",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0043",
+      "event_id": "c341dd33-48a4-44ea-b3fd-c23f375523cf",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0044",
+      "event_id": "3a0f5274-10f7-4d34-98e1-20e1a90ac845",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0045",
+      "event_id": "9ba8efa2-2297-4308-9775-a0d562f8647e",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0046",
+      "event_id": "f718dbfb-9cef-4028-955a-61d1d1e003cc",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0047",
+      "event_id": "8690b550-e503-4ec9-8e43-732b08446a9f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0048",
+      "event_id": "1249f8ce-efa6-47f8-a243-5ddec0f98b36",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0049",
+      "event_id": "fc22d282-6b2e-4d65-b0e2-fa8910ce5bc6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0050",
+      "event_id": "1d0f5ca6-7b0a-4b09-936c-1ed2917db575",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0051",
+      "event_id": "221b6edd-ace1-4eb5-bc58-b761d8e187e3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0052",
+      "event_id": "b795a74f-6a41-4932-8fa5-35740610f828",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0053",
+      "event_id": "f6409f56-64b9-4ff4-bc03-45cc34f656de",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0054",
+      "event_id": "7324149c-abc2-43e5-ad99-56be7ed0e1b7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0055",
+      "event_id": "a81b152b-4bb6-49d8-9eb8-229fd2790c99",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0056",
+      "event_id": "d3d6024f-d6a6-4e3d-b72f-73b3fee3438e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0057",
+      "event_id": "2c454948-9f20-41fc-8453-c6418b5f4711",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0058",
+      "event_id": "917db894-02d8-46b8-80b5-e4c4329714ed",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0059",
+      "event_id": "56b890e6-9ab1-40d1-9661-09c9147bbfc6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0060",
+      "event_id": "71b8b5af-fde3-41ce-adfc-8becdc7ad47d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0061",
+      "event_id": "90f58d5f-cc4a-4818-993c-f78b8e76d967",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0062",
+      "event_id": "94b3af0c-42d6-4064-8374-41d4fdc4e155",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0063",
+      "event_id": "c373200a-c312-45c4-9bef-3688eee21b90",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0064",
+      "event_id": "2d662b39-8bc4-4936-ac4c-88f20202779a",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0065",
+      "event_id": "fbc0a5fc-4499-4de9-9723-ce26eafe8dfb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0066",
+      "event_id": "ea6cf0ca-3994-4553-8bdd-ce017d7fe9d6",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0067",
+      "event_id": "b571a5ec-a864-4025-afcd-368f3b4c3deb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0068",
+      "event_id": "a521058f-e315-4d31-bbbf-88e4ceb0ab84",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0069",
+      "event_id": "3b8f4693-a6c6-4863-a4e2-b88df2978579",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0070",
+      "event_id": "03d3b846-9266-461e-aa20-e4daa3e9864b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0071",
+      "event_id": "b5ce7a08-58eb-449d-9280-546807e4bbec",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0072",
+      "event_id": "36db3273-970c-4517-b2b1-814bc1619999",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0073",
+      "event_id": "00138df7-b208-4f50-b20c-f0092b96a923",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0074",
+      "event_id": "f0eb17fb-cdfb-4b10-a684-5f873840972c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0075",
+      "event_id": "b99aecf9-ce3b-4171-92e6-3d448d1e5503",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0076",
+      "event_id": "f270af98-c089-4369-8a9f-8ed140ec84b1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0077",
+      "event_id": "52f0aabc-706c-4e68-9000-ec575192ee12",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0078",
+      "event_id": "d6b204a3-09f2-4287-b079-0d69e25c1741",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0079",
+      "event_id": "9b5550ea-67d6-4827-a2ee-c05454b7b13f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0080",
+      "event_id": "c4a7470e-055d-4a1e-be2f-45245427f864",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0081",
+      "event_id": "0a23f98c-9da6-4192-ac0d-2c6351e95a64",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0082",
+      "event_id": "ac026c7b-b223-412a-932c-8957a3de6040",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0083",
+      "event_id": "72d88cdc-82ed-4709-ac4b-9ed9b9b62094",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0084",
+      "event_id": "f5e509bf-b600-4756-af43-fa369cbcf038",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0085",
+      "event_id": "2a3b4fe0-fb86-4936-9d5d-0b237066f915",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0086",
+      "event_id": "7b1a2b86-5398-465b-9763-944177c80762",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0087",
+      "event_id": "0f56ae73-9530-42ca-aaaf-7372b028abc7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0088",
+      "event_id": "3d1dcb5d-88b0-4eb3-8284-109611eca8af",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0089",
+      "event_id": "62eecd5e-9630-47b3-bfd4-d693cfb33d67",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0090",
+      "event_id": "0e84bc9f-9970-4dbe-b250-bb0960076705",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0091",
+      "event_id": "1d27d2c4-cd6c-4c4f-80f8-fe3ac5d499eb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0092",
+      "event_id": "936c5565-751d-4bb8-b99e-7c8b95c9b666",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0093",
+      "event_id": "c89df4d9-dcc8-4309-9fcd-624ad6cb1f03",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0094",
+      "event_id": "377b76f6-b834-4887-90e1-44bb762d0ea9",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0095",
+      "event_id": "c209a44b-e058-4b5e-a5b6-1e9758fef237",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0096",
+      "event_id": "ab4800b6-534f-4f49-b90a-989210f2c510",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0097",
+      "event_id": "a3814570-e873-43e7-9263-5c068f469810",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0098",
+      "event_id": "cb0bdf11-4952-4ca3-aade-b93369ea66be",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0099",
+      "event_id": "91f80e25-5d31-4550-84eb-817b7f18739a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0100",
+      "event_id": "39838ca5-75e0-4102-b825-3457a8c373a8",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0101",
+      "event_id": "5516aa9f-6d90-4509-b247-a1e5f1d52220",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0102",
+      "event_id": "43532a8f-4018-4df5-b6c3-9ed7b64a4afe",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0103",
+      "event_id": "49418d09-e535-4057-b295-c306872554c0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0104",
+      "event_id": "23d2adbc-c6f2-48a5-96b1-2fbd6ffc0439",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0105",
+      "event_id": "2ce6fbbf-05eb-45a3-954d-702643345917",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0106",
+      "event_id": "655ce362-28a2-4f91-92ad-077f0a476590",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0107",
+      "event_id": "ab9c8055-6209-4748-92a1-efad9e5d07ff",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0108",
+      "event_id": "29a642b5-aecf-45a2-a9e0-332f2089511e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0109",
+      "event_id": "4f8cab24-32e5-4570-8fb8-4678e6f55940",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0110",
+      "event_id": "af4b08e8-c6ef-4a96-8900-1bd73c9cb313",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0111",
+      "event_id": "6777c3a1-956f-4ab7-a43f-686565580e75",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0112",
+      "event_id": "76cb025b-b7b9-4563-8e76-1495caa100b4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0113",
+      "event_id": "fa559697-3d68-4172-ab0e-c70c97e9e99a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0114",
+      "event_id": "22e3cd22-c0bf-4ad2-a352-a534cc31f2c1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0115",
+      "event_id": "74f8f895-857a-46a5-9dc5-6fffb5a2f01c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0116",
+      "event_id": "b6b2b44e-6608-4b5a-97d1-7e2ed101f8dd",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0117",
+      "event_id": "9cd5c35a-7c98-4982-be88-dedd1d35c069",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0118",
+      "event_id": "2b6d2e2c-63b9-45cc-a679-0647ea1181b6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0119",
+      "event_id": "03b2bd03-927b-480c-9e00-76a4db0ef09f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0120",
+      "event_id": "82e67d21-eb3b-469d-8ab3-618f3cbab1f3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0121",
+      "event_id": "ed9896d9-730a-4dee-bed8-6bb53a45bba4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0122",
+      "event_id": "f5f7eaf3-71f0-4456-aeef-5203b4a7c015",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0123",
+      "event_id": "d4606126-6d13-437d-8433-08e11b1626d3",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0124",
+      "event_id": "2a3e1130-c78c-4ee2-a982-a5374ec1ba57",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0125",
+      "event_id": "9ec779b5-94fc-4bac-b2f1-15651872c520",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0126",
+      "event_id": "0654895b-f770-4736-b18a-8ad8ad5ecf83",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0127",
+      "event_id": "c6f80e1d-48ca-4ec3-ba3a-428b2209f070",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0128",
+      "event_id": "819382e9-4f47-484c-8437-4cb4452310d0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0129",
+      "event_id": "9bbebe10-c50f-4978-a949-1d901ccc1d41",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0130",
+      "event_id": "3ac28600-2f72-4791-87a8-db05f641dc41",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0131",
+      "event_id": "25bab79a-2bd0-4e27-b662-e7fb96a8a259",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0132",
+      "event_id": "9ceedf03-9cfc-4020-a95f-6f09c0f5e8c2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0133",
+      "event_id": "3ceceb88-1749-4edc-b738-3950aa490c88",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0134",
+      "event_id": "fd69ab9d-0a8c-4c5a-9b76-ea504530bb25",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0135",
+      "event_id": "064c2250-f5b8-4872-ac54-1ecbd9756acb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0136",
+      "event_id": "6a482ce7-9923-4a2d-80fd-1c19e34e4f54",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0137",
+      "event_id": "7d79f2d6-9757-4424-ae65-466f00ae65e1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0138",
+      "event_id": "6271d3a8-fab5-4160-aeb9-2f35be29defe",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0139",
+      "event_id": "526d4d94-394b-40ac-8776-2c3bc47e29f5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0140",
+      "event_id": "eace7bb3-4a58-452d-942d-27b5bcd97a28",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0141",
+      "event_id": "560560a3-da87-452e-af3f-e4dda98896fe",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0142",
+      "event_id": "de75b4f3-e934-49c0-95df-28a011c2222e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0143",
+      "event_id": "59585a59-8b4e-4e2e-84ae-ee8265536a2b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0144",
+      "event_id": "42ce6396-9012-4506-b6dc-33bc9c4c2e0d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0145",
+      "event_id": "64d3dc09-f74d-47dc-a3ac-18c6f9fa139b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0146",
+      "event_id": "058798dd-62fb-497a-8d18-1fdfef15ad70",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0147",
+      "event_id": "77d34b0c-7a61-4fe7-9019-d799838eb8f7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0148",
+      "event_id": "7e6dd33d-d550-4efd-bc3e-600dabd708d3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0149",
+      "event_id": "c7d99a58-45b5-495b-a971-29d06dfffdef",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0150",
+      "event_id": "b0284ee3-b908-4f28-9f85-2ea399a52056",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0151",
+      "event_id": "5cced20f-7fc5-4512-8518-f006254fe0b2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0152",
+      "event_id": "0fbc5a6b-438f-4aa2-85bb-b57791d08300",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0153",
+      "event_id": "9bfeb82d-8dae-46ef-82a2-5630c890fe95",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0154",
+      "event_id": "e54b9e61-31f7-45dc-ba49-53e2b88685cc",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0155",
+      "event_id": "1340b49a-20b7-4154-9b1f-2e189bf240f0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0156",
+      "event_id": "44429699-f857-4dce-9d52-e30f2655c6b7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0157",
+      "event_id": "aa6d43a4-f1e0-4f12-a421-a7dfbb2bc1f6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0158",
+      "event_id": "ded50829-1a5c-4c3d-9479-f4e9d35c22dc",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0159",
+      "event_id": "0d89535b-6c21-49f4-af14-015b3b0d0e90",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0160",
+      "event_id": "72869441-2745-4167-b9cb-b106a01e7f3a",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0161",
+      "event_id": "d8c207be-1950-49a0-8b7d-f1c95c2a041d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0162",
+      "event_id": "1c15b666-25df-4980-90ff-53782bd1100f",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0163",
+      "event_id": "5d2f656c-0331-4716-92ed-13041106dd90",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0164",
+      "event_id": "c2c192db-cfd2-41b5-a19c-0c23a7d863a6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0165",
+      "event_id": "c21d9c7e-4cda-4fcc-9a90-45a82f67019c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0166",
+      "event_id": "03200353-d6fb-404e-a2ce-7c3c841619e6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0167",
+      "event_id": "34048e3a-848d-41e1-9f00-93bbb835a502",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0168",
+      "event_id": "a812e9e1-5faa-4aa4-b488-c8ee1a44556a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0169",
+      "event_id": "e8cec386-ad71-4fd4-9a24-8805de0b03f3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0170",
+      "event_id": "62bff714-0cb7-42f3-b16d-8bef405e07bc",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0171",
+      "event_id": "da7c1854-2119-4bd3-817e-4eedcc416e4f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0172",
+      "event_id": "ceb7ef44-a77e-4641-9add-7f1ba7a5ada1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0173",
+      "event_id": "1d707f43-43d9-41ed-bcb3-743d1445d1fe",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0174",
+      "event_id": "e5604555-f2bb-42d0-9dd8-2530b60aa10f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0175",
+      "event_id": "f422c995-9623-4622-9cf0-8450b4758d21",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0176",
+      "event_id": "4b98cb89-cf7f-4625-8871-7afdfef502f2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0177",
+      "event_id": "a9533fe3-39d6-4452-93f6-7a6f56db6203",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0178",
+      "event_id": "fa8741c0-8444-40b4-8702-9b23188669bf",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0179",
+      "event_id": "6d3a6e59-0dfe-42c6-91ca-e364cfa0461e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0180",
+      "event_id": "b79efebc-3c71-4dce-86f3-2265e368f420",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0181",
+      "event_id": "119b99d1-0346-4eb4-addc-4c1824855047",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0182",
+      "event_id": "a615a862-6b9a-4bba-971c-fff52883b716",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0183",
+      "event_id": "82502cfb-691f-43ac-86ae-0088649df5d4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0184",
+      "event_id": "a562fa2c-6c29-40c0-9aa6-79c8d9d5be72",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0185",
+      "event_id": "c865fd51-eb3f-4e44-b653-9ca4ae4403f0",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0186",
+      "event_id": "4c520f54-2042-42c9-944c-7c59fab39fc5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0187",
+      "event_id": "0b0794b2-006b-4556-a6af-e2365b51a3c8",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0188",
+      "event_id": "a7e58f2c-78f1-4b38-bdb0-0131181e166e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0189",
+      "event_id": "51a30525-c788-4504-91f1-04a2d6c9fc77",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0190",
+      "event_id": "b1a76c89-67ec-4435-8e30-7c7c74e02389",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0191",
+      "event_id": "38f22efb-fd9c-4053-9d81-43278271011e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0192",
+      "event_id": "61ec70cc-df6b-4df5-9bb3-e563f6a9d944",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0193",
+      "event_id": "53f9e50e-6095-46f9-8570-be4841014239",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0194",
+      "event_id": "c73b2413-3000-475f-8021-6206d5bf01a1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0195",
+      "event_id": "0f8bb3fd-9291-4532-b36a-69dfea7fe87b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0196",
+      "event_id": "00e973d5-5f84-4c37-8846-0c710aab04ba",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0197",
+      "event_id": "8dec657c-6b82-422f-b708-a6808f87e7c6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0198",
+      "event_id": "1063faac-4197-4379-abb9-4eb57c7268b8",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0199",
+      "event_id": "0a03a44c-043e-4eb7-95c7-4e9b8c0d87ff",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0200",
+      "event_id": "7d9188a1-14e7-4cd1-8242-bdb1f00b9e52",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0201",
+      "event_id": "c76b5a3f-9ae6-46d6-9ae9-4501d8162608",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0202",
+      "event_id": "cb267323-9b71-42e8-bdc9-ee95a7f5be72",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0203",
+      "event_id": "4ba06036-40c8-470c-9295-0ede70f2169a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0204",
+      "event_id": "2b08b9ce-6478-4be9-9b2e-f787941cea3a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0205",
+      "event_id": "7d877220-697c-402e-a3d3-361ec5b42aa7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0206",
+      "event_id": "17a1470d-2e62-4c90-93ab-f1dda56cdf6e",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0207",
+      "event_id": "d3967981-a634-4259-9399-7b40bda3fc51",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0208",
+      "event_id": "4c93a1c2-32df-4803-934f-675b44448748",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0209",
+      "event_id": "08f44f9c-2219-4b83-8485-9b366d1e2488",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0210",
+      "event_id": "bf910af9-9dd6-44c1-9ea9-fc31cb52c89c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0211",
+      "event_id": "e1009661-a9ce-4912-947a-243af454a758",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0212",
+      "event_id": "16c59676-cbfc-47a9-80bc-30aa13973c51",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0213",
+      "event_id": "5fe2ff84-da87-496e-8dfe-afc70ca968c0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0214",
+      "event_id": "60d6a13e-5086-4cd6-85e6-2394c0c16bb7",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0215",
+      "event_id": "d7a4c916-b2c5-4551-8d77-974d0942abf2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0216",
+      "event_id": "0a8bd681-827d-4d72-9535-c9bd4d19d7e0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0217",
+      "event_id": "30c39eaa-5377-485d-ab77-4e227b3cb564",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0218",
+      "event_id": "f4b2f313-12cf-4915-988c-df644ffa0fba",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0219",
+      "event_id": "6f722696-c460-40cd-a23b-f9d3df10ea92",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0220",
+      "event_id": "24eff15b-5f8c-4080-b86f-c4c1a915574d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0221",
+      "event_id": "655da90e-0e6e-401a-85b2-99d65fdfde91",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0222",
+      "event_id": "8f495f08-0374-4c46-84fa-1a71fe023962",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0223",
+      "event_id": "aed530e2-3c47-4003-820c-fb6db90f148d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0224",
+      "event_id": "b8bbb95c-fe9f-4461-97d8-202e68265cc2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0225",
+      "event_id": "3d5ece92-edf9-4851-b0bc-d2ef784cf969",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0226",
+      "event_id": "c25dae45-bc73-46e0-8ded-d1ff8c2884a9",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0227",
+      "event_id": "43ddd260-3b1b-4dca-844d-a2222c71c063",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0228",
+      "event_id": "e04df3f9-53f1-4ff6-8a87-8a1de78a06c3",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0229",
+      "event_id": "62ba738a-a3cc-4b7d-a2ef-d939142ae435",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0230",
+      "event_id": "4ab0be0b-cda8-46f2-8e74-00dc26bfae97",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0231",
+      "event_id": "c969fd2e-cccc-4103-970f-7a4017707515",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0232",
+      "event_id": "7c4dfe89-cdea-4177-92c0-226a90d89621",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0233",
+      "event_id": "1f3e2cf7-2ba2-4958-89d5-0e2746452ca7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0234",
+      "event_id": "368ed172-eccb-4b14-9c88-fba2383f9f44",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0235",
+      "event_id": "154d50ad-c1d1-4c3d-bd9d-3691de81837d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0236",
+      "event_id": "7d72a26c-f6d7-4170-b396-b11e90acad2f",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0237",
+      "event_id": "8a522263-c941-44c3-97a3-ae666b91d08d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0238",
+      "event_id": "635f7609-d4c4-494b-9fa7-4034ff7c04c0",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0239",
+      "event_id": "92b1c3aa-845d-4b66-b1a6-f5902ce23ac9",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0240",
+      "event_id": "a0199497-3507-4bda-996d-ee08dc34f1fe",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0241",
+      "event_id": "58ff281f-4e3b-4793-946c-4a32973dd01f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0242",
+      "event_id": "8c1a5977-105d-4be3-ad18-c2bcfd0293cb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0243",
+      "event_id": "205b24e8-a54e-4810-a5c9-921b24dd586f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0244",
+      "event_id": "75434eca-f427-432c-a296-b934b514f39b",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0245",
+      "event_id": "5416e2ee-e3d8-4c61-9e99-4801d48f37d1",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0246",
+      "event_id": "9fc43cc7-eb3a-4ee5-b0ea-ce53271c1baa",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0247",
+      "event_id": "4647be8e-66ea-4287-b391-0829d135d9fe",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0248",
+      "event_id": "79e439eb-33c4-4807-9670-8cdfc8bbb19c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0249",
+      "event_id": "2402c84d-279f-4179-b629-95e82f92c124",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0250",
+      "event_id": "f4f7466d-90b3-48ae-af51-636ecfc09e7e",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0251",
+      "event_id": "3a80c003-2241-4c99-b96d-97862f9bfdac",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0252",
+      "event_id": "13e9398d-66ae-4a01-899c-8d137fc184e0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0253",
+      "event_id": "972c205d-deb7-47d1-9a9d-feddc0140b90",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0254",
+      "event_id": "58c249c4-c83c-4f45-96bf-518529d56b68",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0255",
+      "event_id": "77711d29-018f-452f-b0d3-cdd53253f6ca",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0256",
+      "event_id": "597d5e95-bd4f-49ea-9d0a-f79256cf197c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0257",
+      "event_id": "58adafaf-4840-4b6e-908b-6f82a72fe371",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0258",
+      "event_id": "512fba64-e259-4692-bec9-264c78eaa7bb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0259",
+      "event_id": "e8f405a6-ecfe-4b7f-b672-2037181f22de",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0260",
+      "event_id": "2122f24c-15c7-4e8c-8119-d41a9e2b664b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0261",
+      "event_id": "4f053081-f5e0-4872-bf17-5443b092662d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0262",
+      "event_id": "6bf7908c-c05e-43a1-94f2-451f4ff1a8b2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0263",
+      "event_id": "db9075c0-61ab-4bb6-9133-dd1701d3a358",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0264",
+      "event_id": "316677e7-431e-44fc-b442-fc8ea3176f28",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0265",
+      "event_id": "494e762d-2568-4e2d-b97c-f22c5a4551d7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0266",
+      "event_id": "581ca236-2b2c-4ccc-9138-3b87a872b692",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0267",
+      "event_id": "35c5e273-39ce-4cbb-9ac3-7460f32147dd",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0268",
+      "event_id": "104e2fe8-b9f2-40dd-9232-53cc3bad1b18",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0269",
+      "event_id": "2efae8de-6906-4388-a469-91790beb4e69",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0270",
+      "event_id": "71ec3849-882c-41a5-8f6c-b6dadd2440f4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0271",
+      "event_id": "e4872929-29b2-4ac3-9ccc-4e41b9eb0f36",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0272",
+      "event_id": "e538a688-e4cf-4e5e-91b0-e0386d88c66f",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0273",
+      "event_id": "4202cb0a-21e2-43fe-bd16-e367fe359912",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0274",
+      "event_id": "f20056e2-f955-4a18-ac7d-85e152479d16",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0275",
+      "event_id": "5e54c61a-0d81-446c-bc14-723e694016ce",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0276",
+      "event_id": "74cf3cda-4916-4cf3-9f8c-ddb3f9480b6c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0277",
+      "event_id": "b009666b-a961-4f21-b0cc-bb0a6f262130",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0278",
+      "event_id": "6f2cb048-71fe-4e61-9221-e84c5a283ed3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0279",
+      "event_id": "f7142ff1-68bd-4cd3-9d30-c849dbc67ccc",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0280",
+      "event_id": "f341f736-35f0-4008-9b39-c31c82607a4d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0281",
+      "event_id": "5a97e4d9-b029-41ad-aa8f-3ec51a0af796",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0282",
+      "event_id": "0a0b453a-ee67-4269-822f-6074bfb75d18",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0283",
+      "event_id": "7f8c437f-69b9-449f-914e-7c8736c632c7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0284",
+      "event_id": "52353e27-7cd7-46d8-8216-8c6e3488a9a5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0285",
+      "event_id": "d7e2af4a-323b-48a2-9f50-723641bc1087",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0286",
+      "event_id": "bfe6accb-28b7-4c22-ae2d-bef69f3e924c",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0287",
+      "event_id": "30cf659e-cf68-45d0-a4d7-eba531777c50",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0288",
+      "event_id": "548b02f8-e07b-4b1d-ba6b-d83c8293ba48",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0289",
+      "event_id": "ef03f659-21a4-4fa8-83f4-d1cb55c7c1a5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0290",
+      "event_id": "1ba1b57a-d228-42f3-99e3-d182ad20bc04",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0291",
+      "event_id": "da8f3e33-1726-4ec8-90ed-c66d2b7ba2eb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0292",
+      "event_id": "06fcff23-dd1b-4bae-a6cb-14a7703db0be",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0293",
+      "event_id": "f61fcc66-2abf-4191-8361-87adb58aead6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0294",
+      "event_id": "ebb680c9-0033-455c-a494-7277fcc63620",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0295",
+      "event_id": "6ee481cb-5c8c-4039-b5ba-aea4abe80ce9",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0296",
+      "event_id": "fda6d9a3-e715-400a-ad5e-bbb5112600d4",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0297",
+      "event_id": "c168bb1f-8fc0-4fbf-9588-6e232ba33184",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0298",
+      "event_id": "83dd1057-82f3-431f-9239-f63db3584bb5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0299",
+      "event_id": "3269f3cc-e7fb-4be7-b152-8cef352e4f35",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0300",
+      "event_id": "e0bf7f26-e7bb-4254-90b5-f644a030aacf",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0301",
+      "event_id": "fa4d692a-40e7-44fb-b255-934d794436e5",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0302",
+      "event_id": "74a9eb19-c0b2-41a0-97e0-6bf1524a6b65",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0303",
+      "event_id": "3dafde04-0461-4430-a8ef-a057f5e0e835",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0304",
+      "event_id": "c79ab270-79df-4fc2-9bc3-d61386e3bf00",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0305",
+      "event_id": "47652ae2-df61-4270-98c3-2d2d9ac21574",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0306",
+      "event_id": "4c090d62-5ea7-4308-bd0f-81b7e9306a9f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0307",
+      "event_id": "9494615c-5396-4983-8f6d-86ed89adbd3f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0308",
+      "event_id": "46f0c9a0-29a0-4800-806e-5cfde287add6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0309",
+      "event_id": "b1a5032d-759e-4849-8267-6cb7580af71b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0310",
+      "event_id": "5f62ef18-d6c5-450b-9bd1-3549d39e3e38",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0311",
+      "event_id": "2797cf1a-35f8-47e7-8163-8457162dfdf1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0312",
+      "event_id": "2c06b682-9fc6-4020-97e3-c12ac948d95a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0313",
+      "event_id": "35330c53-ec87-493d-aaf4-214955374274",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0314",
+      "event_id": "6f567409-fd84-4f27-8df5-849e2924b623",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0315",
+      "event_id": "ffbd8ff3-fca3-4cc0-8483-a9c06a6fda56",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0316",
+      "event_id": "7d60cff2-8f3d-444d-b146-96dd8ce87a20",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0317",
+      "event_id": "f37820b2-a815-4f5e-8f87-929ee81f9aac",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0318",
+      "event_id": "357e1352-9067-4ae2-8af8-dd3bb4f2b9bc",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0319",
+      "event_id": "b96f3a34-7e05-4059-aa4f-1f014797156c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0320",
+      "event_id": "29a47316-2556-4c71-8605-311e92a11c5a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0321",
+      "event_id": "81011954-eea9-45b9-b2f1-0b6950cda126",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0322",
+      "event_id": "ef49140c-cf06-4853-910b-9ab6fc7e51a4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0323",
+      "event_id": "7dc75e55-c279-474e-9fdb-be6713c1ea87",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0324",
+      "event_id": "dfa68ee1-1076-436f-9ac9-1b1033353eb0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0325",
+      "event_id": "a00d36c0-5cf8-446d-9543-3cd17767afb4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0326",
+      "event_id": "373408a2-5657-4f84-a549-277ccb8cd908",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0327",
+      "event_id": "793195ab-066a-4739-8ec1-b66a15218f1c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0328",
+      "event_id": "1f0f3f2f-8403-4d0b-adbe-17936880e4f4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0329",
+      "event_id": "20465bd5-8ee2-45f5-a47e-e15d1b744bda",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0330",
+      "event_id": "2b1c44b7-7b0e-4263-ad7f-e11a55ffb6cf",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0331",
+      "event_id": "14f39f06-6b80-4867-9882-06fd2e038c41",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0332",
+      "event_id": "90abfd5d-5f34-4000-8699-a16ced89baf3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0333",
+      "event_id": "44aa7f6d-afb4-4f56-82a6-b1d67891739a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0334",
+      "event_id": "6d517757-6af3-4695-8c22-741f7ef7415f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0335",
+      "event_id": "fde5225a-a3bb-4626-85a7-56d639c07a52",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0336",
+      "event_id": "3ac6fc31-b879-4f91-95b5-2a920eeb3242",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0337",
+      "event_id": "7eac68a9-973c-4840-9721-402044199d24",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0338",
+      "event_id": "d7767482-baad-498d-b79f-0df43112245f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0339",
+      "event_id": "2dd214ea-2e9f-45d4-aaf7-39873e6c038b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0340",
+      "event_id": "a0d9ec13-f080-475a-a4dc-9e0ae84c0ca4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0341",
+      "event_id": "fa25d6b8-2006-4da0-92f1-ed776a9c1eec",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0342",
+      "event_id": "b9e1cd4e-b7ca-4e35-95cb-73716f682926",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0343",
+      "event_id": "10106313-b67e-4d3f-aee3-056bb0ee4a9e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0344",
+      "event_id": "d3c97963-9394-434c-9b7c-e90dadfdb69c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0345",
+      "event_id": "8e1f0c58-7f10-4756-aaac-56773f6ea7b2",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0346",
+      "event_id": "00a505d0-b1e0-498c-9733-e76c686befe0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0347",
+      "event_id": "6b1f6d35-fadc-4d70-8a62-a39e6ea60fed",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0348",
+      "event_id": "1f3882c2-5562-47fd-8fae-ba32f6034d1a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0349",
+      "event_id": "7da41e07-f955-4783-b585-39ee728a39c6",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0350",
+      "event_id": "9dca16ca-1286-4c10-a6ca-63440a25cd5a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0351",
+      "event_id": "c606f33c-b37e-4af3-b6b3-39667428c32c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0352",
+      "event_id": "504e648e-30b3-4f35-ac9a-a3a9ca981e71",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0353",
+      "event_id": "a14920f0-9ae4-4ddc-8a82-a366494fa684",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0354",
+      "event_id": "f1d3e947-092a-4d2d-8ef0-ca6e819d7da5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0355",
+      "event_id": "f5962d16-e7b9-4349-b8b4-75266dd4dd16",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0356",
+      "event_id": "6af6c832-c04a-4e01-91d4-ef141c5537de",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0357",
+      "event_id": "f600665f-d542-4629-b830-6e0c8207dae9",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0358",
+      "event_id": "fafb4728-4dcf-4476-adb5-c24b283e47cb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0359",
+      "event_id": "02151674-deca-4cd1-9595-c2be2d91dcc3",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0360",
+      "event_id": "229a13e2-d42e-4b5b-a5f3-d97122b2ad07",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0361",
+      "event_id": "118dc38e-a300-4a42-be83-edd0d9a884ac",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0362",
+      "event_id": "697226cb-71eb-4376-8349-4ffb9a751e1a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0363",
+      "event_id": "29f94559-cd32-47b7-8792-e50b8ce30a4c",
+      "defect_type": "missing_sensor_id",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0364",
+      "event_id": "d595b56c-f8d1-43f4-88e7-26ed13d7f5ab",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0365",
+      "event_id": "7017be79-f102-4e4a-b05e-7dfbd0d902d5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0366",
+      "event_id": "dd6c1e38-344b-4afb-bf29-3a7b3f758be7",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0367",
+      "event_id": "2492850f-43a9-476a-85fc-cda13148f01e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0368",
+      "event_id": "03a74555-c8c4-4519-aaa7-e4a1cbbace3c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0369",
+      "event_id": "62f40fac-f64e-4115-99a4-c4fcc73521b0",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0370",
+      "event_id": "344c5495-a129-45aa-b595-be3612eec6c5",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0371",
+      "event_id": "e79a9175-3864-4c05-9248-a7b342a9f86a",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0372",
+      "event_id": "3fb94538-9532-4c8b-92a9-01a1b8f4ecaf",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0373",
+      "event_id": "6552409e-abd7-406f-98e8-e863a7d8f80a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0374",
+      "event_id": "7303618f-814d-4c2f-970c-574d9b839206",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0375",
+      "event_id": "1396c58c-9a19-4dea-9134-0a5fd3ba9518",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0376",
+      "event_id": "62251cd0-5447-42df-98b3-16b10c7cb559",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0377",
+      "event_id": "f5320bdb-7bfe-4832-b214-c0da6705518a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0378",
+      "event_id": "54d2a6a4-302a-4be8-8803-4df5e5315b9e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0379",
+      "event_id": "94240f28-1831-4087-acfe-ac52ea5144d3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0380",
+      "event_id": "ff6ca2e4-b45a-4ab0-b00e-4d209f13a7d9",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0381",
+      "event_id": "5fb1da5c-b6e8-446e-8c88-e4344161b2fc",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0382",
+      "event_id": "16fd7a27-a631-4827-b5a1-35ebead9d283",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0383",
+      "event_id": "1735f9de-9554-4b72-a51a-ef6b5617bf7b",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0384",
+      "event_id": "671ce9f0-bc0f-4af0-829b-5f83a68e88c4",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0385",
+      "event_id": "7741d6d5-c741-4db0-99bc-674dcc155e84",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0386",
+      "event_id": "fbc12024-51a3-4c6c-9ed4-d28690e3ff4e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0387",
+      "event_id": "c3891d22-041a-4771-932f-fd1ee2667262",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0388",
+      "event_id": "613de414-0be3-4d39-ac4d-67a7d5b35600",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0389",
+      "event_id": "74552e17-2f52-446c-b4ef-0a195fabdf05",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0390",
+      "event_id": "1b23ce22-b8e5-4dc0-9176-8589a842b29d",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0391",
+      "event_id": "3be9b1a1-7cc4-4ee2-9f79-d2f7991c32e6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0392",
+      "event_id": "29be9994-8783-453b-aa71-500818a3ee21",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0393",
+      "event_id": "caa10481-e38f-4369-aba8-90825fbb13da",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0394",
+      "event_id": "1419f26b-d3bb-4360-8fea-82a871704301",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0395",
+      "event_id": "22a483c8-6d2b-4a0e-887b-3ea72f1faf8b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0396",
+      "event_id": "81e4e79a-9671-47dd-be90-bac9a2b1b2c2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0397",
+      "event_id": "a67ac909-afbd-4d42-ba15-07f85fe66654",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0398",
+      "event_id": "c0e9fab5-19bc-4e0d-9a26-cd6f6823e0af",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0399",
+      "event_id": "92288175-7d4a-4c73-9ed2-c6ad6a6fd1eb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0400",
+      "event_id": "ac6a8450-4ac5-49ab-addd-0a9f8c6b5e8d",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0401",
+      "event_id": "edc9e536-9321-470c-8ed1-f21900c48baf",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0402",
+      "event_id": "0034fb83-a975-41f5-8366-6442ed9818a2",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0403",
+      "event_id": "0aa67e38-c415-42cc-ba42-b10dc16c3db0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0404",
+      "event_id": "a8801752-139c-4475-8e89-83d409f7e34e",
+      "defect_type": "harvest_before_sowing",
+      "expected_invalid": true,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0405",
+      "event_id": "f0e02354-694a-43a2-9d3a-62bc59db9dc0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0406",
+      "event_id": "e3b824b2-dec8-487b-8e02-582dfa6ad983",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0407",
+      "event_id": "bbcc1220-fa01-4880-a17a-5c7b5bf96cfb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0408",
+      "event_id": "03f62ecc-4bf5-47ad-85e5-1a47cb08a430",
+      "defect_type": "negative_rainfall",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0409",
+      "event_id": "0ec742c4-cf27-443d-abc8-0eadb7967ef8",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0410",
+      "event_id": "11d679b6-08e6-4022-8332-c919852989ed",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0411",
+      "event_id": "488959c9-2998-4bce-8ef5-5abb73d2ec62",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0412",
+      "event_id": "39c1460d-8d65-4a59-a315-67ea8386e367",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0413",
+      "event_id": "9b494fe3-5b80-4dd5-90e1-573a03cb1deb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0414",
+      "event_id": "b9ab734a-e4b4-4ab1-90dc-7ba6a48a7fdd",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0415",
+      "event_id": "b7c9ea69-bf77-4a36-8119-2cb1a6a8d89e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0416",
+      "event_id": "6e1a3979-9af3-4dc1-b12d-97eb7f2ac12d",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0417",
+      "event_id": "ae8e1eaf-82b8-4f89-938c-de27a19f7e38",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0418",
+      "event_id": "2272c807-5805-4253-bbc5-bd9042efe42d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0419",
+      "event_id": "4ebbf12a-e54b-465c-8a28-6513841fd518",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0420",
+      "event_id": "f263409e-96d4-4e76-ac7c-4d807d037981",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0421",
+      "event_id": "94ce9516-2afd-421b-b69a-48aec2414ed9",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0422",
+      "event_id": "f695942b-1dee-4a36-a603-16dfa6b943ab",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0423",
+      "event_id": "972985ff-89e1-4c4e-93d3-5500bf27fda0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0424",
+      "event_id": "9a55857a-f2a1-44cb-85dc-973f9759381e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0425",
+      "event_id": "544757d3-d2a5-4e2f-b0c5-6d851341174c",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0426",
+      "event_id": "89f61e66-f969-4044-a1b5-4d1f5f1aa8e8",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0427",
+      "event_id": "2e027039-5e66-459a-bb31-5eab487eae6b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0428",
+      "event_id": "b28174e0-fd63-4096-816d-2f8843f73768",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0429",
+      "event_id": "6692d0a1-3a6f-4955-9c4d-4acf406fc378",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0430",
+      "event_id": "32281a97-311b-4b9f-8c72-6a038059d630",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0431",
+      "event_id": "5cfef3e0-b87e-4167-b232-8fd89b5bc14a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0432",
+      "event_id": "69d75270-b6bb-4bd7-b0ff-d38945c6e710",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0433",
+      "event_id": "03dc9e18-26db-4d63-9b74-5a1b6bdd8fc0",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0434",
+      "event_id": "67663c7a-4e1d-44f0-b604-11375e7eef9d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0435",
+      "event_id": "9632dbd5-266e-4336-9aef-3c7b2faa28f4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0436",
+      "event_id": "ea112799-a900-4e0a-9318-b531bc090c0d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0437",
+      "event_id": "a59e3804-594c-48bf-ab8b-23e12265e369",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0438",
+      "event_id": "0ee54a6d-1fde-479a-825e-3deaadef0c6f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0439",
+      "event_id": "051fd9ca-86f6-47b3-b30a-da6dad1c76ea",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0440",
+      "event_id": "741e4cc1-b2b0-4743-9e11-96970f98fc2d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0441",
+      "event_id": "9c677bf2-b206-4837-a241-27218a814dea",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0442",
+      "event_id": "5e0b5afd-e9b2-44ea-994a-25d9b49eee3b",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0443",
+      "event_id": "73c35827-495a-4371-8d82-6b3422125279",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0444",
+      "event_id": "b2f46318-8d11-40ff-90f8-b76980aa78f3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0445",
+      "event_id": "d2b5fd5b-f117-4a07-9727-995aed6b24a4",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0446",
+      "event_id": "212fe638-24c9-4563-a15c-b1f7890d97f6",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0447",
+      "event_id": "3e14fe48-a0a6-4650-9638-5076e160c4de",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0448",
+      "event_id": "cf58f31b-6898-437f-ba89-3c926b4c492e",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0449",
+      "event_id": "02847e1e-284e-4f14-8c4f-162b23054f13",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0450",
+      "event_id": "4c968849-568b-41f8-8690-95cc3e1ecac2",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0451",
+      "event_id": "da8bb069-ec44-4ae7-b647-08df054585ba",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0452",
+      "event_id": "0d55b7d2-b145-4e89-bcb8-7619d1536f24",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0453",
+      "event_id": "6a69579c-7032-4c98-85a3-20b8daab6c82",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0454",
+      "event_id": "b391c528-159c-4ee6-a137-adef283e06e8",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0455",
+      "event_id": "175ef218-5a18-4694-87b1-ba4a4bbda992",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0456",
+      "event_id": "89a23570-f472-49fe-aba8-7b0dc8a7eb2f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0457",
+      "event_id": "caf1f396-5f28-48dc-87e3-93604edb2559",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0458",
+      "event_id": "83afeb57-68f4-43ee-ab09-5ae6893fde97",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0459",
+      "event_id": "f1bf5ee8-fcfc-48d9-a137-5f61554721ed",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0460",
+      "event_id": "8d4313d0-6f59-4006-a305-8b65f0027aa6",
+      "defect_type": "invalid_humidity",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0461",
+      "event_id": "341ef8e7-a6a8-4783-b361-514af28cc43f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0462",
+      "event_id": "ae9dcea1-6b39-4741-94f7-6c2cefefbba6",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0463",
+      "event_id": "c71f7b27-befc-4263-8f7f-e6fa4867549f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0464",
+      "event_id": "80eb1dea-f6f5-4477-ac5f-44a1bb908d2c",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0465",
+      "event_id": "157cff74-38e8-4bb7-aee4-61e4799b9beb",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0466",
+      "event_id": "6b9a5bf1-b47a-4b0c-97da-fc88793ce8f3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0467",
+      "event_id": "6a40c31d-e09d-42af-a8e4-67a4211818a8",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0468",
+      "event_id": "813c4dc8-0689-4d4c-86f3-b424a1eaa98d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0469",
+      "event_id": "e3d12b73-809c-4d45-a9a0-56ebe66bd75d",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0470",
+      "event_id": "365c0033-ec6f-4342-ba86-3ce306ba1627",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0471",
+      "event_id": "5d426dc7-5691-46f0-8959-11a74b013dad",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0472",
+      "event_id": "b399ba88-7a5c-44f6-a700-f401a366b104",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0473",
+      "event_id": "57660392-ecb8-4381-80b5-881fa87edb99",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0474",
+      "event_id": "0da62c10-ad5e-4e25-8ca6-01d655294430",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0475",
+      "event_id": "4e700aa5-420a-47d3-b15a-32613d1f6a23",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0476",
+      "event_id": "e8febe60-3380-41e9-9d4f-76d815251d5a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0477",
+      "event_id": "3a74ff92-6302-421d-9636-4a55353caa35",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0478",
+      "event_id": "18469adf-9721-493c-87eb-989104a972d3",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0479",
+      "event_id": "66750e6e-085e-45d0-9e15-00b8005f7a7b",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0480",
+      "event_id": "818ff5c5-deb6-4111-92af-b5784c426608",
+      "defect_type": "invalid_ndvi",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0481",
+      "event_id": "30f28c74-e271-4337-8ed5-07e30650d8be",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0482",
+      "event_id": "49e1c133-b43c-4c80-ab23-713cd7c1b820",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0483",
+      "event_id": "3dd3a4ea-1acf-463a-93e5-8abf2436226f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0484",
+      "event_id": "f10423b0-d841-4638-8fcd-3d134fe6aa4f",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0485",
+      "event_id": "dd00ed8e-623f-42af-b434-f96f5cc5203a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0486",
+      "event_id": "158b3702-de01-4680-9e2f-a88ddb99aace",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0487",
+      "event_id": "2a025410-4a4f-4df1-a11e-9ffe0a076fcd",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0488",
+      "event_id": "f97cd3a1-114b-47e5-b713-50467668d4a3",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0489",
+      "event_id": "32f15bc7-7ba8-4096-98f7-a2aa179eea3a",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0490",
+      "event_id": "8e47e5e2-9442-447f-9eac-e50728a68d16",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0491",
+      "event_id": "81bba10b-a00a-41e2-a806-dbc4ce31cdc2",
+      "defect_type": "invalid_soil_moisture",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0492",
+      "event_id": "5c2c37d0-82d8-41a3-8859-a3a35ad9b385",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0493",
+      "event_id": "936c043b-4965-4364-a092-7c0b79a5edf9",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0494",
+      "event_id": "72f62fa3-1275-44ff-8944-2c9bb6c2a290",
+      "defect_type": "malformed_timestamp",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0495",
+      "event_id": "3d758e0b-b430-40d8-bd3c-0ff5ff9b3f20",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0496",
+      "event_id": "dcc65ee9-1ab8-40bd-bd2b-b937fb4ec205",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0497",
+      "event_id": "4c0a84c3-d570-46dd-97d0-85db9b103e9b",
+      "defect_type": "invalid_soil_ph",
+      "expected_invalid": true,
+      "actual_result": "quarantined"
+    },
+    {
+      "quality_test_id": "quality_eval_0498",
+      "event_id": "c50c4067-c310-4bfe-b481-910d48571ce1",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    },
+    {
+      "quality_test_id": "quality_eval_0499",
+      "event_id": "11240444-4a55-407b-88ac-59a0d65e9f09",
+      "defect_type": "none",
+      "expected_invalid": false,
+      "actual_result": "accepted"
+    }
+  ]
+}
