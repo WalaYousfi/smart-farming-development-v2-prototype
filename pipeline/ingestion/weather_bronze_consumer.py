@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from io import BytesIO
+import argparse
 import json
 from typing import Any, Dict, List
 from uuid import uuid4
@@ -35,6 +36,24 @@ JOB_NAME = "weather_bronze_ingestion"
 JOB_VERSION = "2.0.0"
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description="Consume Weather events into Bronze."
+    )
+
+    parser.add_argument(
+        "--max-records",
+        type=int,
+        default=None,
+        help=(
+            "Stop after consuming this many records. "
+            "If omitted, run until Ctrl+C."
+        ),
+    )
+
+    return parser.parse_args()
+
+
 def utc_now() -> str:
     """Return the current UTC timestamp."""
 
@@ -42,9 +61,7 @@ def utc_now() -> str:
 
 
 def decode_headers(message: Any) -> Dict[str, str]:
-    """
-    Convert Kafka headers from bytes into readable text.
-    """
+    """Convert Kafka headers into readable text."""
 
     decoded_headers = {}
 
@@ -52,9 +69,7 @@ def decode_headers(message: Any) -> Dict[str, str]:
         if value is None:
             decoded_headers[key] = None
         else:
-            decoded_headers[key] = value.decode(
-                "utf-8"
-            )
+            decoded_headers[key] = value.decode("utf-8")
 
     return decoded_headers
 
@@ -63,12 +78,7 @@ def create_weather_bronze_event(
     message: Any,
     run_id: str,
 ) -> Dict[str, Any]:
-    """
-    Wrap the original weather event with Bronze metadata.
-
-    The original weather record remains unchanged
-    inside payload.
-    """
+    """Wrap the original Weather event with Bronze metadata."""
 
     payload = message.value
 
@@ -83,9 +93,7 @@ def create_weather_bronze_event(
                 WEATHER_SOURCE_SCHEMA_VERSION
             ),
             "ingestion_timestamp": utc_now(),
-            "event_timestamp": payload.get(
-                "observed_at"
-            ),
+            "event_timestamp": payload.get("observed_at"),
             "kafka_topic": message.topic,
             "kafka_partition": message.partition,
             "kafka_offset": message.offset,
@@ -94,9 +102,7 @@ def create_weather_bronze_event(
                 if message.key
                 else None
             ),
-            "kafka_headers": decode_headers(
-                message
-            ),
+            "kafka_headers": decode_headers(message),
         },
         "payload": payload,
     }
@@ -107,10 +113,7 @@ def upload_batch(
     events: List[Dict[str, Any]],
     run_id: str,
 ) -> str:
-    """
-    Upload one weather-event batch as JSONL
-    into the MinIO Bronze zone.
-    """
+    """Upload one Weather batch as JSONL."""
 
     if not events:
         raise ValueError(
@@ -146,10 +149,7 @@ def upload_batch(
     )
 
     jsonl_content += "\n"
-
-    encoded_content = jsonl_content.encode(
-        "utf-8"
-    )
+    encoded_content = jsonl_content.encode("utf-8")
 
     minio_client.put_object(
         bucket_name=MINIO_BUCKET,
@@ -168,6 +168,16 @@ def upload_batch(
 
 
 def main() -> None:
+    args = parse_arguments()
+
+    if (
+        args.max_records is not None
+        and args.max_records <= 0
+    ):
+        raise ValueError(
+            "--max-records must be greater than 0."
+        )
+
     run_context = create_run_context(
         job_name=JOB_NAME,
         job_version=JOB_VERSION,
@@ -183,9 +193,7 @@ def main() -> None:
         enable_auto_commit=False,
         group_id=WEATHER_CONSUMER_GROUP,
         key_deserializer=lambda value: (
-            value
-            if value is None
-            else value
+            value if value is None else value
         ),
         value_deserializer=lambda value: json.loads(
             value.decode("utf-8")
@@ -211,9 +219,7 @@ def main() -> None:
             "consumed_records": 0,
             "uploaded_records": 0,
             "uploaded_batches": 0,
-            "source_system": (
-                WEATHER_SOURCE_SYSTEM
-            ),
+            "source_system": WEATHER_SOURCE_SYSTEM,
         },
     )
 
@@ -221,27 +227,25 @@ def main() -> None:
 
     print("Weather Bronze consumer started.")
     print(f"Run ID: {run_context.run_id}")
-    print(
-        f"Kafka topic: {WEATHER_KAFKA_TOPIC}"
-    )
-    print(
-        f"Source system: {WEATHER_SOURCE_SYSTEM}"
-    )
-    print(
-        f"Batch size: {BRONZE_BATCH_SIZE}"
-    )
-    print(
-        "Press Ctrl+C after all weather events "
-        "have been received."
-    )
+    print(f"Kafka topic: {WEATHER_KAFKA_TOPIC}")
+    print(f"Source system: {WEATHER_SOURCE_SYSTEM}")
+    print(f"Batch size: {BRONZE_BATCH_SIZE}")
+
+    if args.max_records is None:
+        print(
+            "Press Ctrl+C after all weather events "
+            "have been received."
+        )
+    else:
+        print(
+            f"Maximum records: {args.max_records}"
+        )
 
     try:
         for message in consumer:
-            bronze_event = (
-                create_weather_bronze_event(
-                    message=message,
-                    run_id=run_context.run_id,
-                )
+            bronze_event = create_weather_bronze_event(
+                message=message,
+                run_id=run_context.run_id,
             )
 
             batch.append(bronze_event)
@@ -261,20 +265,23 @@ def main() -> None:
                 )
 
                 output_objects.append(object_name)
-
                 uploaded_records += len(batch)
                 uploaded_batches += 1
 
-                # Commit only after MinIO confirms upload.
                 consumer.commit()
-
                 batch.clear()
 
-    except KeyboardInterrupt:
-        print(
-            "\nStopping Weather Bronze consumer..."
-        )
+            if (
+                args.max_records is not None
+                and consumed_records >= args.max_records
+            ):
+                print(
+                    f"Reached maximum of "
+                    f"{args.max_records} records."
+                )
+                break
 
+        # Upload a final partial batch.
         if batch:
             object_name = upload_batch(
                 minio_client=minio_client,
@@ -283,7 +290,6 @@ def main() -> None:
             )
 
             output_objects.append(object_name)
-
             uploaded_records += len(batch)
             uploaded_batches += 1
 
@@ -300,25 +306,57 @@ def main() -> None:
             ],
             output_objects=output_objects,
             metrics={
-                "consumed_records": (
-                    consumed_records
-                ),
-                "uploaded_records": (
-                    uploaded_records
-                ),
-                "uploaded_batches": (
-                    uploaded_batches
-                ),
+                "consumed_records": consumed_records,
+                "uploaded_records": uploaded_records,
+                "uploaded_batches": uploaded_batches,
                 "batch_size": BRONZE_BATCH_SIZE,
-                "source_system": (
-                    WEATHER_SOURCE_SYSTEM
+                "source_system": WEATHER_SOURCE_SYSTEM,
+                "source_type": WEATHER_SOURCE_TYPE,
+                "source_format": WEATHER_SOURCE_FORMAT,
+                "source_schema_version": (
+                    WEATHER_SOURCE_SCHEMA_VERSION
                 ),
-                "source_type": (
-                    WEATHER_SOURCE_TYPE
-                ),
-                "source_format": (
-                    WEATHER_SOURCE_FORMAT
-                ),
+            },
+        )
+
+        write_manifest(completed_manifest)
+
+    except KeyboardInterrupt:
+        print(
+            "\nStopping Weather Bronze consumer..."
+        )
+
+        if batch:
+            object_name = upload_batch(
+                minio_client=minio_client,
+                events=batch,
+                run_id=run_context.run_id,
+            )
+
+            output_objects.append(object_name)
+            uploaded_records += len(batch)
+            uploaded_batches += 1
+
+            consumer.commit()
+            batch.clear()
+
+        completed_manifest = create_manifest(
+            run_context=run_context,
+            status="completed",
+            input_zone="kafka",
+            output_zone="bronze",
+            input_objects=[
+                f"kafka://{WEATHER_KAFKA_TOPIC}",
+            ],
+            output_objects=output_objects,
+            metrics={
+                "consumed_records": consumed_records,
+                "uploaded_records": uploaded_records,
+                "uploaded_batches": uploaded_batches,
+                "batch_size": BRONZE_BATCH_SIZE,
+                "source_system": WEATHER_SOURCE_SYSTEM,
+                "source_type": WEATHER_SOURCE_TYPE,
+                "source_format": WEATHER_SOURCE_FORMAT,
                 "source_schema_version": (
                     WEATHER_SOURCE_SCHEMA_VERSION
                 ),
@@ -338,18 +376,10 @@ def main() -> None:
             ],
             output_objects=output_objects,
             metrics={
-                "consumed_records": (
-                    consumed_records
-                ),
-                "uploaded_records": (
-                    uploaded_records
-                ),
-                "uploaded_batches": (
-                    uploaded_batches
-                ),
-                "source_system": (
-                    WEATHER_SOURCE_SYSTEM
-                ),
+                "consumed_records": consumed_records,
+                "uploaded_records": uploaded_records,
+                "uploaded_batches": uploaded_batches,
+                "source_system": WEATHER_SOURCE_SYSTEM,
             },
             error_message=str(error),
         )
@@ -369,9 +399,7 @@ def main() -> None:
     finally:
         consumer.close()
 
-        print(
-            "Weather Bronze consumer closed."
-        )
+        print("Weather Bronze consumer closed.")
 
 
 if __name__ == "__main__":
