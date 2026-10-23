@@ -1,13 +1,19 @@
+// Preserves normal Field ingestion while supporting evaluation settings
+
+
+
 import { Kafka } from "kafkajs";
 import csv from "csv-parser";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { loadEvaluationEnv } from "../common/load-evaluation-env.js";
 
 
-const KAFKA_BROKER =
-  process.env.KAFKA_SERVER ||
-  "localhost:9092";
+
+
+loadEvaluationEnv();
+const KAFKA_BROKER = process.env.KAFKA_SERVER || "localhost:9092";
 
 const kafka = new Kafka({
   clientId: "agri-producer",
@@ -24,9 +30,7 @@ const csvPath = path.resolve(
   "../../data/source/Smart_Farming_Crop_Yield_2024.csv",
 );
 
-const TOPIC =
-  process.env.KAFKA_TOPIC ||
-  "raw-field-readings";
+const TOPIC = process.env.KAFKA_TOPIC || "raw-field-readings";
 
 console.log("Reading CSV from:", csvPath);
 console.log(`Kafka broker: ${KAFKA_BROKER}`);
@@ -61,4 +65,45 @@ async function sendCSV() {
     });
 }
 
-sendCSV();
+async function sendStdin() {
+  const readline = await import("node:readline");
+  const lines = readline.createInterface({
+    input: process.stdin,
+    crlfDelay: Infinity,
+  });
+  const batchSize = Math.max(1, Number(process.env.PRODUCER_BATCH_SIZE || 500));
+  let batch = [],
+    total = 0;
+  await producer.connect();
+  try {
+    for await (const line of lines) {
+      if (!line.trim()) continue;
+      const record = JSON.parse(line);
+      batch.push({
+        key: String(record.farm_id),
+        value: JSON.stringify(record),
+      });
+      if (batch.length >= batchSize) {
+        await producer.send({ topic: TOPIC, messages: batch });
+        total += batch.length;
+        batch = [];
+      }
+    }
+    if (batch.length) {
+      await producer.send({ topic: TOPIC, messages: batch });
+      total += batch.length;
+    }
+    console.log(`Sent ${total} field records in batches`);
+  } finally {
+    await producer.disconnect();
+  }
+}
+
+if (process.argv.includes("--stdin")) {
+  sendStdin().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+} else {
+  sendCSV();
+}

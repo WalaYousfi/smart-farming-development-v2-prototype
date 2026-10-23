@@ -1,5 +1,7 @@
 # Role
 # Creates the shared MinIO client.
+# Stores raw JSONL in the evaluation bucket
+
 
 from minio import Minio
 from minio.error import S3Error

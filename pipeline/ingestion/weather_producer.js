@@ -1,8 +1,16 @@
+// Loads evaluation settings for JavaScript producers
+
+
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { Kafka } from "kafkajs";
+import { loadEvaluationEnv } from "../common/load-evaluation-env.js";
 
+
+
+
+loadEvaluationEnv();
 const currentFile = fileURLToPath(import.meta.url);
 const currentDirectory = path.dirname(currentFile);
 
@@ -101,7 +109,47 @@ async function main() {
   console.log("Kafka result:", result);
 }
 
-main()
+async function sendStdin() {
+  const readline = await import("node:readline");
+  const lines = readline.createInterface({
+    input: process.stdin,
+    crlfDelay: Infinity,
+  });
+  const batchSize = Math.max(1, Number(process.env.PRODUCER_BATCH_SIZE || 500));
+  let batch = [],
+    total = 0;
+  await producer.connect();
+  try {
+    for await (const line of lines) {
+      if (!line.trim()) continue;
+      const record = JSON.parse(line);
+      validateMinimumFields(record, total + batch.length);
+      batch.push({
+        key: `${record.farm_id}:${record.weather_station_id}`,
+        value: JSON.stringify(record),
+        headers: {
+          source_system: "farm_weather_station",
+          source_format: "json",
+          schema_version: "weather-source-1.0.0",
+        },
+      });
+      if (batch.length >= batchSize) {
+        await producer.send({ topic: WEATHER_TOPIC, messages: batch });
+        total += batch.length;
+        batch = [];
+      }
+    }
+    if (batch.length) {
+      await producer.send({ topic: WEATHER_TOPIC, messages: batch });
+      total += batch.length;
+    }
+    console.log(`Sent ${total} weather records in batches`);
+  } finally {
+    await producer.disconnect();
+  }
+}
+
+(process.argv.includes("--stdin") ? sendStdin() : main())
   .catch((error) => {
     console.error("Weather producer failed:", error);
 

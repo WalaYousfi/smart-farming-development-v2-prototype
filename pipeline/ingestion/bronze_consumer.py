@@ -1,3 +1,7 @@
+# Receives Field records and writes Bronze batches
+
+
+
 import argparse
 from datetime import datetime, timezone
 from io import BytesIO
@@ -33,6 +37,25 @@ from pipeline.common.run_context import create_run_context
 JOB_NAME = "bronze_ingestion"
 JOB_VERSION = "2.0.0"
 
+EXPECTED_EVALUATION_BUCKET = (
+    "smart-farming-100000-records-evaluation"
+)
+
+
+def verify_evaluation_environment():
+    from pipeline.common.config import APP_ENV
+
+    if APP_ENV != "evaluation":
+        raise RuntimeError(
+            "This experiment requires APP_ENV=evaluation"
+        )
+
+    if MINIO_BUCKET != EXPECTED_EVALUATION_BUCKET:
+        raise RuntimeError(
+            f"Incorrect MinIO bucket: {MINIO_BUCKET}"
+        )
+
+    
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -255,6 +278,7 @@ def write_failed_manifest(
 
 def main() -> None:
     args = parse_arguments()
+    verify_evaluation_environment()
 
     if (
         args.max_records is not None
@@ -277,6 +301,8 @@ def main() -> None:
         bootstrap_servers=KAFKA_SERVER,
         auto_offset_reset="earliest",
         enable_auto_commit=False,
+        max_poll_records=1000,
+        max_poll_interval_ms=900000,
         group_id=KAFKA_CONSUMER_GROUP,
         value_deserializer=lambda value: json.loads(
             value.decode("utf-8")
@@ -333,11 +359,6 @@ def main() -> None:
             batch.append(bronze_event)
             consumed_records += 1
 
-            print(
-                f"Buffered offset {message.offset} "
-                f"({len(batch)}/"
-                f"{BRONZE_BATCH_SIZE})"
-            )
 
             if len(batch) >= BRONZE_BATCH_SIZE:
                 uploaded_count = flush_batch(
@@ -376,6 +397,21 @@ def main() -> None:
             uploaded_records += uploaded_count
             uploaded_batches += 1
 
+
+        if args.max_records is not None:
+            if (
+                consumed_records != args.max_records
+                or uploaded_records != args.max_records
+            ):
+                raise RuntimeError(
+                    "Incomplete Bronze ingestion: "
+                    f"expected={args.max_records}, "
+                    f"consumed={consumed_records}, "
+                    f"uploaded={uploaded_records}"
+                )
+
+
+            
         write_completed_manifest(
             run_context=run_context,
             output_objects=output_objects,
