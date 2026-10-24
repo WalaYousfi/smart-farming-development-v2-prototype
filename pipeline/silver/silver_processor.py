@@ -1,3 +1,6 @@
+# Enforce additional source-quality rules
+
+
 import argparse
 
 from datetime import datetime, timezone
@@ -61,6 +64,56 @@ SOURCE_SCHEMA_PATH = (
 CANONICAL_SCHEMA_PATH = (
     "canonical/field_observation_v1.schema.json"
 )
+
+def validate_field_semantics(payload):
+    """Return additional source-level quality violations."""
+    from datetime import date
+
+    errors = []
+
+    for field in ("farm_id", "sensor_id"):
+        value = payload.get(field)
+
+        if (
+            value is None
+            or isinstance(value, bool)
+            or not str(value).strip()
+            or str(value).strip().lower() in {"null", "none", "nan"}
+        ):
+            errors.append({
+                "field": field,
+                "message": f"Required identifier '{field}' is missing or invalid.",
+            })
+
+    dates = {}
+
+    for field in ("sowing_date", "harvest_date"):
+        value = payload.get(field)
+
+        if value is None or str(value).strip() == "":
+            continue
+
+        try:
+            dates[field] = date.fromisoformat(str(value).strip())
+        except (ValueError, TypeError):
+            errors.append({
+                "field": field,
+                "message": f"Invalid ISO date in '{field}'.",
+            })
+
+    if (
+        "sowing_date" in dates
+        and "harvest_date" in dates
+        and dates["harvest_date"] < dates["sowing_date"]
+    ):
+        errors.append({
+            "field": "harvest_date",
+            "message": "Harvest date cannot precede sowing date.",
+        })
+
+    return errors
+
+
 
 def parse_arguments() -> argparse.Namespace:
     """
@@ -364,6 +417,13 @@ def process_records(
             payload,
             source_validator,
         )
+        source_errors.extend(
+            validate_field_semantics(payload)
+        )
+
+        
+        # This means additional failures will automatically use the 
+        # existing quarantine and quality-report mechanisms.
 
         if source_errors:
             quarantine_record = (

@@ -81,6 +81,11 @@ def required_text(
         raise ValueError(
             f"Required field '{field_name}' is missing."
         )
+    
+    if value.lower() in {"null", "none", "nan"}:
+        raise ValueError(
+            f"Required field '{field_name}' contains an invalid value."
+        )
 
     return value
 
