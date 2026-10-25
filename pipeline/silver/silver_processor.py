@@ -1,5 +1,5 @@
 # Enforce additional source-quality rules
-
+# Produce canonical Parquet datasets
 
 import argparse
 

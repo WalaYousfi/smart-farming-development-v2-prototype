@@ -1,3 +1,6 @@
+# Safely combine Field and Weather observations
+
+
 import argparse
 from datetime import datetime, timezone
 from io import BytesIO
@@ -262,19 +265,60 @@ def integrate_datasets(
     and calendar date.
     """
 
+
+    join_keys = ["farm_id", "observation_date"]
+
+    # Every Field observation must have a unique identity.
+    if field_dataframe["observation_id"].duplicated().any():
+        raise ValueError(
+            "Duplicate Field observation_id values detected."
+        )
+
+    # Reject missing integration keys.
+    for source_name, dataframe in [
+        ("Field", field_dataframe),
+        ("Weather", weather_dataframe),
+    ]:
+        invalid = dataframe[join_keys].isna().any(axis=1)
+
+        if invalid.any():
+            raise ValueError(
+                f"{source_name} contains {int(invalid.sum())} "
+                "records with missing integration keys."
+            )
+
+    # Detect ambiguous Weather matches.
+    weather_duplicates = weather_dataframe.duplicated(
+        subset=join_keys,
+        keep=False,
+    )
+
+    if weather_duplicates.any():
+        raise ValueError(
+            "Ambiguous Weather integration keys detected: "
+            f"{int(weather_duplicates.sum())} records. "
+            "Integration stopped to prevent join multiplication."
+        )
+
+
+
+    
     integrated = field_dataframe.merge(
         weather_dataframe,
         how="left",
-        on=[
-            "farm_id",
-            "observation_date",
-        ],
-        suffixes=(
-            "_field",
-            "_weather",
-        ),
+        on=join_keys,
+        suffixes=("_field", "_weather"),
         indicator=True,
+        validate="many_to_one",
     )
+
+    if len(integrated) != len(field_dataframe):
+        raise RuntimeError(
+            "Integration cardinality mismatch: "
+            f"Field={len(field_dataframe)}, "
+            f"Integrated={len(integrated)}"
+        )
+    
 
     integrated["weather_match_status"] = (
         integrated["_merge"]

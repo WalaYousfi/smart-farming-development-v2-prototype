@@ -1,3 +1,7 @@
+# Produce canonical Parquet datasets
+
+
+
 import argparse
 from datetime import datetime, timezone
 from io import BytesIO
