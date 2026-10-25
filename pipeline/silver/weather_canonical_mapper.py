@@ -1,6 +1,12 @@
+# Role: Apply Weather normalization before the existing canonical transformation.
+
+
+
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 from uuid import uuid4
+from pipeline.silver.source_normalization import normalize_payload
+
 
 
 def clean_required_text(
@@ -137,6 +143,8 @@ def map_weather_bronze_to_canonical(
             "Weather Bronze record requires a valid "
             "payload object."
         )
+
+    payload = normalize_payload(payload, "weather")
 
     return {
         "weather_observation_id": str(uuid4()),

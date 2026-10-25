@@ -43,6 +43,8 @@
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 from uuid import uuid4
+from pipeline.silver.source_normalization import normalize_payload
+
 
 
 def clean_optional_text(value: Any) -> Optional[str]:
@@ -204,6 +206,9 @@ def map_bronze_to_canonical(
         raise ValueError(
             "Bronze record is missing a valid payload object."
         )
+
+    
+    payload = normalize_payload(payload, "field")
 
     source_event_id = required_text(
         metadata,
