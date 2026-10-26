@@ -1,3 +1,8 @@
+# Reconstruct historical dependency graphs
+# Role: Missing lineage is now explicitly unresolved instead of 
+# automatically being classified as Bronze.
+
+
 import argparse
 from datetime import datetime, timezone
 import json
@@ -183,11 +188,16 @@ def reconstruct_graph(
             run_id
         )
 
+
+# Role: Missing lineage is now explicitly unresolved instead of 
+# automatically being classified as Bronze.
+
         if lineage is None:
             nodes[run_id] = {
                 "run_id": run_id,
-                "node_type": "bronze_root",
+                "node_type": "unresolved",
                 "job_name": None,
+                "reason": "missing_lineage_record",
             }
 
             return
@@ -217,34 +227,29 @@ def reconstruct_graph(
         )
 
         for parent_run_id in parent_run_ids:
-            edges.append(
-                {
-                    "parent_run_id": (
-                        parent_run_id
-                    ),
-                    "child_run_id": run_id,
-                }
+            edges.append({
+                "parent_run_id": parent_run_id,
+                "child_run_id": run_id,
+            })
+
+            if parent_run_id in lineage_index:
+                visit(parent_run_id)
+                continue
+
+            source_info = discover_source_information(
+                lineage=lineage,
+                parent_run_id=parent_run_id,
             )
 
-            if (
-                parent_run_id
-                not in lineage_index
-            ):
-                source_info = (
-                    discover_source_information(
-                        lineage=lineage,
-                        parent_run_id=(
-                            parent_run_id
-                        ),
-                    )
-                )
-
-                nodes[parent_run_id] = (
-                    source_info
-                )
-
+            if source_info["input_objects_from_child"]:
+                nodes[parent_run_id] = source_info
             else:
-                visit(parent_run_id)
+                nodes[parent_run_id] = {
+                    "run_id": parent_run_id,
+                    "node_type": "unresolved",
+                    "job_name": None,
+                    "reason": "missing_parent_lineage",
+                }
 
     visit(start_run_id)
 
@@ -367,6 +372,12 @@ def calculate_metrics(
         / EXPECTED_BRONZE_ROOTS
     )
 
+    unresolved_nodes = [
+        node
+        for node in nodes.values()
+        if node.get("node_type") == "unresolved"
+    ]
+
     complete = all(
         [
             len(nodes)
@@ -379,6 +390,7 @@ def calculate_metrics(
             == EXPECTED_TRANSFORMATION_LINEAGES,
             multi_parent_preserved,
             len(source_systems) == 2,
+            len(unresolved_nodes) == 0,
         ]
     )
 
@@ -444,7 +456,14 @@ def calculate_metrics(
             if complete
             else "incomplete"
         ),
+        "unresolved_lineage_nodes": len(unresolved_nodes),
+
+        "unresolved_run_ids": [
+            node["run_id"]
+            for node in unresolved_nodes
+        ],
     }
+# Role: A graph with missing dependencies can no longer be reported as fully traceable.
 
 
 def build_ascii_tree(
