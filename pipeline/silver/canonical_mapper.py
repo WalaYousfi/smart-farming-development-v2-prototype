@@ -335,4 +335,32 @@ def map_bronze_to_canonical(
         "quality_status": "accepted",
     }
 
+    
+        # Preserve augmentation provenance when supplied.
+    family_id = payload.get("augmentation_family_id")
+
+    if family_id is not None:
+        family_id = str(family_id).strip()
+
+        if not family_id:
+            raise ValueError(
+                "augmentation_family_id cannot be empty"
+            )
+
+        canonical_record["augmentation_family_id"] = family_id
+
+    # Independent label: 1 = anomaly, 0 = normal.
+    # Never infer this from Isolation Forest predictions.
+    ground_truth = payload.get("ground_truth_anomaly")
+
+    if ground_truth is not None:
+        if isinstance(ground_truth, bool) or ground_truth not in (0, 1):
+            raise ValueError(
+                "ground_truth_anomaly must be 0 or 1"
+            )
+
+        canonical_record["ground_truth_anomaly"] = int(
+            ground_truth
+        )
+
     return canonical_record

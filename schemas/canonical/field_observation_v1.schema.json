@@ -129,7 +129,16 @@
     "quality_status": {
       "type": "string",
       "enum": ["accepted", "quarantined"]
+    },
+    "augmentation_family_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ground_truth_anomaly": {
+      "type": "integer",
+      "enum": [0, 1]
     }
   },
   "additionalProperties": false
 }
+
