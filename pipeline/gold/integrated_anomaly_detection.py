@@ -1,3 +1,6 @@
+# role: 	Train/test split, model training, scoring, and artifact storage
+
+
 import argparse
 from datetime import datetime, timezone
 from io import BytesIO
@@ -31,6 +34,10 @@ from pipeline.gold.integration_run_selector import (
     select_integration_run_by_id,
     select_latest_integration_run,
 )
+import pickle
+
+import numpy as np
+from sklearn.model_selection import GroupShuffleSplit
 
 
 JOB_NAME = (
@@ -59,6 +66,11 @@ FEATURE_COLUMNS = [
     "ndvi_index",
 ]
 
+TRAIN_RATIO = 0.70
+SPLIT_RANDOM_STATE = 42
+MODEL_RANDOM_STATE = 42
+MODEL_ESTIMATORS = 200
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -85,6 +97,11 @@ def parse_arguments() -> argparse.Namespace:
             "When omitted, the latest completed run "
             "is selected."
         ),
+    )
+
+    parser.add_argument(
+        "--require-family-groups", action="store_true",
+        help="Fail if augmentation_family_id is missing or incomplete.",
     )
 
     parser.add_argument(
@@ -201,62 +218,94 @@ def prepare_features(
 
     return features
 
+# Role: Split observations into training and testing subsets, 
+# keeping records from the same augmentation family together when family identifiers are available.
 
-def score_observations(
-    dataframe: pd.DataFrame,
-    feature_dataframe: pd.DataFrame,
-    contamination: float,
-    gold_run_id: str,
-) -> pd.DataFrame:
-    """
-    Train Isolation Forest and score observations.
-    """
+def create_train_test_split(dataframe, require_family_groups=False):
+    """Return disjoint positional indices; group augmented siblings together."""
+    if len(dataframe) < MINIMUM_RECORDS:
+        raise ValueError("Insufficient records for train/test split")
 
+    has_family = "augmentation_family_id" in dataframe.columns
+    if require_family_groups and not has_family:
+        raise ValueError("augmentation_family_id is required for evaluation")
+
+    if has_family:
+        family = dataframe["augmentation_family_id"]
+        missing = family.isnull() | family.astype(str).str.strip().eq("")
+        if missing.any():
+            raise ValueError("Missing augmentation_family_id values: {}".format(int(missing.sum())))
+        groups = family.astype(str).values
+        if len(set(groups)) < 2:
+            raise ValueError("At least two augmentation families are required")
+    else:
+        # Only for legacy, nonaugmented datasets; not leakage-safe for augmentation.
+        groups = np.arange(len(dataframe))
+
+    splitter = GroupShuffleSplit(
+        n_splits=1, train_size=TRAIN_RATIO, random_state=SPLIT_RANDOM_STATE
+    )
+    train_indices, test_indices = next(splitter.split(dataframe, groups=groups))
+    if not len(train_indices) or not len(test_indices):
+        raise ValueError("Train/test split produced an empty partition")
+    return train_indices, test_indices
+
+
+def score_observations(dataframe, feature_dataframe, contamination, gold_run_id,
+                       require_family_groups=False):
+    """Fit only on train, then score both partitions without refitting."""
+    if len(dataframe) != len(feature_dataframe):
+        raise ValueError("Feature and observation row counts differ")
+    train_indices, test_indices = create_train_test_split(
+        dataframe, require_family_groups=require_family_groups
+    )
     model = IsolationForest(
-        n_estimators=200,
+        n_estimators=MODEL_ESTIMATORS,
         contamination=contamination,
-        random_state=42,
+        random_state=MODEL_RANDOM_STATE,
+        n_jobs=-1,
     )
+    model.fit(feature_dataframe.iloc[train_indices].to_numpy())
 
-    feature_matrix = (
-        feature_dataframe.to_numpy()
+    result = dataframe.copy().reset_index(drop=True)
+    result["dataset_split"] = ""
+    result["anomaly_prediction"] = 0
+    result["anomaly_score"] = np.nan
+
+    for indices, split_name in ((train_indices, "train"), (test_indices, "test")):
+        values = feature_dataframe.iloc[indices].to_numpy()
+        result.iloc[indices, result.columns.get_loc("dataset_split")] = split_name
+        result.iloc[indices, result.columns.get_loc("anomaly_prediction")] = model.predict(values)
+        result.iloc[indices, result.columns.get_loc("anomaly_score")] = model.decision_function(values)
+
+    result["anomaly_label"] = result["anomaly_prediction"].map(
+        {1: "normal", -1: "anomaly"}
     )
-
-    predictions = model.fit_predict(
-        feature_matrix
-    )
-
-    scores = model.decision_function(
-        feature_matrix
-    )
-
-    result = dataframe.copy()
-
-    result["anomaly_prediction"] = predictions
-
-    result["anomaly_label"] = (
-        pd.Series(predictions)
-        .map(
-            {
-                1: "normal",
-                -1: "anomaly",
-            }
-        )
-        .values
-    )
-
-    result["anomaly_score"] = scores
     result["model_name"] = MODEL_NAME
     result["model_version"] = MODEL_VERSION
     result["model_contamination"] = contamination
-    result["gold_processing_run_id"] = (
-        gold_run_id
-    )
-    result["gold_processing_timestamp"] = (
-        utc_now()
-    )
+    result["gold_processing_run_id"] = gold_run_id
+    result["gold_processing_timestamp"] = utc_now()
 
-    return result
+    metadata = {
+        "train_records": int(len(train_indices)),
+        "test_records": int(len(test_indices)),
+        "train_ratio_actual": float(len(train_indices) / len(dataframe)),
+        "test_ratio_actual": float(len(test_indices) / len(dataframe)),
+        "split_method": "GroupShuffleSplit" if "augmentation_family_id" in dataframe else "row_level_fallback",
+        "split_random_state": SPLIT_RANDOM_STATE,
+        "group_column": "augmentation_family_id" if "augmentation_family_id" in dataframe else None,
+        "model_estimators": MODEL_ESTIMATORS,
+        "model_random_state": MODEL_RANDOM_STATE,
+        "model_version": MODEL_VERSION,
+        "feature_columns": list(FEATURE_COLUMNS),
+        "contamination": contamination,
+        "train_family_count": int(dataframe.iloc[train_indices]["augmentation_family_id"].nunique())
+            if "augmentation_family_id" in dataframe else None,
+        "test_family_count": int(dataframe.iloc[test_indices]["augmentation_family_id"].nunique())
+            if "augmentation_family_id" in dataframe else None,
+    }
+    return result, model, metadata
 
 
 def create_alerts(
@@ -322,6 +371,7 @@ def create_alerts(
         "integration_processing_run_id",
         "gold_processing_run_id",
         "gold_processing_timestamp",
+        "dataset_split",
     ]
 
     existing_columns = [
@@ -382,6 +432,24 @@ def upload_json(
 
     print(f"Gold JSON stored: {object_name}")
 
+    return object_name
+
+
+def upload_model(minio_client, model, object_name):
+    content = pickle.dumps(
+        model,
+        protocol=4,
+    )
+
+    minio_client.put_object(
+        bucket_name=MINIO_BUCKET,
+        object_name=object_name,
+        data=BytesIO(content),
+        length=len(content),
+        content_type="application/octet-stream",
+    )
+
+    print("Gold model stored: {}".format(object_name))
     return object_name
 
 
@@ -587,12 +655,27 @@ def main() -> None:
             integrated_dataframe
         )
 
-        scored_dataframe = score_observations(
-            dataframe=integrated_dataframe,
-            feature_dataframe=feature_dataframe,
-            contamination=arguments.contamination,
-            gold_run_id=run_context.run_id,
+        scored_dataframe, trained_model, split_metadata = (
+            score_observations(
+                dataframe=integrated_dataframe,
+                feature_dataframe=feature_dataframe,
+                contamination=arguments.contamination,
+                gold_run_id=run_context.run_id,
+                require_family_groups=arguments.require_family_groups,
+            )
         )
+
+        model_object = (
+            "{}/models/integrated_isolation_forest/run_id={}/model.pkl"
+        ).format(GOLD_PREFIX, run_context.run_id)
+        upload_model(minio_client, trained_model, model_object)
+        output_objects.append(model_object)
+
+        split_object = (
+            "{}/evaluation/train_test_split/run_id={}/split_metadata.json"
+        ).format(GOLD_PREFIX, run_context.run_id)
+        upload_json(minio_client, split_metadata, split_object)
+        output_objects.append(split_object)
 
         alerts_dataframe = create_alerts(
             scored_dataframe
@@ -655,6 +738,16 @@ def main() -> None:
 
         manifest_metrics = {
             **summary["metrics"],
+            "train_records": split_metadata["train_records"],
+            "test_records": split_metadata["test_records"],
+            "train_ratio_actual": split_metadata["train_ratio_actual"],
+            "test_ratio_actual": split_metadata["test_ratio_actual"],
+            "split_method": split_metadata["split_method"],
+            "group_column": split_metadata["group_column"],
+            "split_random_state": SPLIT_RANDOM_STATE,
+            "model_random_state": MODEL_RANDOM_STATE,
+            "model_estimators": MODEL_ESTIMATORS,
+            "feature_columns": list(FEATURE_COLUMNS),
             "integration_run_id": selected_run[
                 "integration_run_id"
             ],
