@@ -41,21 +41,20 @@ from sklearn.model_selection import GroupShuffleSplit
 
 
 JOB_NAME = (
-    "gold_integrated_field_anomaly_detection"
+    "gold_integrated_field_weather_anomaly_detection"
 )
 JOB_VERSION = "2.0.0"
 
 MODEL_NAME = "IsolationForest"
-MODEL_VERSION = "2.1.0"
+MODEL_VERSION = "2.2.0"
 
 DEFAULT_CONTAMINATION = 0.05
 MINIMUM_RECORDS = 20
 
 
-# We use the complete Field feature set.
-# Weather columns are currently enrichment context because
-# most Field rows do not yet have matching Weather data.
-FEATURE_COLUMNS = [
+# Integrated Field-Weather numerical features used by Isolation Forest.
+# Ground-truth labels and augmentation-family identifiers are NOT features.
+FIELD_FEATURE_COLUMNS = [
     "soil_moisture_percentage",
     "soil_ph",
     "temperature_celsius",
@@ -65,6 +64,17 @@ FEATURE_COLUMNS = [
     "pesticide_usage_milliliters",
     "ndvi_index",
 ]
+
+WEATHER_FEATURE_COLUMNS = [
+    "weather_temperature_celsius",
+    "weather_humidity_percentage",
+    "weather_rainfall_millimeters",
+    "weather_sunlight_hours",
+    "wind_speed_kmh",
+    "atmospheric_pressure_hpa",
+]
+
+FEATURE_COLUMNS = FIELD_FEATURE_COLUMNS + WEATHER_FEATURE_COLUMNS
 
 TRAIN_RATIO = 0.70
 SPLIT_RANDOM_STATE = 42
@@ -173,48 +183,47 @@ def read_integrated_data(
 def prepare_features(
     dataframe: pd.DataFrame,
 ) -> pd.DataFrame:
-    """
-    Validate and prepare model features.
-    """
-
-    missing_columns = [
-        column
-        for column in FEATURE_COLUMNS
-        if column not in dataframe.columns
-    ]
-
-    if missing_columns:
-        raise ValueError(
-            "Integrated Silver data is missing "
-            f"required features: {missing_columns}"
-        )
-
+    """Validate fully matched integrated observations and numeric features."""
     if len(dataframe) < MINIMUM_RECORDS:
         raise ValueError(
-            "The integrated dataset contains too few "
-            f"records. Found: {len(dataframe)}. "
-            f"Required: {MINIMUM_RECORDS}."
+            "The integrated dataset contains too few records. "
+            "Found: {}. Required: {}.".format(len(dataframe), MINIMUM_RECORDS)
         )
 
-    features = dataframe[
-        FEATURE_COLUMNS
-    ].copy()
+    required_columns = FEATURE_COLUMNS + ["weather_match_status"]
+    missing_columns = [
+        column for column in required_columns
+        if column not in dataframe.columns
+    ]
+    if missing_columns:
+        raise ValueError(
+            "Integrated Silver data is missing required columns: {}".format(
+                missing_columns
+            )
+        )
 
+    unmatched = dataframe["weather_match_status"].ne("matched")
+    if unmatched.fillna(True).any() or dataframe["weather_match_status"].isnull().any():
+        raise ValueError(
+            "Integrated anomaly detection requires matched Field-Weather "
+            "observations. Unmatched records: {}".format(
+                int((unmatched.fillna(True) | dataframe["weather_match_status"].isnull()).sum())
+            )
+        )
+
+    features = dataframe[FEATURE_COLUMNS].copy()
     for column in FEATURE_COLUMNS:
-        features[column] = pd.to_numeric(
-            features[column],
-            errors="coerce",
-        )
+        features[column] = pd.to_numeric(features[column], errors="coerce")
 
-    invalid_rows = features.isnull().any(
-        axis=1
-    )
-
+    invalid_rows = features.isnull().any(axis=1)
     if invalid_rows.any():
         raise ValueError(
-            f"{int(invalid_rows.sum())} integrated "
-            "records contain invalid Field model features."
+            "{} integrated records contain missing or invalid "
+            "numerical features.".format(int(invalid_rows.sum()))
         )
+
+    if not np.isfinite(features.to_numpy(dtype=float)).all():
+        raise ValueError("Integrated features contain infinite values.")
 
     return features
 
@@ -533,8 +542,9 @@ def create_summary(
             "contamination": contamination,
             "feature_columns": FEATURE_COLUMNS,
             "weather_feature_policy": (
-                "Weather fields are enrichment context "
-                "until integration coverage is sufficient."
+                "Weather measurements are numerical model "
+                "features; fully matched Field-Weather "
+                "observations are required."
             ),
         },
         "metrics": {
