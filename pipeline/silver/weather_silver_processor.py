@@ -6,6 +6,8 @@ import argparse
 from datetime import datetime, timezone
 from io import BytesIO
 import json
+import math
+from datetime import datetime as _datetime
 from typing import Any, Dict, List, Set, Tuple
 
 import pandas as pd
@@ -57,6 +59,81 @@ SOURCE_SCHEMA_PATH = (
 CANONICAL_SCHEMA_PATH = (
     "canonical/weather_observation_v1.schema.json"
 )
+
+
+# Only deterministic representation fixes; never invent sensor readings.
+WEATHER_NUMERIC_FIELDS = (
+    "air_temperature_celsius", "relative_humidity_percentage",
+    "rainfall_millimeters", "sunlight_duration_hours", "wind_speed_kmh",
+    "atmospheric_pressure_hpa", "latitude", "longitude",
+)
+
+
+def clean_weather_record(payload):
+    """Return a cleaned copy and an audit list of actual changes."""
+    cleaned = dict(payload)
+    actions = []
+    for field, value in list(cleaned.items()):
+        if isinstance(value, str):
+            trimmed = value.strip()
+            if trimmed != value:
+                cleaned[field] = trimmed
+                actions.append({"field": field, "action": "trim_whitespace"})
+
+    for field in WEATHER_NUMERIC_FIELDS:
+        value = cleaned.get(field)
+        if isinstance(value, str) and value:
+            try:
+                number = float(value)
+            except (ValueError, OverflowError):
+                continue
+            if math.isfinite(number):
+                cleaned[field] = number
+                actions.append({"field": field, "action": "parse_numeric_string"})
+
+    value = cleaned.get("observed_at")
+    if isinstance(value, str) and value:
+        try:
+            # Normalize unambiguous ISO-8601 offsets only, preserving instant.
+            parsed = _datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if len(value) == 10 and value[4:5] == "-" and value[7:8] == "-":
+                # Existing canonical mapper convention: daily dates represent
+                # midnight UTC. This is an imputed time, not measured time.
+                parsed = _datetime.strptime(value, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+                cleaned["observed_at"] = parsed.isoformat()
+                actions.append({"field": "observed_at", "action": "date_only_to_midnight_utc"})
+            elif parsed.tzinfo is not None and parsed.utcoffset() is not None:
+                normalized = parsed.isoformat()
+                if normalized != value:
+                    cleaned["observed_at"] = normalized
+                    actions.append({"field": "observed_at", "action": "normalize_iso_datetime"})
+        except ValueError:
+            pass
+    return cleaned, actions
+
+
+def validate_weather_semantics(payload):
+    """Supplement JSON Schema with finite-number and identifier checks."""
+    errors = []
+    for field in ("farm_id", "weather_station_id"):
+        value = payload.get(field)
+        if isinstance(value, str) and value.strip().lower() in ("none", "null", "nan"):
+            errors.append({"field": field, "message": "Invalid identifier placeholder."})
+    for field in WEATHER_NUMERIC_FIELDS:
+        value = payload.get(field)
+        if isinstance(value, bool):
+            errors.append({"field": field, "message": "Boolean is not a measurement."})
+        elif isinstance(value, (int, float)) and not math.isfinite(value):
+            errors.append({"field": field, "message": "Measurement must be finite."})
+    value = payload.get("observed_at")
+    if isinstance(value, str):
+        try:
+            parsed = _datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if parsed.tzinfo is None or parsed.utcoffset() is None:
+                raise ValueError("Timestamp must contain timezone")
+        except ValueError:
+            errors.append({"field": "observed_at", "message": "Invalid timezone-aware ISO timestamp."})
+    return errors
 
 
 def utc_now() -> str:
@@ -226,6 +303,9 @@ def process_records(
         "source_schema_failures": 0,
         "mapping_failures": 0,
         "canonical_schema_failures": 0,
+        "cleaned_records": 0,
+        "cleaning_actions": 0,
+        "records_with_warnings": 0,
     }
 
     for bronze_record in bronze_records:
@@ -381,10 +461,17 @@ def process_records(
         if event_id:
             seen_event_ids.add(event_id)
 
+        # Clean a copy; retain the original Bronze record for audit/quarantine.
+        cleaned_payload, cleaning_actions = clean_weather_record(payload)
+        if cleaning_actions:
+            counters["cleaned_records"] += 1
+            counters["cleaning_actions"] += len(cleaning_actions)
+
         source_errors = get_validation_errors(
-            payload,
+            cleaned_payload,
             source_validator,
         )
+        source_errors.extend(validate_weather_semantics(cleaned_payload))
 
         if source_errors:
             quarantine_record = (
@@ -412,7 +499,7 @@ def process_records(
         try:
             canonical_record = (
                 map_weather_bronze_to_canonical(
-                    bronze_record=bronze_record,
+                    bronze_record={**bronze_record, "payload": cleaned_payload},
                     silver_run_id=silver_run_id,
                 )
             )

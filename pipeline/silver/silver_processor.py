@@ -6,6 +6,8 @@ import argparse
 from datetime import datetime, timezone
 from io import BytesIO
 import json
+import math
+import re
 from typing import Any, Dict, List, Set, Tuple
 
 import pandas as pd
@@ -65,53 +67,169 @@ CANONICAL_SCHEMA_PATH = (
     "canonical/field_observation_v1.schema.json"
 )
 
-def validate_field_semantics(payload):
-    """Return additional source-level quality violations."""
-    from datetime import date
+# Explicit source categories: "None" means no irrigation/no disease.
+CATEGORIES = {
+    "region": ("North India", "South India", "Central USA", "South USA", "East Africa"),
+    "crop_type": ("Wheat", "Rice", "Maize", "Cotton", "Soybean"),
+    "irrigation_type": ("Drip", "Sprinkler", "Manual", "None"),
+    "fertilizer_type": ("Organic", "Inorganic", "Mixed"),
+    "crop_disease_status": ("None", "Mild", "Moderate", "Severe"),
+}
 
+NUMERIC_FIELDS = (
+    "soil_moisture_%", "soil_pH", "temperature_C", "rainfall_mm",
+    "humidity_%", "sunlight_hours", "pesticide_usage_ml", "total_days",
+    "yield_kg_per_hectare", "latitude", "longitude", "NDVI_index",
+)
+
+# Hard constraints only. Unusual but plausible values should reach Gold.
+NUMERIC_BOUNDS = {
+    "soil_moisture_%": (0, 100),
+    "soil_pH": (0, 14),
+    "humidity_%": (0, 100),
+    "rainfall_mm": (0, None),
+    "sunlight_hours": (0, 24),
+    "pesticide_usage_ml": (0, None),
+    "total_days": (0, None),
+    "yield_kg_per_hectare": (0, None),
+    "latitude": (-90, 90),
+    "longitude": (-180, 180),
+    "NDVI_index": (-1, 1),
+    # Temperature is intentionally not constrained to the source generator's range.
+}
+
+
+def clean_field_record(payload):
+    """Return a cleaned COPY and a list of deterministic cleaning actions."""
+    cleaned = dict(payload)
+    actions = []
+    for key, value in list(cleaned.items()):
+        if isinstance(value, str):
+            stripped = value.strip()
+            if stripped != value:
+                cleaned[key] = stripped
+                actions.append({"field": key, "action": "trim_whitespace"})
+
+    for field, choices in CATEGORIES.items():
+        value = cleaned.get(field)
+        if isinstance(value, str):
+            canonical = next((choice for choice in choices
+                              if choice.casefold() == value.casefold()), None)
+            if canonical is not None and canonical != value:
+                cleaned[field] = canonical
+                actions.append({"field": field, "action": "normalize_category"})
+
+    for field in NUMERIC_FIELDS:
+        value = cleaned.get(field)
+        if isinstance(value, str) and value != "":
+            try:
+                number = float(value)
+                if math.isfinite(number):
+                    cleaned[field] = number
+                    actions.append({"field": field, "action": "parse_numeric_string"})
+            except ValueError:
+                pass  # Validator will quarantine unparseable values.
+
+    for field in ("sowing_date", "harvest_date"):
+        value = cleaned.get(field)
+        if isinstance(value, str) and value:
+            from datetime import date
+            try:
+                normalized = date.fromisoformat(value).isoformat()
+                if normalized != value:
+                    cleaned[field] = normalized
+                    actions.append({"field": field, "action": "normalize_iso_date"})
+            except ValueError:
+                pass  # Do not guess ambiguous date formats.
+
+    return cleaned, actions
+
+
+def validate_field_semantics(payload):
+    """Hard source-level validation: invalid records go to quarantine."""
+    from datetime import date, datetime
     errors = []
 
     for field in ("farm_id", "sensor_id"):
         value = payload.get(field)
+        if (value is None or isinstance(value, bool)
+                or not str(value).strip()
+                or str(value).strip().lower() in {"null", "none", "nan"}):
+            errors.append({"field": field, "message": "Missing or invalid identifier."})
 
-        if (
-            value is None
-            or isinstance(value, bool)
-            or not str(value).strip()
-            or str(value).strip().lower() in {"null", "none", "nan"}
-        ):
-            errors.append({
-                "field": field,
-                "message": f"Required identifier '{field}' is missing or invalid.",
-            })
+    for field in NUMERIC_FIELDS:
+        value = payload.get(field)
+        if value is None or value == "":
+            continue  # Requiredness is checked by source/canonical schema.
+        try:
+            number = float(value)
+            if not math.isfinite(number):
+                raise ValueError("Non-finite number")
+            bounds = NUMERIC_BOUNDS.get(field)
+            if bounds:
+                lower, upper = bounds
+                if ((lower is not None and number < lower)
+                        or (upper is not None and number > upper)):
+                    errors.append({"field": field, "message": "Outside physically valid bounds."})
+            if field == "total_days" and not number.is_integer():
+                errors.append({"field": field, "message": "Duration must be a whole number of days."})
+        except (ValueError, TypeError, OverflowError):
+            errors.append({"field": field, "message": "Invalid finite numeric value."})
+
+    for field, choices in CATEGORIES.items():
+        value = payload.get(field)
+        if value is not None and (not isinstance(value, str) or value not in choices):
+            errors.append({"field": field, "message": "Unrecognized categorical value."})
 
     dates = {}
-
     for field in ("sowing_date", "harvest_date"):
         value = payload.get(field)
-
         if value is None or str(value).strip() == "":
             continue
-
         try:
             dates[field] = date.fromisoformat(str(value).strip())
         except (ValueError, TypeError):
-            errors.append({
-                "field": field,
-                "message": f"Invalid ISO date in '{field}'.",
-            })
+            errors.append({"field": field, "message": "Invalid ISO date."})
 
-    if (
-        "sowing_date" in dates
-        and "harvest_date" in dates
-        and dates["harvest_date"] < dates["sowing_date"]
-    ):
-        errors.append({
-            "field": "harvest_date",
-            "message": "Harvest date cannot precede sowing date.",
-        })
+    if "sowing_date" in dates and "harvest_date" in dates:
+        if dates["harvest_date"] < dates["sowing_date"]:
+            errors.append({"field": "harvest_date", "message": "Harvest before sowing."})
+        duration = payload.get("total_days")
+        if duration is not None and duration != "":
+            try:
+                if float(duration) != (dates["harvest_date"] - dates["sowing_date"]).days:
+                    errors.append({"field": "total_days", "message": "Does not match crop-cycle duration."})
+            except (TypeError, ValueError):
+                pass  # Already caught as invalid numeric value.
+
+    timestamp = payload.get("timestamp")
+    if timestamp is not None and str(timestamp).strip():
+        try:
+            ts = datetime.fromisoformat(str(timestamp).strip().replace("Z", "+00:00"))
+            if "sowing_date" in dates and ts.date() < dates["sowing_date"]:
+                errors.append({"field": "timestamp", "message": "Observation before sowing."})
+            if "harvest_date" in dates and ts.date() > dates["harvest_date"]:
+                errors.append({"field": "timestamp", "message": "Observation after harvest."})
+        except (ValueError, TypeError):
+            errors.append({"field": "timestamp", "message": "Invalid ISO timestamp."})
 
     return errors
+
+
+def field_quality_warnings(payload):
+    """Warn on unverifiable geographic labels; never invent coordinates."""
+    region = payload.get("region")
+    lon = payload.get("longitude")
+    if region in ("Central USA", "South USA", "East Africa"):
+        try:
+            longitude = float(lon)
+        except (ValueError, TypeError):
+            return []
+        # These broad bounds only flag obvious continent mismatches.
+        if (region in ("Central USA", "South USA") and longitude > -60) or (region == "East Africa" and longitude > 55):
+            return [{"field": "region", "rule": "region_coordinate_consistency",
+                     "message": "Region label conflicts with longitude; source coordinates preserved."}]
+    return []
 
 
 
@@ -279,6 +397,10 @@ def process_records(
         "source_schema_failures": 0,
         "mapping_failures": 0,
         "canonical_schema_failures": 0,
+        "cleaned_records": 0,
+        "cleaning_actions": 0,
+        "records_with_warnings": 0,
+        "geographic_warnings": 0,
     }
 
     for bronze_record in bronze_records:
@@ -412,13 +534,21 @@ def process_records(
         if event_id:
             seen_event_ids.add(event_id)
 
-        # Validate the original source payload.
+        # Clean a copy. Keep the original Bronze payload untouched.
+        cleaned_payload, cleaning_actions = clean_field_record(payload)
+        cleaned_bronze_record = dict(bronze_record)
+        cleaned_bronze_record["payload"] = cleaned_payload
+        if cleaning_actions:
+            counters["cleaned_records"] += 1
+            counters["cleaning_actions"] += len(cleaning_actions)
+
+        # Validate the cleaned source payload.
         source_errors = get_validation_errors(
-            payload,
+            cleaned_payload,
             source_validator,
         )
         source_errors.extend(
-            validate_field_semantics(payload)
+            validate_field_semantics(cleaned_payload)
         )
 
         
@@ -450,7 +580,7 @@ def process_records(
         try:
             canonical_record = (
                 map_bronze_to_canonical(
-                    bronze_record=bronze_record,
+                    bronze_record=cleaned_bronze_record,
                     silver_run_id=silver_run_id,
                 )
             )
@@ -518,6 +648,13 @@ def process_records(
 
             counters["quarantined_records"] += 1
             continue
+
+        warnings = field_quality_warnings(cleaned_payload)
+        if warnings:
+            counters["records_with_warnings"] += 1
+            counters["geographic_warnings"] += len(warnings)
+            # Warnings are tracked in the quality report, not added to the
+            # canonical record because its schema is controlled separately.
 
         accepted_records.append(canonical_record)
         counters["accepted_records"] += 1

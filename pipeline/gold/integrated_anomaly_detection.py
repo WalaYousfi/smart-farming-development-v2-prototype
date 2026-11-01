@@ -254,9 +254,32 @@ def create_train_test_split(dataframe, require_family_groups=False):
     splitter = GroupShuffleSplit(
         n_splits=1, train_size=TRAIN_RATIO, random_state=SPLIT_RANDOM_STATE
     )
-    train_indices, test_indices = next(splitter.split(dataframe, groups=groups))
+    
+    train_indices, test_indices = next(
+        splitter.split(dataframe, groups=groups)
+    )
+
     if not len(train_indices) or not len(test_indices):
         raise ValueError("Train/test split produced an empty partition")
+
+    train_groups = set(groups[train_indices])
+    test_groups = set(groups[test_indices])
+
+    overlapping_groups = train_groups.intersection(test_groups)
+
+    if overlapping_groups:
+        raise ValueError(
+            "Train/test family leakage detected: {} overlapping groups".format(
+                len(overlapping_groups)
+            )
+        )
+
+    print(
+        "Train/test group overlap: {}".format(
+            len(overlapping_groups)
+        )
+    )
+
     return train_indices, test_indices
 
 
