@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from io import BytesIO
 import argparse
 import json
+import os
 from typing import Any, Dict, List
 from uuid import uuid4
 
@@ -41,23 +42,45 @@ JOB_VERSION = "2.0.0"
 
 
 
-EXPECTED_EVALUATION_BUCKET = (
-    "smart-farming-100000-records-evaluation"
-)
-
 
 def verify_evaluation_environment():
+    """Fail closed before creating consumers or writing any objects."""
     from pipeline.common.config import APP_ENV
 
     if APP_ENV != "evaluation":
+        raise RuntimeError("This experiment requires APP_ENV=evaluation")
+
+    expected_bucket = os.getenv("EVALUATION_EXPECTED_BUCKET", "").strip()
+    topic_marker = os.getenv("EVALUATION_TOPIC_MARKER", "").strip()
+
+    if not expected_bucket or not topic_marker:
         raise RuntimeError(
-            "This experiment requires APP_ENV=evaluation"
+            "Missing EVALUATION_EXPECTED_BUCKET or EVALUATION_TOPIC_MARKER "
+            "in the evaluation environment"
         )
 
-    if MINIO_BUCKET != EXPECTED_EVALUATION_BUCKET:
+    if not topic_marker.isdigit() or int(topic_marker) <= 0:
+        raise RuntimeError("EVALUATION_TOPIC_MARKER must be a positive integer")
+
+    if not expected_bucket.endswith("-evaluation"):
+        raise RuntimeError("Expected bucket must be an evaluation bucket")
+
+    if MINIO_BUCKET != expected_bucket:
         raise RuntimeError(
-            f"Incorrect MinIO bucket: {MINIO_BUCKET}"
+            "Incorrect evaluation bucket: configured={!r}, expected={!r}".format(
+                MINIO_BUCKET, expected_bucket
+            )
         )
+
+    topic = WEATHER_KAFKA_TOPIC
+    if not topic.startswith("eval-" + topic_marker + "-"):
+        raise RuntimeError(
+            "Incorrect evaluation Kafka topic: {!r}".format(topic)
+        )
+
+    if not topic.endswith("-weather-readings"):
+        raise RuntimeError("Incorrect Weather evaluation topic: {!r}".format(topic))
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser(

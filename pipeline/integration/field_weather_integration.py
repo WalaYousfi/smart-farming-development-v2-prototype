@@ -40,7 +40,7 @@ from pipeline.integration.weather_silver_run_selector import (
 
 
 JOB_NAME = "silver_field_weather_integration"
-JOB_VERSION = "2.0.0"
+JOB_VERSION = "2.1.0"
 
 
 def utc_now() -> str:
@@ -259,10 +259,10 @@ def integrate_datasets(
     field_dataframe: pd.DataFrame,
     weather_dataframe: pd.DataFrame,
     integration_run_id: str,
-) -> pd.DataFrame:
+) -> tuple:
     """
-    Join Field and Weather observations using farm ID
-    and calendar date.
+    Return (matched integrated records, unmatched Field quarantine).
+    Preserve exact farm ID + date matching; never send unmatched to Gold.
     """
 
 
@@ -320,31 +320,30 @@ def integrate_datasets(
         )
     
 
-    integrated["weather_match_status"] = (
-        integrated["_merge"]
-        .map(
-            {
-                "both": "matched",
-                "left_only": "not_matched",
-                "right_only": "weather_only",
-            }
-        )
-        .astype("string")
-    )
+    # Split before publishing: Gold must only receive complete joins.
+    matched = integrated.loc[integrated["_merge"] == "both"].copy()
+    unmatched = integrated.loc[integrated["_merge"] == "left_only"].copy()
 
-    integrated = integrated.drop(
-        columns=["_merge"]
-    )
+    matched["weather_match_status"] = "matched"
+    matched = matched.drop(columns=["_merge"])
+    matched["integration_processing_run_id"] = integration_run_id
+    matched["integration_processing_timestamp"] = utc_now()
 
-    integrated[
-        "integration_processing_run_id"
-    ] = integration_run_id
+    # Preserve original Field columns, identifiers and provenance for audit.
+    # This is integration quarantine, not Silver source-validation quarantine.
+    unmatched_ids = set(unmatched["observation_id"].tolist())
+    unmatched = field_dataframe.loc[
+        field_dataframe["observation_id"].isin(unmatched_ids)
+    ].copy()
+    unmatched["failed_stage"] = "field_weather_integration"
+    unmatched["failure_reason"] = "no_exact_weather_match_for_farm_id_and_date"
+    unmatched["integration_processing_run_id"] = integration_run_id
+    unmatched["integration_processing_timestamp"] = utc_now()
 
-    integrated[
-        "integration_processing_timestamp"
-    ] = utc_now()
+    if len(matched) + len(unmatched) != len(field_dataframe):
+        raise RuntimeError("Integration output accounting mismatch")
 
-    return integrated
+    return matched, unmatched
 
 
 def upload_parquet(
@@ -381,45 +380,26 @@ def upload_parquet(
 
 def calculate_metrics(
     integrated: pd.DataFrame,
+    quarantined: pd.DataFrame,
     field_count: int,
     weather_count: int,
 ) -> Dict[str, Any]:
-    """
-    Calculate integration coverage metrics.
-    """
+    """Count accepted joins and unmatched Field quarantine separately."""
+    matched_records = len(integrated)
+    unmatched_records = len(quarantined)
+    if matched_records + unmatched_records != field_count:
+        raise RuntimeError("Field integration accounting mismatch")
 
-    matched_records = int(
-        (
-            integrated["weather_match_status"]
-            == "matched"
-        ).sum()
-    )
-
-    unmatched_records = int(
-        (
-            integrated["weather_match_status"]
-            == "not_matched"
-        ).sum()
-    )
-
-    match_rate = (
-        matched_records / field_count
-        if field_count
-        else 0.0
-    )
-
+    match_rate = matched_records / field_count if field_count else 0.0
     return {
         "field_input_records": field_count,
         "weather_input_records": weather_count,
-        "integrated_output_records": int(
-            len(integrated)
-        ),
+        "integrated_output_records": matched_records,
         "matched_field_records": matched_records,
         "unmatched_field_records": unmatched_records,
-        "weather_match_rate": round(
-            match_rate,
-            4,
-        ),
+        "integration_quarantined_records": unmatched_records,
+        "integration_acceptance_rate": round(match_rate, 4),
+        "weather_match_rate": round(match_rate, 4),
     }
 
 
@@ -602,7 +582,7 @@ def main() -> None:
             weather_dataframe
         )
 
-        integrated_dataframe = integrate_datasets(
+        integrated_dataframe, integration_quarantine = integrate_datasets(
             field_dataframe=field_dataframe,
             weather_dataframe=weather_dataframe,
             integration_run_id=run_context.run_id,
@@ -625,8 +605,23 @@ def main() -> None:
             integrated_object
         )
 
+        # Unmatched Field observations are stored separately, never in Gold input.
+        quarantine_object = (
+            f"{SILVER_PREFIX}/quarantine/"
+            f"field_weather_integration/"
+            f"run_id={run_context.run_id}/"
+            f"unmatched_field_observations.parquet"
+        )
+        upload_parquet(
+            minio_client=minio_client,
+            dataframe=integration_quarantine,
+            object_name=quarantine_object,
+        )
+        output_objects.append(quarantine_object)
+
         metrics = calculate_metrics(
             integrated=integrated_dataframe,
+            quarantined=integration_quarantine,
             field_count=len(field_dataframe),
             weather_count=len(weather_dataframe),
         )
@@ -705,6 +700,14 @@ def main() -> None:
         print(
             f"Unmatched field records: "
             f"{metrics['unmatched_field_records']}"
+        )
+        print(
+            f"Integrated accepted output: "
+            f"{metrics['integrated_output_records']}"
+        )
+        print(
+            f"Integration quarantine: "
+            f"{metrics['integration_quarantined_records']}"
         )
         print(
             f"Weather match rate: "

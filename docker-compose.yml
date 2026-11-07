@@ -1,5 +1,19 @@
-services:
+# Four-node distributed MinIO cluster; Kafka remains unchanged.
+x-minio-common: &minio-common
+  image: minio/minio
+  environment:
+    MINIO_ROOT_USER: admin
+    MINIO_ROOT_PASSWORD: password123
+  command: >-
+    server
+    http://minio/data
+    http://minio2/data
+    http://minio3/data
+    http://minio4/data
+    --console-address ":9001"
+  restart: unless-stopped
 
+services:
   kafka:
     image: apache/kafka:latest
     container_name: kafka
@@ -7,23 +21,34 @@ services:
       - "9092:9092"
 
   minio:
-    image: minio/minio
+    <<: *minio-common
     container_name: minio
-
     ports:
       - "9000:9000"
       - "9001:9001"
-
-    environment:
-      MINIO_ROOT_USER: admin
-      MINIO_ROOT_PASSWORD: password123
-
-    command: server /data --console-address ":9001"
-
     volumes:
-      - minio_data:/data
+      - minio1_data:/data
 
+  minio2:
+    <<: *minio-common
+    container_name: minio2
+    volumes:
+      - minio2_data:/data
+
+  minio3:
+    <<: *minio-common
+    container_name: minio3
+    volumes:
+      - minio3_data:/data
+
+  minio4:
+    <<: *minio-common
+    container_name: minio4
+    volumes:
+      - minio4_data:/data
 
 volumes:
-  mongo_data:
-  minio_data:
+  minio1_data:
+  minio2_data:
+  minio3_data:
+  minio4_data:

@@ -22,7 +22,7 @@ WEATHER_PATH = (
     ROOT / "data/source/weather/weather_observations.json"
 )
 
-DEFAULT_COUNT = 100000
+DEFAULT_COUNT = 1000000
 DEFAULT_SEED = 42
 DEFAULT_ANOMALY_RATE = 0.05
 
@@ -157,7 +157,7 @@ def generate(source, count, seed, anomaly_rate=DEFAULT_ANOMALY_RATE):
 
         # Both source streams use identical pairing,
         # date shifts, and farm identifiers.
-        days = 400 * (index // len(pairs))
+        days = 400 * ((index // len(pairs)) % 100)
 
         if source == "field":
             record = dict(field)
@@ -381,9 +381,21 @@ def main():
         MINIO_BUCKET,
     )
 
-    if MINIO_BUCKET != (
-        "smart-farming-100000-records-evaluation"
-    ):
+    expected_bucket = os.getenv("EVALUATION_EXPECTED_BUCKET", "").strip()
+    topic_marker = os.getenv("EVALUATION_TOPIC_MARKER", "").strip()
+
+    if not expected_bucket or not topic_marker:
+        parser.error(
+            "Missing EVALUATION_EXPECTED_BUCKET or EVALUATION_TOPIC_MARKER"
+        )
+
+    if not topic_marker.isdigit() or int(topic_marker) <= 0:
+        parser.error("EVALUATION_TOPIC_MARKER must be a positive integer")
+
+    if not expected_bucket.endswith("-evaluation"):
+        parser.error("Expected bucket must end with -evaluation")
+
+    if MINIO_BUCKET != expected_bucket:
         parser.error("Incorrect evaluation bucket")
 
     topic = (
@@ -392,8 +404,13 @@ def main():
         else WEATHER_KAFKA_TOPIC
     )
 
-    if "100000" not in topic:
-        parser.error("Incorrect evaluation topic")
+    expected_topic = "eval-{}-{}-readings".format(
+        topic_marker, args.source
+    )
+    if topic != expected_topic:
+        parser.error(
+            "Incorrect evaluation topic: expected {}".format(expected_topic)
+        )
 
     from kafka import KafkaProducer
 
